@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement name="Row" style="flex-grow: 0; height: 60px; flex-direction: row;">
+        <ui:VisualElement name="Icon" style="flex-grow: 0; background-image: url(&apos;project://database/Assets/M%20Studio/Art/Items/Icons/icon_Game.png?fileID=2800000&amp;guid=64d6efac46c1d450bbcb0f49d098bea2&amp;type=3#icon_Game&apos;); width: 50px; height: 50px; align-self: center; justify-content: flex-start;" />
+        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Name" style="align-self: center; -unity-font: url(&apos;project://database/Assets/Font/VonwaonBitmap-16px.ttf?fileID=12800000&amp;guid=eaea87ca3d7a652488925fb5ea6bc3f4&amp;type=3#VonwaonBitmap-16px&apos;); -unity-font-definition: initial; -unity-font-style: bold; font-size: 15px; padding-left: 5px; margin-left: 1px;" />
+    </ui:VisualElement>
+</ui:UXML>

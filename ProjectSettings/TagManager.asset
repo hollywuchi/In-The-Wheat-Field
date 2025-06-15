@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Bound
+  - ItemParent
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Water
+    uniqueID: 668231049
+    locked: 0
+  - name: Ground Bottom
+    uniqueID: 2454024709
+    locked: 0
+  - name: Ground Middle
+    uniqueID: 1149220425
+    locked: 0
+  - name: Ground Top
+    uniqueID: 1021880137
+    locked: 0
+  - name: Stuff1
+    uniqueID: 1876104849
+    locked: 0
+  - name: Stuff2
+    uniqueID: 4196697015
+    locked: 0
+  - name: DIg
+    uniqueID: 1719537237
+    locked: 0
+  - name: Instance
+    uniqueID: 586618359
+    locked: 0
+  - name: Collision
+    uniqueID: 3920992603
+    locked: 0
+  - name: CanDig
+    uniqueID: 2699612309
+    locked: 0
+  - name: CanDropItem
+    uniqueID: 1044149629
+    locked: 0
+  - name: CanPlaceFunture
+    uniqueID: 3393999161
+    locked: 0
+  - name: NPC Obstacle
+    uniqueID: 815248579
+    locked: 0
