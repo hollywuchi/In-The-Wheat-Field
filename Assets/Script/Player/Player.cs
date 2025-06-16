@@ -13,15 +13,22 @@ public class Player : MonoBehaviour
 
     private Vector2 movementInput;
 
+    private Animator[] animators;
+    private bool isMoving;
+
+    void Awake()
+    {
+        animators = GetComponentsInChildren<Animator>();
+    }
     void Update()
     {
         playerMoveDir();
+        SwitchAnimation();
     }
 
     void FixedUpdate()
     {
         playerMove();
-
     }
 
     /// <summary>
@@ -37,7 +44,15 @@ public class Player : MonoBehaviour
             inputX *= 0.6f;
             inputY *= 0.6f;
         }
+
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            inputX *= 0.5f;
+            inputY *= 0.5f;
+        }
         movementInput = new Vector2(inputX, inputY);
+
+        isMoving = movementInput != Vector2.zero;
     }
     /// <summary>
     /// 玩家移动
@@ -47,6 +62,18 @@ public class Player : MonoBehaviour
         rb.MovePosition(rb.position + movementInput * speed * Time.deltaTime);
     }
 
+    private void SwitchAnimation()
+    {
+        foreach(var anim in animators)
+        {
+            anim.SetBool("isMoving",isMoving);
+            if(isMoving)
+            {
+                anim.SetFloat("inputX",inputX);
+                anim.SetFloat("inputY",inputY);
+            }
+        }
+    }
 
 
 }
