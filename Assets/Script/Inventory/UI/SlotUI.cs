@@ -70,6 +70,14 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginD
         isSelected = !isSelected;
 
         inventoryUI.SwitchHighLight(Index);
+        // 判断是否点按的是背包的物品
+        // 否则点按超市的物品直接零元购
+        if (soltType == SoltType.Bag)
+        {
+            // 点按通知转换姿势(物品的信息和是否点选)
+            EventHandler.CallItemSelectEvent(itemDetails, isSelected);
+        }
+
     }
 
 

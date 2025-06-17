@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Rendering;
 
+// FIXME:发现人物移动时会出现残影，不知道是不是帧数问题？
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb => gameObject.GetComponent<Rigidbody2D>();
