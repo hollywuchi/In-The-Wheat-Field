@@ -67,18 +67,12 @@ TagManager:
   - name: Instance
     uniqueID: 586618359
     locked: 0
+  - name: Front1
+    uniqueID: 4037675023
+    locked: 0
+  - name: Front2
+    uniqueID: 1936162607
+    locked: 0
   - name: Collision
     uniqueID: 3920992603
-    locked: 0
-  - name: CanDig
-    uniqueID: 2699612309
-    locked: 0
-  - name: CanDropItem
-    uniqueID: 1044149629
-    locked: 0
-  - name: CanPlaceFunture
-    uniqueID: 3393999161
-    locked: 0
-  - name: NPC Obstacle
-    uniqueID: 815248579
     locked: 0
