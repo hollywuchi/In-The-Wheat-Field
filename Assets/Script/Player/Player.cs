@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Rendering;
 
-// FIXME:发现人物移动时会出现残影，不知道是不是帧数问题？
 public class Player : MonoBehaviour
 {
-    private Rigidbody2D rb => gameObject.GetComponent<Rigidbody2D>();
+    private Rigidbody2D rb ;
     public float speed;
     private float inputX;
     private float inputY;
@@ -20,6 +19,11 @@ public class Player : MonoBehaviour
     void Awake()
     {
         animators = GetComponentsInChildren<Animator>();
+        // 使用lambda表达式会产生巨大的性能开销，在awake中赋值则不会
+        rb = GetComponent<Rigidbody2D>();
+
+        // 刚体自带的插帧效果，真的有效改善了主角残影问题
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
     }
     void Update()
     {
