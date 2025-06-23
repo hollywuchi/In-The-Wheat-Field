@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml.Serialization;
 using JetBrains.Annotations;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public static class EventHandler 
@@ -24,4 +26,16 @@ public static class EventHandler
     {
         ItemSelectEvent?.Invoke(itemDetails,isSelected);
     } 
+
+    public static event Action<int,int> GameMinuteEvent;
+    public static void CallGameMinuteEvent(int second,int minute)
+    {
+        GameMinuteEvent?.Invoke(second,minute);
+    }
+
+    public static event Action<int,int,int,int,Season> GameDateEvent;
+    public static void CallGameDateEvent(int hour,int day,int month,int year,Season season)
+    {
+        GameDateEvent?.Invoke(hour,day,month,year,season);
+    }
 }

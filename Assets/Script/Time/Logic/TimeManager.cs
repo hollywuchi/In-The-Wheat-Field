@@ -18,7 +18,13 @@ public class TimeManager : MonoBehaviour
     {
         NewGameTime();
     }
-
+    void Start()
+    {
+        // 同样是初始化，为什么放在Awake中？
+        // 因为方法注册在OnEnable中，生命周期比Awake晚，会报空
+        EventHandler.CallGameDateEvent(gameHour, gameDay, gameMonth, gameYear, gameSeason);
+        EventHandler.CallGameMinuteEvent(gameMinute, gameHour);
+    }
     void Update()
     {
         if (!gameClockPause)
@@ -30,6 +36,12 @@ public class TimeManager : MonoBehaviour
                 UpdateGameTime();
             }
         }
+
+        if (Input.GetKey(KeyCode.T))
+        {
+            for (int i = 0; i < 60; i++)
+                UpdateGameTime();
+        }
     }
 
     private void NewGameTime()
@@ -39,7 +51,7 @@ public class TimeManager : MonoBehaviour
         gameHour = 7;
         gameDay = 1;
         gameMonth = 1;
-        gameYear = 1;
+        gameYear = 2025;
         gameSeason = Season.春天;
     }
     private void UpdateGameTime()
@@ -82,7 +94,7 @@ public class TimeManager : MonoBehaviour
                                 seasonNumber = 0;
                             }
 
-                            if (gameYear > 3)
+                            if (gameYear > 2030)
                             {
                                 // FIXME:可以适当添加彩蛋
                                 gameYear = 2025;
@@ -90,9 +102,11 @@ public class TimeManager : MonoBehaviour
                         }
                     }
                 }
+                EventHandler.CallGameDateEvent(gameHour, gameDay, gameMonth, gameYear, gameSeason);
             }
+            EventHandler.CallGameMinuteEvent(gameMinute, gameHour);
         }
-        Debug.Log("minute:" + gameMinute + "second:" + gameSecond);
+        // Debug.Log("minute:" + gameMinute + "second:" + gameSecond);
 
     }
 }
