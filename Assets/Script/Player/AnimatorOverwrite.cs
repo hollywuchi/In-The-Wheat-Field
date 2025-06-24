@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AnimatorOverwrite : MonoBehaviour
 {
-    private Animator[] animators => GetComponentsInChildren<Animator>();
+    private Animator[] animators;
     public SpriteRenderer holdItem;
 
     [Header("各部分动画列表")]
@@ -15,6 +15,8 @@ public class AnimatorOverwrite : MonoBehaviour
 
     void Awake()
     {
+        // lambda表达式修正
+        animators = GetComponentsInChildren<Animator>();
         foreach (var anim in animators)
         {
             animatorNameDic.Add(anim.name, anim);
@@ -24,10 +26,18 @@ public class AnimatorOverwrite : MonoBehaviour
     void OnEnable()
     {
         EventHandler.ItemSelectEvent += OnItemSelectEvent;
+        EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
     }
     void OnDisable()
     {
         EventHandler.ItemSelectEvent -= OnItemSelectEvent;
+        EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+    }
+
+    private void OnBeforeSceneUnloadEvent()
+    {
+        holdItem.enabled = false;
+        SwitchAnimator(PartType.None);
     }
 
     private void OnItemSelectEvent(ItemDetails details, bool isSelected)

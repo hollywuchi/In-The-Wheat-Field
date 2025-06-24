@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.Rendering;
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody2D rb ;
+    private Rigidbody2D rb;
     public float speed;
     private float inputX;
     private float inputY;
@@ -16,6 +12,22 @@ public class Player : MonoBehaviour
     private Animator[] animators;
     private bool isMoving;
 
+    private bool inputDisable;
+
+    void OnEnable()
+    {
+        EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+        EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
+        EventHandler.MoveToPosition += OnMoveToPosition;
+    }
+
+    void OnDisable()
+    {
+        EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+        EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
+        EventHandler.MoveToPosition -= OnMoveToPosition;
+    }
+    
     void Awake()
     {
         animators = GetComponentsInChildren<Animator>();
@@ -27,13 +39,29 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        playerMoveDir();
+        if (inputDisable == false)
+            playerMoveDir();
         SwitchAnimation();
     }
 
     void FixedUpdate()
     {
         playerMove();
+    }
+
+private void OnMoveToPosition(Vector3 position)
+    {
+        transform.position = position;
+    }
+
+    private void OnAfterSceneLoadEvent()
+    {
+        inputDisable = false;
+    }
+
+    private void OnBeforeSceneUnloadEvent()
+    {
+        inputDisable = true;
     }
 
     /// <summary>
@@ -50,7 +78,7 @@ public class Player : MonoBehaviour
             inputY *= 0.6f;
         }
 
-        if(Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             inputX *= 0.5f;
             inputY *= 0.5f;
@@ -69,13 +97,13 @@ public class Player : MonoBehaviour
 
     private void SwitchAnimation()
     {
-        foreach(var anim in animators)
+        foreach (var anim in animators)
         {
-            anim.SetBool("isMoving",isMoving);
-            if(isMoving)
+            anim.SetBool("isMoving", isMoving);
+            if (isMoving)
             {
-                anim.SetFloat("inputX",inputX);
-                anim.SetFloat("inputY",inputY);
+                anim.SetFloat("inputX", inputX);
+                anim.SetFloat("inputY", inputY);
             }
         }
     }

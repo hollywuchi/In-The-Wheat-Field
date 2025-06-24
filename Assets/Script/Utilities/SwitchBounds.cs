@@ -3,12 +3,16 @@ using UnityEngine;
 
 public class SwitchBounds : MonoBehaviour
 {
-    // TODO:场景转换优化
-    void Start()
+
+    void OnEnable()
     {
-        SwitchBoundsInChange();
+        EventHandler.AfterSceneLoadEvent += SwitchBoundsInChange;
     }
-    
+    void OnDisable()
+    {
+        EventHandler.AfterSceneLoadEvent -= SwitchBoundsInChange;
+    }
+       
     void SwitchBoundsInChange()
     {
         PolygonCollider2D Bounds = GameObject.FindGameObjectWithTag("Bound").GetComponent<PolygonCollider2D>();

@@ -15,12 +15,15 @@ namespace Farm.Inventory
         void OnEnable()
         {
             EventHandler.UpdateInventoryUI += OnUpdateInvntoryUI;
+            EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
         }
         void OnDisable()
         {
             EventHandler.UpdateInventoryUI -= OnUpdateInvntoryUI;
+            EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
         }
 
+       
         void Start()
         {
             for (int i = 0; i < slotUIs.Length; i++)
@@ -29,6 +32,11 @@ namespace Farm.Inventory
             }
             // 注意，现在activeInHierarchy已经代替了active
             openedUI = playerBag.activeInHierarchy;
+        }
+
+         private void OnBeforeSceneUnloadEvent()
+        {
+            SwitchHighLight(-1);
         }
 
         private void OnUpdateInvntoryUI(InventoryLocation location, List<InventoryItem> list)
@@ -62,9 +70,9 @@ namespace Farm.Inventory
 
         public void SwitchHighLight(int index)
         {
-            foreach(var slot in slotUIs)
+            foreach (var slot in slotUIs)
             {
-                if(slot.Index ==  index && slot.isSelected)
+                if (slot.Index == index && slot.isSelected)
                 {
                     slot.highLightImg.gameObject.SetActive(true);
                 }
