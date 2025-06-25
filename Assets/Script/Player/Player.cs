@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
         EventHandler.MoveToPosition -= OnMoveToPosition;
     }
-    
+
     void Awake()
     {
         animators = GetComponentsInChildren<Animator>();
@@ -39,17 +39,21 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        if (inputDisable == false)
+        if (!inputDisable)
             playerMoveDir();
+        else
+            isMoving = false;
         SwitchAnimation();
     }
 
     void FixedUpdate()
     {
-        playerMove();
+        // 玩家在传送的过程中不能移动
+        if (!inputDisable)
+            playerMove();
     }
 
-private void OnMoveToPosition(Vector3 position)
+    private void OnMoveToPosition(Vector3 position)
     {
         transform.position = position;
     }
