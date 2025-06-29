@@ -1,7 +1,4 @@
 using System.Collections;
-using System.Runtime.InteropServices;
-using Unity.Mathematics;
-using UnityEditor.U2D.Sprites;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,10 +20,14 @@ namespace Farm.Transition
         {
             EventHandler.TransitionEvent -= OnTransitionEvent;
         }
-        void Start()
+
+        // Start 竟然也可以改成协程形式
+        IEnumerator Start()
         {
-            StartCoroutine(LoadSceneSetActive(startSceneName));
             canvasGroup = FindObjectOfType<CanvasGroup>();
+            yield return LoadSceneSetActive(startSceneName);
+            // 目的是，在游戏初始化之后也能执行场景加载后的事件
+            EventHandler.CallAfterSceneLoadEvent();
         }
 
         private void OnTransitionEvent(string sceneName, Vector3 position)

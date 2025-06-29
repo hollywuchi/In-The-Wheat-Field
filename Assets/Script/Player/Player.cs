@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
         EventHandler.MoveToPosition += OnMoveToPosition;
+        EventHandler.MouseClickedEvent += OnMouseClickedEvent;
     }
 
     void OnDisable()
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
         EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
         EventHandler.MoveToPosition -= OnMoveToPosition;
+        EventHandler.MouseClickedEvent -= OnMouseClickedEvent;
     }
 
     void Awake()
@@ -67,7 +69,10 @@ public class Player : MonoBehaviour
     {
         inputDisable = true;
     }
-
+    private void OnMouseClickedEvent(Vector3 pos, ItemDetails itemDetails)
+    {
+        EventHandler.CallExcuteActionAfterAnimation(pos,itemDetails);
+    }
     /// <summary>
     /// 玩家移动方向
     /// </summary>

@@ -27,7 +27,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginD
     void Start()
     {
         isSelected = false;
-        if (itemDetails.itemID == 0)
+        if (itemDetails == null)
         {
             UpdateEmptySolt();
         }
@@ -56,7 +56,12 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginD
         if (isSelected)
         {
             isSelected = false;
+
+            inventoryUI.SwitchHighLight(-1);
+            EventHandler.CallItemSelectEvent(itemDetails, isSelected);
         }
+        // 修改这里会牵扯到很多代码，虽然其中的amount是0，但是不允许返回值，此为空指针
+        itemDetails = null;
         slotImg.enabled = false;
         amountText.text = string.Empty;
         button.interactable = false;
@@ -65,7 +70,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginD
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (itemAmount == 0) return;
+        if (itemDetails == null) return;
 
         isSelected = !isSelected;
 

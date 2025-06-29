@@ -59,7 +59,8 @@ public class AnimatorOverwrite : MonoBehaviour
         {
             if (currentType == PartType.Carry)
             {
-                holdItem.sprite = details.itemOnWorldSprite;
+                // FIXME：尝试解决举着物品显示失败的BUG
+                holdItem.sprite = details.itemOnWorldSprite == null ? details.itemIcon : details.itemOnWorldSprite;
                 holdItem.enabled = true;
             }
         }

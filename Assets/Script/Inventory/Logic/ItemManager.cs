@@ -18,6 +18,7 @@ namespace Farm.Inventory
             EventHandler.InstantiateItemInScene += OnInstantiateItemInScene;
             EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
             EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
+            EventHandler.DropItemEvent += OnDropItemEvent;
         }
 
 
@@ -26,7 +27,10 @@ namespace Farm.Inventory
             EventHandler.InstantiateItemInScene -= OnInstantiateItemInScene;
             EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
             EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
+            EventHandler.DropItemEvent -= OnDropItemEvent;
         }
+
+
 
         private void OnBeforeSceneUnloadEvent()
         {
@@ -45,6 +49,12 @@ namespace Farm.Inventory
             newItem.itemID = ID;
         }
 
+        private void OnDropItemEvent(int ID, Vector3 pos)
+        {
+            // TODO:扔东西动画
+            var newItem = Instantiate(itemPrefab, pos, Quaternion.identity, itemParent);
+            newItem.itemID = ID;
+        }
 
         /// <summary>
         /// 获取当前场景中的物体

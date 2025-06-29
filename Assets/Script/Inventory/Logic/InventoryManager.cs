@@ -1,4 +1,6 @@
+using UnityEditor.Timeline;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 // 引用了命名空间，其他脚本中就没办法直接调用InventoryManager，除非调用这个命名空间
 // 为了防止乱调用，产生的耦合，也方便之后解耦所用
@@ -10,6 +12,18 @@ namespace Farm.Inventory
         public ItemDetailList_SO itemLibrary;
         [Header("背包数据库")]
         public InventoryBag_SO playerBag;
+
+        void OnEnable()
+        {
+            EventHandler.DropItemEvent += OnDropItemEvent;
+        }
+
+        void OnDisable()
+        {
+            EventHandler.DropItemEvent += OnDropItemEvent;
+        }
+
+
 
         void Start()
         {
@@ -118,6 +132,34 @@ namespace Farm.Inventory
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
         }
 
+        private void OnDropItemEvent(int ID, Vector3 pos)
+        {
+            RemoveItem(ID, 1);
+        }
+
+        /// <summary>
+        /// 移除指定物品
+        /// </summary>
+        /// <param name="ID">物品ID</param>
+        /// <param name="removeAmount">数量</param>
+        private void RemoveItem(int ID, int removeAmount)
+        {
+            var index = GetItemIndexInBag(ID);
+
+            if (playerBag.BagItemList[index].itemAmount > removeAmount)
+            {
+                var amount = playerBag.BagItemList[index].itemAmount - removeAmount;
+                InventoryItem newItem = new InventoryItem { itemID = ID, itemAmount = amount };
+                playerBag.BagItemList[index] = newItem;
+            }
+            else if (playerBag.BagItemList[index].itemAmount == removeAmount)
+            {
+                InventoryItem newItem = new InventoryItem();
+                playerBag.BagItemList[index] = newItem;
+            }
+
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
+        }
     }
 
 }
