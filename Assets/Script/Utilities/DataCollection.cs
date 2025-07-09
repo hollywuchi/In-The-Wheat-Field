@@ -81,8 +81,9 @@ public class TileDetails
 {
     public int girdX, girdY;
     public bool canDig, canDropItem, canPlaceFunture, isNPCObstacle;
-    public int daysSceneDig = -1;
+    public int daysSinceDig = -1;
+    public int daysSinceWatered = -1;
     public int seedItemID = -1;
     public int growthDays = -1;
-    public int daysSceneLastHarvest = -1;
+    public int daysSinceLastHarvest = -1;
 }

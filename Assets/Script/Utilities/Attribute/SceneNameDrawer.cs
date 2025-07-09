@@ -43,7 +43,6 @@ public class SceneNameDrawer : PropertyDrawer
         {
             string path = scenes[i].path;
             // 切分方法，要切分的部分，切分模式
-            // TODO：仍然未知其中的参数意义
             string[] splitPath = path.Split(sceneNameSplite, System.StringSplitOptions.RemoveEmptyEntries);
 
             string sceneName = "";

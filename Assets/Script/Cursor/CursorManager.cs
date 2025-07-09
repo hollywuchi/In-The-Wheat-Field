@@ -132,7 +132,7 @@ public class CursorManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && cursorPositionVaild)
         {
-            EventHandler.CallMouseClickedEvent(mouseWorldPos,currentItem);
+            EventHandler.CallMouseClickedEvent(mouseWorldPos, currentItem);
         }
     }
     private void CheckCursorValid()
@@ -152,10 +152,19 @@ public class CursorManager : MonoBehaviour
 
         if (currentTile != null)
         {
+            // WORKFLOW:补充所有物品的类型
             switch (currentItem.itemType)
             {
                 case ItemType.Commondity:
                     if (currentTile.canDropItem && currentItem.canDropped) SetCursorVaild(); else SetCursorInVaild();
+                    break;
+
+                case ItemType.HoeTool:
+                    if (currentTile.canDig) SetCursorVaild(); else SetCursorInVaild();
+                    break;
+
+                case ItemType.WaterTool:
+                    if (currentTile.daysSinceDig > -1 && currentTile.daysSinceWatered == -1) SetCursorVaild(); else SetCursorInVaild();
                     break;
             }
         }
