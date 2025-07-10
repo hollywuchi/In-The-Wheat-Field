@@ -47,6 +47,9 @@ public class AnimatorOverwrite : MonoBehaviour
         {
             ItemType.Seed => PartType.Carry,
             ItemType.Commondity => PartType.Carry,
+            ItemType.HoeTool => PartType.Hoe,
+            ItemType.WaterTool => PartType.Water,
+            // FIXME:此处有浇完水身体动画控制器不还原BUG
             _ => PartType.None
         };
 
@@ -59,7 +62,6 @@ public class AnimatorOverwrite : MonoBehaviour
         {
             if (currentType == PartType.Carry)
             {
-                // FIXME：尝试解决举着物品显示失败的BUG
                 holdItem.sprite = details.itemOnWorldSprite == null ? details.itemIcon : details.itemOnWorldSprite;
                 holdItem.enabled = true;
             }

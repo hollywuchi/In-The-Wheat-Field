@@ -1,0 +1,472 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 830d94482f7be3b4d9b1fdd93d340e35, type: 3}
+  m_Name: MapData_Home
+  m_EditorClassIdentifier: 
+  sceneName: 02.Home
+  tileProperties:
+  - tileCoordinate: {x: -14, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -14, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -14, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -14, y: -10}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -14, y: -9}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -14, y: -8}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -14, y: -7}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -14, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -14, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -14, y: -4}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -13, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -13, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -13, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -13, y: -10}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -13, y: -9}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -13, y: -8}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -13, y: -7}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -13, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -13, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -13, y: -4}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -12, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -12, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -12, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -12, y: -10}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -12, y: -9}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -12, y: -8}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -12, y: -7}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -12, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -12, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -12, y: -4}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -11, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -11, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -11, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -11, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -11, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -11, y: -4}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -10, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -10, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -9, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -9, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -8, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -8, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -7, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -7, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -6, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -6, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -6, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -6, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -6, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -5, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -5, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -5, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -5, y: -10}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -5, y: -9}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -5, y: -8}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -5, y: -7}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -5, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -5, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -4, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -4, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -4, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -4, y: -10}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -4, y: -9}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -4, y: -8}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -4, y: -7}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -4, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -4, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -3, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -3, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -3, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -3, y: -10}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -3, y: -9}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -3, y: -8}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -3, y: -7}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -3, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -3, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -2, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -2, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -2, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -2, y: -10}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -2, y: -9}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -2, y: -8}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -2, y: -7}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -2, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -2, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -1, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -1, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -1, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -1, y: -10}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -1, y: -9}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -1, y: -8}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -1, y: -7}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -1, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: -1, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 0, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 0, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 0, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 0, y: -10}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 0, y: -9}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 0, y: -8}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 0, y: -7}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 0, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 0, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 1, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 1, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 1, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 1, y: -10}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 1, y: -9}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 1, y: -8}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 1, y: -7}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 1, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 2, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 2, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 2, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 2, y: -10}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 2, y: -9}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 2, y: -8}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 2, y: -7}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 2, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 3, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 3, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 3, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 3, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 4, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 4, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 4, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 4, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 5, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 5, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 5, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 5, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 6, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 6, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 6, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 6, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 7, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 7, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 7, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 7, y: -7}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 7, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 7, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 7, y: -4}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 8, y: -13}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 8, y: -12}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 8, y: -11}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 8, y: -10}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 8, y: -9}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 8, y: -8}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 8, y: -7}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 8, y: -6}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 8, y: -5}
+    girdType: 1
+    boolTypeValue: 1
+  - tileCoordinate: {x: 8, y: -4}
+    girdType: 1
+    boolTypeValue: 1

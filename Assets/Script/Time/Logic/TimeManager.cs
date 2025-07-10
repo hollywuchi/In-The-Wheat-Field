@@ -37,13 +37,22 @@ public class TimeManager : MonoBehaviour
             }
         }
 
+        #region 作弊部分 仅限测试使用
         if (Input.GetKey(KeyCode.T))
         {
             for (int i = 0; i < 60; i++)
                 UpdateGameTime();
         }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            gameDay++;
+            EventHandler.CallGameDayEvent(gameDay, gameSeason);
+            EventHandler.CallGameDateEvent(gameHour, gameDay, gameMonth, gameYear, gameSeason);
+        }
     }
 
+    #endregion
     private void NewGameTime()
     {
         gameSecond = 0;
@@ -100,6 +109,7 @@ public class TimeManager : MonoBehaviour
                                 gameYear = 2025;
                             }
                         }
+                        EventHandler.CallGameDayEvent(gameDay, gameSeason);
                     }
                 }
                 EventHandler.CallGameDateEvent(gameHour, gameDay, gameMonth, gameYear, gameSeason);

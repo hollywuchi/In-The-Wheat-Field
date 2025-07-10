@@ -1,6 +1,10 @@
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEditor.Callbacks;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -22,15 +26,19 @@ namespace Farm.Map
 
         private Grid currentGrid;
 
+        private Season currentSeason;
+
         void OnEnable()
         {
             EventHandler.ExcuteActionAfterAnimation += OnExcuteActionAfterAnimation;
             EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
+            EventHandler.GameDayEvent += OnGameDayEvent;
         }
         void OnDisable()
         {
             EventHandler.ExcuteActionAfterAnimation -= OnExcuteActionAfterAnimation;
             EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
+            EventHandler.GameDayEvent -= OnGameDayEvent;
         }
 
 
@@ -106,8 +114,31 @@ namespace Farm.Map
             currentGrid = FindObjectOfType<Grid>();
             digTileMaps = GameObject.FindWithTag("Dig").GetComponent<Tilemap>();
             wetTileMaps = GameObject.FindWithTag("Water").GetComponent<Tilemap>();
+
+            RefreshMap();
         }
 
+        private void OnGameDayEvent(int days, Season season)
+        {
+            currentSeason = season;
+            foreach (var tile in tileDetailsDict)
+            {
+                if (tile.Value.daysSinceWatered > -1)
+                    tile.Value.daysSinceWatered = -1;
+                if (tile.Value.daysSinceDig > -1)
+                    tile.Value.daysSinceDig++;
+
+                // 过期的坑
+                if (tile.Value.daysSinceDig > 5 && tile.Value.seedItemID == -1)
+                {
+                    tile.Value.daysSinceDig = -1;
+                    tile.Value.canDig = true;
+                }
+
+            }
+
+            RefreshMap();
+        }
         public TileDetails GetTileDetailsOnMousePosition(Vector3Int mouseGridPos)
         {
             string key = mouseGridPos.x + "X" + mouseGridPos.y + "Y" + SceneManager.GetActiveScene().name;
@@ -146,6 +177,8 @@ namespace Farm.Map
                         // 音效
                         break;
                 }
+
+                UpdateTileDetails(currentTile);
             }
         }
         /// <summary>
@@ -167,6 +200,51 @@ namespace Farm.Map
             Vector3Int pos = new Vector3Int(tile.girdX, tile.girdY, 0);
             if (wetTileMaps != null)
                 wetTileMaps.SetTile(pos, wetTile);
+        }
+
+        /// <summary>
+        /// 更新地图中瓦片的信息
+        /// </summary>
+        /// <param name="tileDetails"></param>
+        private void UpdateTileDetails(TileDetails tileDetails)
+        {
+            string key = tileDetails.girdX + "X" + tileDetails.girdY + "Y" + SceneManager.GetActiveScene().name;
+            if (tileDetailsDict.ContainsKey(key))
+            {
+                tileDetailsDict[key] = tileDetails;
+            }
+        }
+
+        private void RefreshMap()
+        {
+            if (digTileMaps != null)
+                digTileMaps.ClearAllTiles();
+            if (wetTileMaps != null)
+                wetTileMaps.ClearAllTiles();
+
+            DisplayMap(SceneManager.GetActiveScene().name);
+        }
+
+        /// <summary>
+        /// 显示地图瓦片
+        /// </summary>
+        /// <param name="sceneName"></param>
+        private void DisplayMap(string sceneName)
+        {
+            foreach (var tile in tileDetailsDict)
+            {
+                var key = tile.Key;
+                var tileDetails = tile.Value;
+
+                if (key.Contains(sceneName))
+                {
+                    if (tileDetails.daysSinceDig > -1)
+                        SetDigGround(tileDetails);
+                    if (tileDetails.daysSinceWatered > -1)
+                        SetWetGround(tileDetails);
+                    // TODO:种子
+                }
+            }
         }
     }
 }

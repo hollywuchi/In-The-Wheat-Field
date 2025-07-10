@@ -1,4 +1,8 @@
+using System.Collections;
+using System.Threading;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +18,10 @@ public class Player : MonoBehaviour
 
     private bool inputDisable;
 
+    // 鼠标方向向量
+    private float mouseX;
+    private float mouseY;
+    private bool useTool;
     void OnEnable()
     {
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
@@ -69,10 +77,48 @@ public class Player : MonoBehaviour
     {
         inputDisable = true;
     }
-    private void OnMouseClickedEvent(Vector3 pos, ItemDetails itemDetails)
+    private void OnMouseClickedEvent(Vector3 mouseWorldPos, ItemDetails itemDetails)
     {
-        EventHandler.CallExcuteActionAfterAnimation(pos,itemDetails);
+        if (itemDetails.itemType != ItemType.Seed && itemDetails.itemType != ItemType.Commondity && itemDetails.itemType != ItemType.Funiture)
+        {
+            mouseX = mouseWorldPos.x - transform.position.x;
+            mouseY = mouseWorldPos.y - transform.position.y;
+            // 鼠标指针在斜方向的时候，人物没办法斜方向
+            // 因此要进行统一
+            if (Mathf.Abs(mouseX) > Mathf.Abs(mouseY))
+                mouseY = 0;
+            else
+                mouseX = 0;
+
+            StartCoroutine(UseToolRoutine(mouseWorldPos, itemDetails));
+        }
+        else
+        {
+            EventHandler.CallExcuteActionAfterAnimation(mouseWorldPos, itemDetails);
+        }
     }
+
+    private IEnumerator UseToolRoutine(Vector3 mouseWorldPos, ItemDetails itemDetails)
+    {
+        useTool = true;
+        inputDisable = true;
+        yield return null;
+        foreach (var anim in animators)
+        {
+            anim.SetTrigger("useTool");
+            // 人物面朝的方向
+            anim.SetFloat("inputX", mouseX);
+            anim.SetFloat("inputY", mouseY);
+        }
+        yield return new WaitForSeconds(0.5f);
+        EventHandler.CallExcuteActionAfterAnimation(mouseWorldPos, itemDetails);
+        yield return new WaitForSeconds(0.25f);
+
+        // 等待动画结束
+        useTool = false;
+        inputDisable = false;
+    }
+
     /// <summary>
     /// 玩家移动方向
     /// </summary>
@@ -109,6 +155,9 @@ public class Player : MonoBehaviour
         foreach (var anim in animators)
         {
             anim.SetBool("isMoving", isMoving);
+
+            anim.SetFloat("mouseX",mouseX);
+            anim.SetFloat("mouseY",mouseY);
             if (isMoving)
             {
                 anim.SetFloat("inputX", inputX);

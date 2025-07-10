@@ -39,6 +39,12 @@ public static class EventHandler
         GameMinuteEvent?.Invoke(second,minute);
     }
 
+    public static event Action<int,Season> GameDayEvent;
+    public static void CallGameDayEvent(int day,Season season)
+    {
+        GameDayEvent?.Invoke(day,season);
+    }
+    
     public static event Action<int,int,int,int,Season> GameDateEvent;
     public static void CallGameDateEvent(int hour,int day,int month,int year,Season season)
     {
