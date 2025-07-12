@@ -2,9 +2,7 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 using Farm.Map;
-using System.Collections;
-using Unity.Mathematics;
-using UnityEditor.U2D.Aseprite;
+using Farm.CropPlant;
 
 public class CursorManager : MonoBehaviour
 {
@@ -152,9 +150,14 @@ public class CursorManager : MonoBehaviour
 
         if (currentTile != null)
         {
+            CropDetails currentCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
+
             // WORKFLOW:补充所有物品的类型
             switch (currentItem.itemType)
             {
+                case ItemType.Seed:
+                    if (currentTile.daysSinceDig > -1 && currentTile.seedItemID == -1) SetCursorVaild(); else SetCursorInVaild();
+                    break;
                 case ItemType.Commondity:
                     if (currentTile.canDropItem && currentItem.canDropped) SetCursorVaild(); else SetCursorInVaild();
                     break;
@@ -166,6 +169,14 @@ public class CursorManager : MonoBehaviour
                 case ItemType.WaterTool:
                     if (currentTile.daysSinceDig > -1 && currentTile.daysSinceWatered == -1) SetCursorVaild(); else SetCursorInVaild();
                     break;
+                case ItemType.CollectTool:
+                    if (currentCrop != null)
+                    {
+                        if (currentTile.growthDays >= currentCrop.TotalGrowthDays) SetCursorVaild(); else SetCursorInVaild();
+                    }
+                    else SetCursorInVaild();
+                    break;
+
             }
         }
         else

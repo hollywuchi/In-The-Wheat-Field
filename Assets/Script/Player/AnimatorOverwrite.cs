@@ -45,11 +45,12 @@ public class AnimatorOverwrite : MonoBehaviour
         // C# 新的语法糖
         PartType currentType = details.itemType switch
         {
+            // WORKFLOW:物品使用时对应的动画
             ItemType.Seed => PartType.Carry,
             ItemType.Commondity => PartType.Carry,
             ItemType.HoeTool => PartType.Hoe,
             ItemType.WaterTool => PartType.Water,
-            // FIXME:此处有浇完水身体动画控制器不还原BUG
+            ItemType.CollectTool => PartType.Collect,
             _ => PartType.None
         };
 
@@ -65,8 +66,12 @@ public class AnimatorOverwrite : MonoBehaviour
                 holdItem.sprite = details.itemOnWorldSprite == null ? details.itemIcon : details.itemOnWorldSprite;
                 holdItem.enabled = true;
             }
+            else
+            {
+                // 切换其他工具之后手要放下来
+                holdItem.enabled = false;
+            }
         }
-
         SwitchAnimator(currentType);
 
     }

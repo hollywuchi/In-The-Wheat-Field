@@ -880,6 +880,7 @@ Transform:
   - {fileID: 888006789}
   - {fileID: 1820336527}
   - {fileID: 1295385165}
+  - {fileID: 1622697473}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &888006788
@@ -1182,6 +1183,51 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 0}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!1 &1622697472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1622697473}
+  - component: {fileID: 1622697474}
+  m_Layer: 0
+  m_Name: CropManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1622697473
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622697472}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 748874919}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1622697474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622697472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29bd33a1d24ee7341b997be4117e97b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cropDataBase: {fileID: 11400000, guid: 445eb34b320b1204a986e0dece62876b, type: 2}
 --- !u!1 &1669389253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,18 +1410,30 @@ MonoBehaviour:
   - partType: 0
     partName: 2
     overrideController: {fileID: 22100000, guid: f4e80ea2b185de24ba5c0d7392928daa, type: 2}
+  - partType: 1
+    partName: 2
+    overrideController: {fileID: 22100000, guid: 66ac6b66c33d3b649b279d4adac71e55, type: 2}
+  - partType: 2
+    partName: 2
+    overrideController: {fileID: 22100000, guid: f4e80ea2b185de24ba5c0d7392928daa, type: 2}
+  - partType: 5
+    partName: 2
+    overrideController: {fileID: 22100000, guid: cbf8c04c5368c0647a5c3900acd2bec2, type: 2}
   - partType: 4
     partName: 2
     overrideController: {fileID: 22100000, guid: 4485bf618f0ad5141a8a1c303b7858a5, type: 2}
   - partType: 4
     partName: 1
     overrideController: {fileID: 22100000, guid: ab2bca015f1d73c4bb8e04577fbdf864, type: 2}
+  - partType: 5
+    partName: 1
+    overrideController: {fileID: 22100000, guid: 79f6096289cd97442939cf757029e77c, type: 2}
   - partType: 4
     partName: 0
     overrideController: {fileID: 22100000, guid: be46530bd4acef64fbb1faaab69bff85, type: 2}
-  - partType: 1
-    partName: 2
-    overrideController: {fileID: 22100000, guid: 66ac6b66c33d3b649b279d4adac71e55, type: 2}
+  - partType: 5
+    partName: 0
+    overrideController: {fileID: 22100000, guid: 447343fa293f25647aabfc0c6cccea7b, type: 2}
   - partType: 0
     partName: 3
     overrideController: {fileID: 22100000, guid: fbfef9ffad93ef84595016f519cc0315, type: 2}

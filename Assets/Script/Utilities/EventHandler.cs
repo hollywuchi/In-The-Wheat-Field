@@ -1,10 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Xml.Serialization;
-using JetBrains.Annotations;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public static class EventHandler 
@@ -21,10 +16,10 @@ public static class EventHandler
         InstantiateItemInScene?.Invoke(ID,pos);
     }
 
-    public static event Action<int,Vector3> DropItemEvent;
-    public static void CallDropItemEvent(int ID,Vector3 pos)
+    public static event Action<int,Vector3,ItemType> DropItemEvent;
+    public static void CallDropItemEvent(int ID,Vector3 pos,ItemType itemType)
     {
-        DropItemEvent?.Invoke(ID,pos);
+        DropItemEvent?.Invoke(ID,pos,itemType);
     }
 
     public static event Action<ItemDetails,bool> ItemSelectEvent;
@@ -85,5 +80,11 @@ public static class EventHandler
     public static void CallExcuteActionAfterAnimation(Vector3 pos,ItemDetails itemDetails)
     {
         ExcuteActionAfterAnimation?.Invoke(pos,itemDetails);
+    }
+
+    public static event Action<int,TileDetails> PlantSeedEvent;
+    public static void CallPlantSeedEvent(int ID,TileDetails tileDetails)
+    {
+        PlantSeedEvent?.Invoke(ID,tileDetails);
     }
 }

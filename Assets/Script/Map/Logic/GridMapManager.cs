@@ -1,14 +1,8 @@
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using UnityEditor;
-using UnityEditor.Build.Reporting;
-using UnityEditor.Callbacks;
-using UnityEditor.Search;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 
 namespace Farm.Map
 {
@@ -133,6 +127,12 @@ namespace Farm.Map
                 {
                     tile.Value.daysSinceDig = -1;
                     tile.Value.canDig = true;
+                    tile.Value.growthDays = -1; 
+                }
+                if (tile.Value.seedItemID != -1)
+                {
+                    tile.Value.growthDays++;
+
                 }
 
             }
@@ -160,8 +160,12 @@ namespace Farm.Map
                 // WORKFLOW:物品使用实际功能
                 switch (itemDetails.itemType)
                 {
+                    case ItemType.Seed:
+                        EventHandler.CallPlantSeedEvent(itemDetails.itemID, currentTile);
+                        EventHandler.CallDropItemEvent(itemDetails.itemID,mouseWorldPos,ItemType.Seed);
+                        break;
                     case ItemType.Commondity:
-                        EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos);
+                        EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos,ItemType.Commondity);
                         break;
 
                     case ItemType.HoeTool:
@@ -176,10 +180,27 @@ namespace Farm.Map
                         currentTile.daysSinceWatered = 0;
                         // 音效
                         break;
+                    case ItemType.CollectTool:
+                        Crop currnetCrop = GetCropObject(mouseWorldPos);
+                        // TODO:执行收割方法
+                        break;
                 }
 
                 UpdateTileDetails(currentTile);
             }
+        }
+
+        private Crop GetCropObject(Vector3 mouseWorldPos)
+        {
+            Collider2D[] colliders = Physics2D.OverlapPointAll(mouseWorldPos);
+            Crop currentCrop = null;
+
+            for(int i = 0;i < colliders.Length; i++)
+            {
+                if(colliders[i].GetComponent<Crop>())
+                    currentCrop = colliders[i].GetComponent<Crop>();
+            }
+            return currentCrop;
         }
         /// <summary>
         /// 显示挖坑瓦片
@@ -221,6 +242,10 @@ namespace Farm.Map
                 digTileMaps.ClearAllTiles();
             if (wetTileMaps != null)
                 wetTileMaps.ClearAllTiles();
+            foreach (var crop in FindObjectsOfType<Crop>())
+            {
+                Destroy(crop.gameObject);
+            }
 
             DisplayMap(SceneManager.GetActiveScene().name);
         }
@@ -242,7 +267,8 @@ namespace Farm.Map
                         SetDigGround(tileDetails);
                     if (tileDetails.daysSinceWatered > -1)
                         SetWetGround(tileDetails);
-                    // TODO:种子
+                    if (tileDetails.seedItemID > -1)
+                        EventHandler.CallPlantSeedEvent(tileDetails.seedItemID, tileDetails);
                 }
             }
         }

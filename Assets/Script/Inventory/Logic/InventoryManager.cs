@@ -132,7 +132,7 @@ namespace Farm.Inventory
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
         }
 
-        private void OnDropItemEvent(int ID, Vector3 pos)
+        private void OnDropItemEvent(int ID, Vector3 pos,ItemType itemType)
         {
             RemoveItem(ID, 1);
         }
