@@ -172,7 +172,8 @@ public class CursorManager : MonoBehaviour
                 case ItemType.CollectTool:
                     if (currentCrop != null)
                     {
-                        if (currentTile.growthDays >= currentCrop.TotalGrowthDays) SetCursorVaild(); else SetCursorInVaild();
+                        if (currentCrop.CheckToolAvailable(currentItem.itemID))
+                            if (currentTile.growthDays >= currentCrop.TotalGrowthDays) SetCursorVaild(); else SetCursorInVaild();
                     }
                     else SetCursorInVaild();
                     break;

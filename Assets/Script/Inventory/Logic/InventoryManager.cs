@@ -16,15 +16,16 @@ namespace Farm.Inventory
         void OnEnable()
         {
             EventHandler.DropItemEvent += OnDropItemEvent;
+            EventHandler.HaverstAtPlayerPosition += OnHaverstAtPlayerPosition;
         }
 
         void OnDisable()
         {
             EventHandler.DropItemEvent += OnDropItemEvent;
+            EventHandler.HaverstAtPlayerPosition -= OnHaverstAtPlayerPosition;
         }
 
-
-
+        
         void Start()
         {
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
@@ -136,6 +137,20 @@ namespace Farm.Inventory
         {
             RemoveItem(ID, 1);
         }
+
+        /// <summary>
+        /// 添加收获的农作物到背包（直接添加版）
+        /// </summary>
+        /// <param name="ID">农作物ID</param>
+        private void OnHaverstAtPlayerPosition(int ID)
+        {
+            var Index = GetItemIndexInBag(ID);
+
+            AddItemByIndex(ID, Index, 1);
+
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.BagItemList);
+        }
+
 
         /// <summary>
         /// 移除指定物品

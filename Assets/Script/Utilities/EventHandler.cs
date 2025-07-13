@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class EventHandler 
 {
@@ -86,5 +87,17 @@ public static class EventHandler
     public static void CallPlantSeedEvent(int ID,TileDetails tileDetails)
     {
         PlantSeedEvent?.Invoke(ID,tileDetails);
+    }
+
+    public static event Action<int> HaverstAtPlayerPosition;
+    public static void CallHaverstAtPlayerPosition(int ID)
+    {
+        HaverstAtPlayerPosition?.Invoke(ID);
+    }
+
+    public static event Action RefreshCurrnetMap;
+    public static void CallRefreshCurrnetMap()
+    {
+        RefreshCurrnetMap?.Invoke();
     }
 }

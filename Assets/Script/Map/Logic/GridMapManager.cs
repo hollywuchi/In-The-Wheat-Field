@@ -27,12 +27,14 @@ namespace Farm.Map
             EventHandler.ExcuteActionAfterAnimation += OnExcuteActionAfterAnimation;
             EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
             EventHandler.GameDayEvent += OnGameDayEvent;
+            EventHandler.RefreshCurrnetMap += RefreshMap;
         }
         void OnDisable()
         {
             EventHandler.ExcuteActionAfterAnimation -= OnExcuteActionAfterAnimation;
             EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
             EventHandler.GameDayEvent -= OnGameDayEvent;
+            EventHandler.RefreshCurrnetMap -= RefreshMap;
         }
 
 
@@ -182,7 +184,7 @@ namespace Farm.Map
                         break;
                     case ItemType.CollectTool:
                         Crop currnetCrop = GetCropObject(mouseWorldPos);
-                        // TODO:执行收割方法
+                        currnetCrop.ProcessToolAction(itemDetails,currentTile);
                         break;
                 }
 

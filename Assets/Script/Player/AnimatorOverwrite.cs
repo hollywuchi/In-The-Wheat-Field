@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Farm.Inventory;
 using UnityEngine;
 
 public class AnimatorOverwrite : MonoBehaviour
@@ -27,17 +28,38 @@ public class AnimatorOverwrite : MonoBehaviour
     {
         EventHandler.ItemSelectEvent += OnItemSelectEvent;
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+        EventHandler.HaverstAtPlayerPosition += OnHaverstAtPlayerPosition;
     }
     void OnDisable()
     {
         EventHandler.ItemSelectEvent -= OnItemSelectEvent;
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+        EventHandler.HaverstAtPlayerPosition -= OnHaverstAtPlayerPosition;
     }
 
+    
     private void OnBeforeSceneUnloadEvent()
     {
         holdItem.enabled = false;
         SwitchAnimator(PartType.None);
+    }
+
+    private void OnHaverstAtPlayerPosition(int ID)
+    {
+        Sprite itemSprite = InventoryManager.Instance.GetDetails(ID).itemOnWorldSprite;
+        if(holdItem.enabled == false)
+        {
+            StartCoroutine(ShowItem(itemSprite));
+        }
+
+    }
+
+    private IEnumerator ShowItem(Sprite itemSprite)
+    {
+        holdItem.sprite = itemSprite;
+        holdItem.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        holdItem.enabled = false;
     }
 
     private void OnItemSelectEvent(ItemDetails details, bool isSelected)
