@@ -1,12 +1,15 @@
+using System.Net.Mail;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class Crop : MonoBehaviour
 {
     public CropDetails cropDetails;
-
+    public TileDetails tile;
+    public bool canHarvest => tile.growthDays > cropDetails.TotalGrowthDays;
     private int harvestActionCount;
-    private TileDetails tile;
+    public Animator anim;
+    private Transform PlayerTrans => FindAnyObjectByType<Player>().transform;
     public void ProcessToolAction(ItemDetails tool, TileDetails tileDetails)
     {
         tile = tileDetails;
@@ -14,21 +17,36 @@ public class Crop : MonoBehaviour
         int requireActionCount = cropDetails.GetTotalRequireCount(tool.itemID);
         if (requireActionCount == -1) return;
 
-        // 判断是否有动画
 
+        anim = GetComponentInChildren<Animator>();
         // 点击计数器
-
         if (harvestActionCount < requireActionCount)
         {
             harvestActionCount++;
 
+            if(anim != null && cropDetails.hasAnimation)
+            {
+                if(PlayerTrans.position.x < transform.position.x)
+                    anim.SetTrigger("RotateRight");
+                else
+                    anim.SetTrigger("RotateLeft");
+            }
+
+            // 判断是否有动画
             // 播放音效
             // 播放动画
         }
         if (harvestActionCount >= requireActionCount)
         {
-            // 生成农作物
-            SpawnHarvestItems();
+            if (cropDetails.generateAtPlayerPosition)
+            {
+                // 生成农作物
+                SpawnHarvestItems();
+            }
+            else if(cropDetails.hasAnimation)
+            {
+
+            }
         }
 
     }
@@ -70,7 +88,7 @@ public class Crop : MonoBehaviour
             tile.daysSinceLastHarvest++;
 
             // 判断是否可以生长
-            if(tile.daysSinceLastHarvest < cropDetails.RegrowTimes && cropDetails.daysToRegrow > 0)
+            if (tile.daysSinceLastHarvest < cropDetails.RegrowTimes && cropDetails.daysToRegrow > 0)
             {
                 tile.growthDays = cropDetails.TotalGrowthDays - cropDetails.daysToRegrow;
                 // 刷新种子

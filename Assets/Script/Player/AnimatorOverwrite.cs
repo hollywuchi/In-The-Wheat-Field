@@ -70,6 +70,7 @@ public class AnimatorOverwrite : MonoBehaviour
             // WORKFLOW:物品使用时对应的动画
             ItemType.Seed => PartType.Carry,
             ItemType.Commondity => PartType.Carry,
+            ItemType.ChopTool => PartType.Chop,
             ItemType.HoeTool => PartType.Hoe,
             ItemType.WaterTool => PartType.Water,
             ItemType.CollectTool => PartType.Collect,

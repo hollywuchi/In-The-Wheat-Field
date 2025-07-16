@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -129,7 +130,7 @@ namespace Farm.Map
                 {
                     tile.Value.daysSinceDig = -1;
                     tile.Value.canDig = true;
-                    tile.Value.growthDays = -1; 
+                    tile.Value.growthDays = -1;
                 }
                 if (tile.Value.seedItemID != -1)
                 {
@@ -159,15 +160,16 @@ namespace Farm.Map
 
             if (currentGrid != null)
             {
+                Crop currnetCrop = GetCropObject(mouseWorldPos);
                 // WORKFLOW:物品使用实际功能
                 switch (itemDetails.itemType)
                 {
                     case ItemType.Seed:
                         EventHandler.CallPlantSeedEvent(itemDetails.itemID, currentTile);
-                        EventHandler.CallDropItemEvent(itemDetails.itemID,mouseWorldPos,ItemType.Seed);
+                        EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos, ItemType.Seed);
                         break;
                     case ItemType.Commondity:
-                        EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos,ItemType.Commondity);
+                        EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos, ItemType.Commondity);
                         break;
 
                     case ItemType.HoeTool:
@@ -182,9 +184,11 @@ namespace Farm.Map
                         currentTile.daysSinceWatered = 0;
                         // 音效
                         break;
+                    case ItemType.ChopTool:
+                        currnetCrop.ProcessToolAction(itemDetails, currnetCrop.tile);
+                        break;
                     case ItemType.CollectTool:
-                        Crop currnetCrop = GetCropObject(mouseWorldPos);
-                        currnetCrop.ProcessToolAction(itemDetails,currentTile);
+                        currnetCrop.ProcessToolAction(itemDetails, currentTile);
                         break;
                 }
 
@@ -192,14 +196,14 @@ namespace Farm.Map
             }
         }
 
-        private Crop GetCropObject(Vector3 mouseWorldPos)
+        public Crop GetCropObject(Vector3 mouseWorldPos)
         {
             Collider2D[] colliders = Physics2D.OverlapPointAll(mouseWorldPos);
             Crop currentCrop = null;
 
-            for(int i = 0;i < colliders.Length; i++)
+            for (int i = 0; i < colliders.Length; i++)
             {
-                if(colliders[i].GetComponent<Crop>())
+                if (colliders[i].GetComponent<Crop>())
                     currentCrop = colliders[i].GetComponent<Crop>();
             }
             return currentCrop;

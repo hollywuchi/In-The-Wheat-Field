@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Farm.Map;
 using Farm.CropPlant;
+using System.Security.Cryptography;
 
 public class CursorManager : MonoBehaviour
 {
@@ -152,6 +153,7 @@ public class CursorManager : MonoBehaviour
         {
             CropDetails currentCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
 
+            Crop crop = GridMapManager.Instance.GetCropObject(mouseWorldPos);
             // WORKFLOW:补充所有物品的类型
             switch (currentItem.itemType)
             {
@@ -168,6 +170,14 @@ public class CursorManager : MonoBehaviour
 
                 case ItemType.WaterTool:
                     if (currentTile.daysSinceDig > -1 && currentTile.daysSinceWatered == -1) SetCursorVaild(); else SetCursorInVaild();
+                    break;
+                case ItemType.ChopTool:
+                    if (crop != null)
+                    {
+                        // 重要！！！
+                        // 这里不是CurrentCrop的Check，而是crop.cropDetails中的Check 原因仍然未知
+                        if (crop.canHarvest && crop.cropDetails.CheckToolAvailable(currentItem.itemID)) SetCursorVaild(); else SetCursorInVaild();
+                    }
                     break;
                 case ItemType.CollectTool:
                     if (currentCrop != null)

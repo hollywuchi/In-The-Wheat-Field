@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
         if (itemDetails.itemType != ItemType.Seed && itemDetails.itemType != ItemType.Commondity && itemDetails.itemType != ItemType.Funiture)
         {
             mouseX = mouseWorldPos.x - transform.position.x;
-            mouseY = mouseWorldPos.y - transform.position.y;
+            mouseY = mouseWorldPos.y - (transform.position.y + 0.85f);
             // 鼠标指针在斜方向的时候，人物没办法斜方向
             // 因此要进行统一
             if (Mathf.Abs(mouseX) > Mathf.Abs(mouseY))
