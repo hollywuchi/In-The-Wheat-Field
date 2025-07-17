@@ -1,4 +1,7 @@
+using System.Collections;
 using System.Net.Mail;
+using System.Net.Sockets;
+using System.Security.Cryptography;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 
@@ -24,9 +27,9 @@ public class Crop : MonoBehaviour
         {
             harvestActionCount++;
 
-            if(anim != null && cropDetails.hasAnimation)
+            if (anim != null && cropDetails.hasAnimation)
             {
-                if(PlayerTrans.position.x < transform.position.x)
+                if (PlayerTrans.position.x < transform.position.x)
                     anim.SetTrigger("RotateRight");
                 else
                     anim.SetTrigger("RotateLeft");
@@ -38,19 +41,52 @@ public class Crop : MonoBehaviour
         }
         if (harvestActionCount >= requireActionCount)
         {
-            if (cropDetails.generateAtPlayerPosition)
+            if (cropDetails.generateAtPlayerPosition || !cropDetails.hasAnimation)
             {
                 // 生成农作物
                 SpawnHarvestItems();
             }
-            else if(cropDetails.hasAnimation)
+            else if (cropDetails.hasAnimation)
             {
+                if (PlayerTrans.position.x < transform.position.x)
+                    anim.SetTrigger("FallingRight");
+                else
+                    anim.SetTrigger("FallingLeft");
 
+                StartCoroutine(HarvestAfterAnimation());
             }
         }
 
     }
 
+    private IEnumerator HarvestAfterAnimation()
+    {
+        while (!anim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+        {
+            yield return null;
+        }
+
+        SpawnHarvestItems();
+
+        // 可能会执行,转换新物品
+        if (cropDetails.transferItemID > 0)
+        {
+            CreatTransferCrop();
+        }
+
+
+    }
+
+
+    private void CreatTransferCrop()
+    {
+        tile.seedItemID = cropDetails.transferItemID;
+        tile.daysSinceLastHarvest = -1;
+        // BUG:会使得鼠标检测失效
+        // tile.growthDays = 0;
+
+        EventHandler.CallRefreshCurrnetMap();
+    }
     /// <summary>
     /// 生成农作物
     /// </summary>
@@ -77,7 +113,12 @@ public class Crop : MonoBehaviour
                 }
                 else    // 在世界上生成物品
                 {
+                    var dirX = PlayerTrans.position.x < transform.position.x ? 1 : -1;
 
+                    var spwanPos = new Vector3(transform.position.x + Random.Range(dirX, cropDetails.spawnRadius.x * dirX),
+                    transform.position.y + Random.Range(-cropDetails.spawnRadius.y, cropDetails.spawnRadius.y));
+
+                    EventHandler.CallInstantiateItemInScene(cropDetails.producedItemID[i], spwanPos);
                 }
 
             }

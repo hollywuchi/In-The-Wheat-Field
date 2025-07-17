@@ -47,8 +47,9 @@ namespace Farm.Inventory
 
         private void OnInstantiateItemInScene(int ID, Vector3 pos)
         {
-            var newItem = Instantiate(itemPrefab, pos, Quaternion.identity, itemParent);
+            var newItem = Instantiate(bounceItemPrefab, pos, Quaternion.identity, itemParent);
             newItem.itemID = ID;
+            newItem.GetComponent<ItemBounce>().InitBounceItem(pos, Vector3.up);
         }
 
         private void OnDropItemEvent(int ID, Vector3 mousePos, ItemType itemType)
