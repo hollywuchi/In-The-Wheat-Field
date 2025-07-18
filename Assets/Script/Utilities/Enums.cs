@@ -18,7 +18,7 @@ public enum InventoryLocation
 
 public enum PartType
 {
-    None, Carry, Hoe, Break, Water, Collect,Chop
+    None, Carry, Hoe, Break, Water, Collect, Chop
 }
 
 public enum PartName
@@ -34,4 +34,9 @@ public enum Season
 public enum GirdType
 {
     Diggable, DropItem, PlaceFurinture, NPCObstacle
+}
+
+public enum ParticalEffectType
+{
+    None, LeavesFalling01, LeavesFalling02, Rock, ReapableScenery
 }

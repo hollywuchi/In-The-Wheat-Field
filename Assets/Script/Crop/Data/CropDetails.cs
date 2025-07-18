@@ -50,6 +50,7 @@ public class CropDetails
     public bool generateAtPlayerPosition;
     public bool hasAnimation;
     public bool hasParticalEffect;
+    public ParticalEffectType particalEffect;
 
     /// <summary>
     /// 检查工具是否可用，也就是菜篮子不能砍树
