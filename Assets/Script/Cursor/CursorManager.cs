@@ -171,6 +171,7 @@ public class CursorManager : MonoBehaviour
                 case ItemType.WaterTool:
                     if (currentTile.daysSinceDig > -1 && currentTile.daysSinceWatered == -1) SetCursorVaild(); else SetCursorInVaild();
                     break;
+                case ItemType.BreakTool:    // BUG:玩家无法在不改变天数的情况下挖石头
                 case ItemType.ChopTool:
                     if (crop != null)
                     {
@@ -178,6 +179,8 @@ public class CursorManager : MonoBehaviour
                         // 这里不是CurrentCrop的Check，而是crop.cropDetails中的Check 原因仍然未知
                         if (crop.canHarvest && crop.cropDetails.CheckToolAvailable(currentItem.itemID)) SetCursorVaild(); else SetCursorInVaild();
                     }
+                    // 可以防止斧头砍到范围之外的区域引发的报错，同时防止树木砍完之后还可以砍树的行为
+                    else SetCursorInVaild();
                     break;
                 case ItemType.CollectTool:
                     if (currentCrop != null)

@@ -51,6 +51,7 @@ public class CropDetails
     public bool hasAnimation;
     public bool hasParticalEffect;
     public ParticalEffectType particalEffect;
+    public Vector3 effectPos;
 
     /// <summary>
     /// 检查工具是否可用，也就是菜篮子不能砍树

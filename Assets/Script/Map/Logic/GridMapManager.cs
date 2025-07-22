@@ -4,6 +4,7 @@ using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 namespace Farm.Map
 {
@@ -17,6 +18,7 @@ namespace Farm.Map
         [Header("地图数据")]
         public List<MapData_SO> mapDataList;
 
+        private Dictionary<string, bool> firstLoadDict = new Dictionary<string, bool>();
         private Dictionary<string, TileDetails> tileDetailsDict = new Dictionary<string, TileDetails>();
 
         private Grid currentGrid;
@@ -44,6 +46,7 @@ namespace Farm.Map
         {
             foreach (var mapData in mapDataList)
             {
+                firstLoadDict.Add(mapData.sceneName, true);
                 InitTileDetailsDict(mapData);
             }
         }
@@ -111,7 +114,12 @@ namespace Farm.Map
             currentGrid = FindObjectOfType<Grid>();
             digTileMaps = GameObject.FindWithTag("Dig").GetComponent<Tilemap>();
             wetTileMaps = GameObject.FindWithTag("Water").GetComponent<Tilemap>();
-
+            if (firstLoadDict[SceneManager.GetActiveScene().name])
+            {
+                // 为了保证树不被刷掉，提前保存ID
+                EventHandler.CallGenerateCropEvent();
+                firstLoadDict[SceneManager.GetActiveScene().name] = false;
+            }
             RefreshMap();
         }
 
@@ -184,8 +192,10 @@ namespace Farm.Map
                         currentTile.daysSinceWatered = 0;
                         // 音效
                         break;
+                    case ItemType.BreakTool:
                     case ItemType.ChopTool:
-                        currnetCrop.ProcessToolAction(itemDetails, currnetCrop.tile);
+                        // 三目运算符为了防止点击非树木位置产生报错
+                        currnetCrop?.ProcessToolAction(itemDetails, currnetCrop.tile);
                         break;
                     case ItemType.CollectTool:
                         currnetCrop.ProcessToolAction(itemDetails, currentTile);
@@ -233,12 +243,16 @@ namespace Farm.Map
         /// 更新地图中瓦片的信息
         /// </summary>
         /// <param name="tileDetails"></param>
-        private void UpdateTileDetails(TileDetails tileDetails)
+        public void UpdateTileDetails(TileDetails tileDetails)
         {
             string key = tileDetails.girdX + "X" + tileDetails.girdY + "Y" + SceneManager.GetActiveScene().name;
             if (tileDetailsDict.ContainsKey(key))
             {
                 tileDetailsDict[key] = tileDetails;
+            }
+            else
+            {
+                tileDetailsDict.Add(key, tileDetails);
             }
         }
 

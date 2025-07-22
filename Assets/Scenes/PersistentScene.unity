@@ -881,8 +881,56 @@ Transform:
   - {fileID: 1820336527}
   - {fileID: 1295385165}
   - {fileID: 1622697473}
+  - {fileID: 792234816}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &792234815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 792234816}
+  - component: {fileID: 792234817}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &792234816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792234815}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 748874919}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &792234817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792234815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f8097409764be24f84186942f93d84a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolPrefabs:
+  - {fileID: 6540582611817937848, guid: 97e8c8cf0bd13de419c10fa9ce7d1144, type: 3}
+  - {fileID: 8162634196007256246, guid: 541b6b6a8c62bbc4ca705864188c6dfc, type: 3}
 --- !u!1 &888006788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,6 +1115,7 @@ MonoBehaviour:
   wetTile: {fileID: 11400000, guid: 9abfafc75ed2be74f8ea1a86325d0ac1, type: 2}
   mapDataList:
   - {fileID: 11400000, guid: 34ae2e6decbf1dc4fad9db01ea044a6e, type: 2}
+  - {fileID: 11400000, guid: a783c35fde8c88c43add5ab7d5487522, type: 2}
 --- !u!1 &1467655067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1446,6 +1495,9 @@ MonoBehaviour:
   - partType: 6
     partName: 3
     overrideController: {fileID: 22100000, guid: 842afc3f8bfb1344fa12180e55d94b6f, type: 2}
+  - partType: 3
+    partName: 3
+    overrideController: {fileID: 22100000, guid: 268c7f172a2a64843a81c2c9a60b957f, type: 2}
 --- !u!1 &1788200361
 GameObject:
   m_ObjectHideFlags: 0

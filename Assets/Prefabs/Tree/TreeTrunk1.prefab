@@ -123,6 +123,8 @@ MonoBehaviour:
     generateAtPlayerPosition: 0
     hasAnimation: 0
     hasParticalEffect: 0
+    particalEffect: 0
+    effectPos: {x: 0, y: 0, z: 0}
   tile:
     girdX: 0
     girdY: 0

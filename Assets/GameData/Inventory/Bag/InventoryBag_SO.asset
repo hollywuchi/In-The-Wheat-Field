@@ -13,32 +13,32 @@ MonoBehaviour:
   m_Name: InventoryBag_SO
   m_EditorClassIdentifier: 
   BagItemList:
-  - itemID: 1007
-    itemAmount: 53
-  - itemID: 1027
-    itemAmount: 30
-  - itemID: 1012
-    itemAmount: 34
-  - itemID: 1028
-    itemAmount: 111
-  - itemID: 1003
+  - itemID: 1001
     itemAmount: 1
   - itemID: 1002
     itemAmount: 1
-  - itemID: 1001
-    itemAmount: 1
-  - itemID: 1006
-    itemAmount: 1
-  - itemID: 1017
-    itemAmount: 10
+  - itemID: 1028
+    itemAmount: 1004
+  - itemID: 1031
+    itemAmount: 1007
   - itemID: 1030
-    itemAmount: 40
+    itemAmount: 27
+  - itemID: 1033
+    itemAmount: 17
+  - itemID: 1004
+    itemAmount: 1
   - itemID: 0
     itemAmount: 0
   - itemID: 0
     itemAmount: 0
-  - itemID: 1022
-    itemAmount: 44
+  - itemID: 0
+    itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
   - itemID: 0
     itemAmount: 0
   - itemID: 0
