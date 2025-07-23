@@ -9,7 +9,7 @@ public class Crop : MonoBehaviour
 {
     public CropDetails cropDetails;
     public TileDetails tile;
-    public bool canHarvest => tile.growthDays > cropDetails.TotalGrowthDays;
+    public bool canHarvest => tile.growthDays >= cropDetails.TotalGrowthDays;   // 一定是大于等于，否则无法凿石头
     private int harvestActionCount;
     public Animator anim;
     private Transform PlayerTrans => FindAnyObjectByType<Player>().transform;

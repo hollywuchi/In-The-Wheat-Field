@@ -171,7 +171,7 @@ public class CursorManager : MonoBehaviour
                 case ItemType.WaterTool:
                     if (currentTile.daysSinceDig > -1 && currentTile.daysSinceWatered == -1) SetCursorVaild(); else SetCursorInVaild();
                     break;
-                case ItemType.BreakTool:    // BUG:玩家无法在不改变天数的情况下挖石头
+                case ItemType.BreakTool:
                 case ItemType.ChopTool:
                     if (crop != null)
                     {

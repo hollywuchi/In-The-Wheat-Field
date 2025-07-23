@@ -196,7 +196,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 586618359
   m_SortingLayer: 8
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -931,6 +931,7 @@ MonoBehaviour:
   poolPrefabs:
   - {fileID: 6540582611817937848, guid: 97e8c8cf0bd13de419c10fa9ce7d1144, type: 3}
   - {fileID: 8162634196007256246, guid: 541b6b6a8c62bbc4ca705864188c6dfc, type: 3}
+  - {fileID: 413678346712078720, guid: 42b2db15fe88ff9449996451e3d2f92a, type: 3}
 --- !u!1 &888006788
 GameObject:
   m_ObjectHideFlags: 0

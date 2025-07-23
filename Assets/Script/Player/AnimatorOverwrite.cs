@@ -97,14 +97,15 @@ public class AnimatorOverwrite : MonoBehaviour
             }
         }
         SwitchAnimator(currentType);
-
+        Debug.Log(currentType);
     }
 
     public void SwitchAnimator(PartType currentType)
     {
         foreach (var item in animatorTypes)
         {
-            if (item.partType == currentType)
+            // item.partType == PartType.None 这样可以让该类型物品非必要身体部位恢复为None，防止animatorTypes过于复杂
+            if (item.partType == currentType || item.partType == PartType.None)
             {
                 // 字典发力！传入物品的类别名称，返回对应的动画类别
                 animatorNameDic[item.partName.ToString()].runtimeAnimatorController = item.overrideController;
