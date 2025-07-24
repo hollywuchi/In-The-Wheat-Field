@@ -17,4 +17,6 @@ public class Settings
     public const int seasonHold = 3;
 
     public const float FadeDuration = 0.5f;
+
+    public const int reapCount = 2;
 }

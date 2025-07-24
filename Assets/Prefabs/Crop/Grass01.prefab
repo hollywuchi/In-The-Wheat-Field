@@ -106,11 +106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54965697c86102741ada8a9e0012b1f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 0
+  itemID: 1037
   itemdetails:
     itemID: 0
     itemName: 
-    itemType: 0
+    itemType: 9
     itemIcon: {fileID: 0}
     itemOnWorldSprite: {fileID: 0}
     itemDescription: 

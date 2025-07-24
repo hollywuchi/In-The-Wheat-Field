@@ -190,6 +190,9 @@ public class CursorManager : MonoBehaviour
                     }
                     else SetCursorInVaild();
                     break;
+                case ItemType.ReapTool:
+                    if(GridMapManager.Instance.HaveReapableItemsInReadius(mouseWorldPos,currentItem))SetCursorVaild(); else SetCursorInVaild();
+                    break;
 
             }
         }

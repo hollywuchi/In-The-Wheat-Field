@@ -37,7 +37,7 @@ public class AnimatorOverwrite : MonoBehaviour
         EventHandler.HaverstAtPlayerPosition -= OnHaverstAtPlayerPosition;
     }
 
-    
+
     private void OnBeforeSceneUnloadEvent()
     {
         holdItem.enabled = false;
@@ -47,7 +47,7 @@ public class AnimatorOverwrite : MonoBehaviour
     private void OnHaverstAtPlayerPosition(int ID)
     {
         Sprite itemSprite = InventoryManager.Instance.GetDetails(ID).itemOnWorldSprite;
-        if(holdItem.enabled == false)
+        if (holdItem.enabled == false)
         {
             StartCoroutine(ShowItem(itemSprite));
         }
@@ -75,6 +75,7 @@ public class AnimatorOverwrite : MonoBehaviour
             ItemType.WaterTool => PartType.Water,
             ItemType.CollectTool => PartType.Collect,
             ItemType.BreakTool => PartType.Break,
+            ItemType.ReapTool => PartType.Reap,
             _ => PartType.None
         };
 

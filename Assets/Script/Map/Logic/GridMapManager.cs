@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Net.WebSockets;
 using System.Security.Cryptography;
-using UnityEditor.Callbacks;
+using Farm.CropPlant;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 
 namespace Farm.Map
 {
@@ -22,7 +24,7 @@ namespace Farm.Map
         private Dictionary<string, TileDetails> tileDetailsDict = new Dictionary<string, TileDetails>();
 
         private Grid currentGrid;
-
+        private List<ReapItem> ItemsInRadius;
         private Season currentSeason;
 
         void OnEnable()
@@ -200,6 +202,18 @@ namespace Farm.Map
                     case ItemType.CollectTool:
                         currnetCrop.ProcessToolAction(itemDetails, currentTile);
                         break;
+                    case ItemType.ReapTool:
+                        int Count = 0;
+                        for (int i = 0; i < ItemsInRadius.Count; i++)
+                        {
+                            EventHandler.CallParticalEffectEvent(ParticalEffectType.ReapableScenery,ItemsInRadius[i].transform.position + Vector3.up);
+                            ItemsInRadius[i].SpawnHarvestItems();
+                            Destroy(ItemsInRadius[i].gameObject);
+                            Count++;
+                            if(Count > Settings.reapCount)
+                                break;
+                        }
+                        break;
                 }
 
                 UpdateTileDetails(currentTile);
@@ -217,6 +231,37 @@ namespace Farm.Map
                     currentCrop = colliders[i].GetComponent<Crop>();
             }
             return currentCrop;
+        }
+        /// <summary>
+        /// 返回工具范围内的杂草
+        /// </summary>
+        /// <param name="tool">工具详情</param>
+        /// <returns></returns>
+        public bool HaveReapableItemsInReadius(Vector3 mouseWirldPos,ItemDetails tool)
+        {
+            ItemsInRadius = new List<ReapItem>();
+            Collider2D[] colliders = new Collider2D[20];
+
+            // 这个方法用于返回圆形范围中碰撞器，但是效率更高，性能更好
+            Physics2D.OverlapCircleNonAlloc(mouseWirldPos, tool.itemUseRadius, colliders);
+
+            if (colliders.Length > 0)
+            {
+                for (int i = 0; i < colliders.Length; i++)
+                {
+                    if (colliders[i] != null)
+                    {
+                        if (colliders[i].GetComponent<ReapItem>())
+                        {
+                            var item = colliders[i].GetComponent<ReapItem>();
+                            ItemsInRadius.Add(item);
+                        }
+                    }
+
+                }
+            }
+            return ItemsInRadius.Count > 0;
+
         }
         /// <summary>
         /// 显示挖坑瓦片

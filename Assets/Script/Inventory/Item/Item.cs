@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
-
+using Farm.CropPlant;
 
 namespace Farm.Inventory
 {
@@ -34,6 +34,13 @@ namespace Farm.Inventory
             // 所以要减去本来的世界坐标，才可以求出其中的差
             var newoffset = itemSprte.bounds.center.y - transform.position.y;
             coll.offset = new Vector2(0, newoffset);
+
+            if(itemdetails.itemType == ItemType.ReapableScenery)
+            {
+                gameObject.AddComponent<ReapItem>();
+                gameObject.AddComponent<ItemInteractive>();
+                gameObject.GetComponent<ReapItem>().InitCropDetails(itemdetails.itemID);
+            }
         }
     }
 
