@@ -1,8 +1,4 @@
 using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Security.Cryptography;
 using Farm.CropPlant;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -336,6 +332,35 @@ namespace Farm.Map
                         EventHandler.CallPlantSeedEvent(tileDetails.seedItemID, tileDetails);
                 }
             }
+        }
+
+        /// <summary>
+        /// 根据场景名称构建网格范围，输出范围和原点
+        /// </summary>
+        /// <param name="sceneName">场景名称</param>
+        /// <param name="gridDimensions">网格范围</param>
+        /// <param name="girdOrigin">网格原点</param>
+        /// <returns>是否有当前场景的信息</returns>
+        public bool GetGridDemensions(string sceneName, out Vector2Int gridDimensions,out Vector2Int girdOrigin)
+        {
+            gridDimensions = Vector2Int.zero;
+            girdOrigin = Vector2Int.zero;
+
+            foreach(var mapdata in mapDataList)
+            {
+                if(mapdata.sceneName == sceneName)
+                {
+                    gridDimensions.x = mapdata.gridWitch;
+                    gridDimensions.y = mapdata.gridHeight;
+
+                    girdOrigin.x = mapdata.originX;
+                    girdOrigin.y = mapdata.originY;
+
+                    return true;
+                }
+            }
+            return false;
+
         }
     }
 }

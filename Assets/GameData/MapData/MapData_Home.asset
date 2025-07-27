@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: MapData_Home
   m_EditorClassIdentifier: 
   sceneName: 02.Home
+  gridWitch: 25
+  gridHeight: 20
+  originX: -15
+  originY: -18
   tileProperties:
   - tileCoordinate: {x: -14, y: -13}
     girdType: 1
