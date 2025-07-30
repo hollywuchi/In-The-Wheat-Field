@@ -31,7 +31,8 @@ namespace Farm.AStar
         {
             if (xPos < witch && yPos < height)
             {
-                return new Node(new Vector2Int(xPos, yPos));
+                // BUG：return错误
+                return gridNodes[xPos,yPos];
             }
             Debug.Log("超出地图范围");
             return null;

@@ -1,8 +1,5 @@
 using System.Collections.Generic;
 using Farm.Map;
-using Unity.Mathematics;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.Timeline;
 using UnityEngine;
 
 namespace Farm.AStar
@@ -22,16 +19,26 @@ namespace Farm.AStar
         private bool pathFound;
 
 
-        public void BuildPath(string sceneName, Vector2Int startPos, Vector2Int targetPos)
+        /// <summary>
+        /// 构建路径更新Step的每一步
+        /// </summary>
+        /// <param name="sceneName"></param>
+        /// <param name="startPos"></param>
+        /// <param name="targetPos"></param>
+        /// <param name="movementSteps"></param>
+        public void BuildPath(string sceneName, Vector2Int startPos, Vector2Int targetPos, Stack<MovementStep> movementSteps)
         {
             pathFound = false;
 
             // 查找最短路径
-            if (FindShortestPath())
+            if (GenerateGridNodes(sceneName, startPos, targetPos))
             {
-                // TODO:构建NPC移动路径
+                if (FindShortestPath())
+                {
+                    // 构建NPC移动路径
+                    UpdatePathOnMovementStepStack(sceneName, movementSteps);
+                }
             }
-
         }
 
         /// <summary>
@@ -57,13 +64,12 @@ namespace Farm.AStar
 
                 closedNodeList = new HashSet<Node>();
 
-                // GridNodes的范围是从0开始，所以要减去原点坐标得到实际位置
-                startNode = gridNodes.GetGridNode(startPos.x - originX, startPos.y - originY);
-                targetNode = gridNodes.GetGridNode(targetPos.x - originX, targetPos.y - originY);
-
             }
             else
                 return false;
+            // GridNodes的范围是从0开始，所以要减去原点坐标得到实际位置
+            startNode = gridNodes.GetGridNode(startPos.x - originX, startPos.y - originY);
+            targetNode = gridNodes.GetGridNode(targetPos.x - originX, targetPos.y - originY);
 
             for (int x = 0; x < gridWitch; x++)
             {
@@ -134,7 +140,8 @@ namespace Farm.AStar
                     if (x == 0 && y == 0)
                         continue;
 
-                    validNeighbourNode = GetValidNeighbourNode(currentNode.gridPosition.x + x, currentNode.gridPosition.y + y);
+                    // BUG：使用currentNodePos，并非currentNode
+                    validNeighbourNode = GetValidNeighbourNode(currentNodePos.x + x, currentNodePos.y + y);
 
                     if (validNeighbourNode != null)
                     {
@@ -144,7 +151,7 @@ namespace Farm.AStar
                             validNeighbourNode.hCost = GetDistance(validNeighbourNode, targetNode);
                             // 链接父节点
                             validNeighbourNode.parentNode = currentNode;
-                            openNodeList.Add(validNeighbourNode);                            
+                            openNodeList.Add(validNeighbourNode);
                         }
                     }
 
@@ -160,7 +167,7 @@ namespace Farm.AStar
         /// <returns></returns>
         private Node GetValidNeighbourNode(int x, int y)
         {
-            if (x > gridWitch || y > gridHeight || x < 0 || y < 0)
+            if (x >= gridWitch || y >= gridHeight || x < 0 || y < 0)
                 return null;
 
             Node neighbourNode = gridNodes.GetGridNode(x, y);
@@ -187,6 +194,28 @@ namespace Farm.AStar
                 return 14 * yDistance + 10 * (xDistance - yDistance);
             }
             return 14 * xDistance + 10 * (yDistance - xDistance);
+        }
+
+        /// <summary>
+        /// 更新路径的每一步的坐标和场景名字
+        /// </summary>
+        /// <param name="sceneName"></param>
+        /// <param name="npcMovementStep"></param>
+        private void UpdatePathOnMovementStepStack(string sceneName, Stack<MovementStep> npcMovementStep)
+        {
+            Node nextNode = targetNode;
+
+            while (nextNode != null)
+            {
+                MovementStep newStep = new MovementStep();
+                newStep.sceneName = sceneName;
+                // BUG:将nextNode写成newStep
+                newStep.gridCoordinate = new Vector2Int(nextNode.gridPosition.x + originX, nextNode.gridPosition.y + originY);
+
+                // 将下一步压入堆栈
+                npcMovementStep.Push(newStep);
+                nextNode = nextNode.parentNode;
+            }
         }
     }
 }

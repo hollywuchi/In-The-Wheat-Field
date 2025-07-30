@@ -80,3 +80,15 @@ TagManager:
   - name: Collision
     uniqueID: 3920992603
     locked: 0
+  - name: CanDig
+    uniqueID: 1147663691
+    locked: 0
+  - name: CanDropItem
+    uniqueID: 1823107697
+    locked: 0
+  - name: CanPlaceFuniture
+    uniqueID: 167090359
+    locked: 0
+  - name: NPC Obstacle
+    uniqueID: 3986725737
+    locked: 0
