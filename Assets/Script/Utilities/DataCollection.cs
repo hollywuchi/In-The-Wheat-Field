@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -86,4 +87,12 @@ public class TileDetails
     public int seedItemID = -1;
     public int growthDays = -1;
     public int daysSinceLastHarvest = -1;
+}
+
+[System.Serializable]
+public class NPCPosition
+{
+    public Transform npc;
+    public string startScene;
+    public Vector3 position;
 }
