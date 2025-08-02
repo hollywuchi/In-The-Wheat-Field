@@ -1329,6 +1329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957793bb9858e924f9e645093798f604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scheduleData: {fileID: 0}
   currentScene: 02.Home
   normalSpeed: 2
 --- !u!95 &1349030230
@@ -1852,6 +1853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957793bb9858e924f9e645093798f604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scheduleData: {fileID: 11400000, guid: a3ab28de8e3615a48bb677d669d80fc0, type: 2}
   currentScene: 01.Field
   normalSpeed: 2
 --- !u!95 &1634217907

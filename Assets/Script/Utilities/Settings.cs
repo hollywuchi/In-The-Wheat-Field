@@ -19,4 +19,7 @@ public class Settings
     public const float FadeDuration = 0.5f;
 
     public const int reapCount = 2;
+
+    public const float gridCellSize = 1f;
+    public const float gridCellDiagonalSize = 1.41f;
 }
