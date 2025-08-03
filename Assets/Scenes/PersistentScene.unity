@@ -824,6 +824,11 @@ MonoBehaviour:
   displayTile: {fileID: 11400000, guid: 95f18b61f0730b240b99ae54504c1d86, type: 2}
   displayStartAndTarget: 0
   displayPath: 0
+  npcMovement: {fileID: 1634217906}
+  moveNPC: 0
+  sceneName: 01.Field
+  targetPos_: {x: 7, y: -10}
+  stopClip: {fileID: 7400000, guid: 54d560542c0284c169c56cddc7145ac6, type: 2}
 --- !u!114 &626867091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,7 +855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcPositionList:
   - npc: {fileID: 1349030228}
-    startScene: 02.Home
+    startScene: 01.Filed
     position: {x: -8.52, y: -3.04, z: 0}
   - npc: {fileID: 1634217905}
     startScene: 01.Field
@@ -1300,7 +1305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1349030228
 Transform:
   m_ObjectHideFlags: 0
@@ -1329,9 +1334,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957793bb9858e924f9e645093798f604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scheduleData: {fileID: 0}
-  currentScene: 02.Home
-  normalSpeed: 2
+  scheduleData: {fileID: 11400000, guid: c32b00ed5d309124f83d599e3c4147ec, type: 2}
+  currentScene: 01.Field
+  normalSpeed: 1.5
+  blankAnimationClip: {fileID: 7400000, guid: 500fefed8113b4f7e8f2dc728631a63d, type: 2}
 --- !u!95 &1349030230
 Animator:
   serializedVersion: 5
@@ -1855,7 +1861,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scheduleData: {fileID: 11400000, guid: a3ab28de8e3615a48bb677d669d80fc0, type: 2}
   currentScene: 01.Field
-  normalSpeed: 2
+  normalSpeed: 1.5
+  blankAnimationClip: {fileID: 7400000, guid: 500fefed8113b4f7e8f2dc728631a63d, type: 2}
 --- !u!95 &1634217907
 Animator:
   serializedVersion: 5

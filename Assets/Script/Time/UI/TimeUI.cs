@@ -37,7 +37,7 @@ public class TimeUI : MonoBehaviour
         EventHandler.GameMinuteEvent -= OnGameMinuteEvent;
     }
 
-    private void OnGameMinuteEvent(int minute, int hour)
+    private void OnGameMinuteEvent(int minute, int hour ,int day,Season season)
     {
         // ToString("00") 正则化写法，可以显示01,02这种时间
         timeText.text = hour.ToString("00") + ":" + minute.ToString("00");

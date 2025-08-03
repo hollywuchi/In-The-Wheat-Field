@@ -1,7 +1,8 @@
 using System;
+using UnityEditor.Search;
 using UnityEngine;
 
-[Serializable]    
+[Serializable]
 public class ScheduleDetails : IComparable<ScheduleDetails>
 {
     public int hour, minute, day;
@@ -12,12 +13,20 @@ public class ScheduleDetails : IComparable<ScheduleDetails>
     public AnimationClip clipAtStop;
     public bool interactable;
 
-    // public ScheduleDetails()
-    // {
+    public ScheduleDetails(int hour, int minute, int day, int priority, Season season, string targetScene, Vector2Int targetGridPosition, AnimationClip clipAtStop, bool interactable)
+    {
+        this.hour = hour;
+        this.minute = minute;
+        this.day = day;
+        this.priority = priority;
+        this.season = season;
+        this.targetScene = targetScene;
+        this.targetGridPosition = targetGridPosition;
+        this.clipAtStop = clipAtStop;
+        this.interactable = interactable;
+    }
 
-    // }
-
-    private int Time => (hour * 100) + minute;
+    public int Time => (hour * 100) + minute;
     public int CompareTo(ScheduleDetails other)
     {
         if (Time == other.Time)

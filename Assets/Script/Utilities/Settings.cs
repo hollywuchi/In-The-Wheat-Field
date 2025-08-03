@@ -22,4 +22,7 @@ public class Settings
 
     public const float gridCellSize = 1f;
     public const float gridCellDiagonalSize = 1.41f;
+
+    public const float pixelSize = 0.05f;   // 如果像素大小为20*20占一个格子，所以一个格子的一个像素点大小为0.05
+    public const float animationBreakTime = 5f; 
 }

@@ -15,8 +15,9 @@ public class TimeManager : Singleton<TimeManager>
     public TimeSpan GameTime => new TimeSpan(gameHour, gameMinute, gameSecond);
     private float tikTime;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         NewGameTime();
     }
     void Start()
@@ -24,7 +25,7 @@ public class TimeManager : Singleton<TimeManager>
         // 同样是初始化，为什么放在Awake中？
         // 因为方法注册在OnEnable中，生命周期比Awake晚，会报空
         EventHandler.CallGameDateEvent(gameHour, gameDay, gameMonth, gameYear, gameSeason);
-        EventHandler.CallGameMinuteEvent(gameMinute, gameHour);
+        EventHandler.CallGameMinuteEvent(gameMinute, gameHour, gameDay, gameSeason);
     }
     void Update()
     {
@@ -39,9 +40,9 @@ public class TimeManager : Singleton<TimeManager>
         }
 
         #region 作弊部分 仅限测试使用
-        if (Input.GetKey(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            for (int i = 0; i < 60; i++)
+            for (int i = 0; i < 600; i++)
                 UpdateGameTime();
         }
 
@@ -51,9 +52,9 @@ public class TimeManager : Singleton<TimeManager>
             EventHandler.CallGameDayEvent(gameDay, gameSeason);
             EventHandler.CallGameDateEvent(gameHour, gameDay, gameMonth, gameYear, gameSeason);
         }
+        #endregion
     }
 
-    #endregion
     private void NewGameTime()
     {
         gameSecond = 0;
@@ -115,7 +116,7 @@ public class TimeManager : Singleton<TimeManager>
                 }
                 EventHandler.CallGameDateEvent(gameHour, gameDay, gameMonth, gameYear, gameSeason);
             }
-            EventHandler.CallGameMinuteEvent(gameMinute, gameHour);
+            EventHandler.CallGameMinuteEvent(gameMinute, gameHour, gameDay, gameSeason);
         }
         // Debug.Log("minute:" + gameMinute + "second:" + gameSecond);
 
