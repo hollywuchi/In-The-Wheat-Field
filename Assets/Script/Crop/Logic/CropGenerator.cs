@@ -34,6 +34,10 @@ namespace Farm.CropPlant
                 if (tile == null)
                 {
                     tile = new TileDetails();
+                    // bug:在没有瓦片信息的瓦片上种植时，会生成一片瓦片并添加到数据库。
+                    // 但是没有给瓦片赋值的话就会在原点生成一个瓦片然后将作物种植在原点
+                    tile.girdX = cropGridPos.x;
+                    tile.girdY = cropGridPos.y;
                 }
 
                 tile.seedItemID = seedItemID;

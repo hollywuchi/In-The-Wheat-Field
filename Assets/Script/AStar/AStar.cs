@@ -75,10 +75,12 @@ namespace Farm.AStar
             {
                 for (int y = 0; y < gridHeight; y++)
                 {
-                    // FIXME:样例有误
                     Vector3Int tilePos = new Vector3Int(x + originX, y + originY, 0);
 
-                    TileDetails tile = GridMapManager.Instance.GetTileDetailsOnMousePosition(tilePos);
+                    // bug: 在循环判断障碍物时，使用GetTileDetailsOnMousePosition方法只会判断当前玩家所在地图的障碍物
+                    // NPC可能会跨场景移动，因此不能使用这个方法，直接使用GetTileDetails，并在之前创建key即可
+                    var key = tilePos.x + "X" + tilePos.y + "Y" + sceneName;
+                    TileDetails tile = GridMapManager.Instance.GetTileDetails(key);
 
                     if (tile != null)
                     {

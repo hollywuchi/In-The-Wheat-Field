@@ -20,6 +20,19 @@ public class TimeManager : Singleton<TimeManager>
         base.Awake();
         NewGameTime();
     }
+    
+    void OnEnable()
+    {
+        EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
+        EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+    }
+
+    void OnDisable()
+    {
+        EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
+        EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+    }
+
     void Start()
     {
         // 同样是初始化，为什么放在Awake中？
@@ -53,6 +66,16 @@ public class TimeManager : Singleton<TimeManager>
             EventHandler.CallGameDateEvent(gameHour, gameDay, gameMonth, gameYear, gameSeason);
         }
         #endregion
+    }
+
+    private void OnAfterSceneLoadEvent()
+    {
+        gameClockPause = false;
+    }
+
+    private void OnBeforeSceneUnloadEvent()
+    {
+        gameClockPause = true;
     }
 
     private void NewGameTime()

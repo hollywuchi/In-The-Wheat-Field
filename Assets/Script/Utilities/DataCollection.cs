@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -95,4 +96,20 @@ public class NPCPosition
     public Transform npc;
     public string startScene;
     public Vector3 position;
+}
+
+[System.Serializable]
+public class SceneRoute
+{
+    public string fromSceneName;
+    public string gotoSceneName;
+    public List<ScenePath> scenePathsList;
+}
+
+[System.Serializable]
+public class ScenePath
+{
+    public string sceneName;
+    public Vector2Int fromGirdCell;
+    public Vector2Int gotoGridCell;
 }

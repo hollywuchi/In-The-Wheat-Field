@@ -99,7 +99,7 @@ namespace Farm.Map
         /// </summary>
         /// <param name="key">坐标X+坐标Y+场景名称</param>
         /// <returns></returns>
-        private TileDetails GetTileDetails(string key)
+        public TileDetails GetTileDetails(string key)
         {
             if (tileDetailsDict.ContainsKey(key))
                 return tileDetailsDict[key];
