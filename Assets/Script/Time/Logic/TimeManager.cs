@@ -20,7 +20,7 @@ public class TimeManager : Singleton<TimeManager>
         base.Awake();
         NewGameTime();
     }
-    
+
     void OnEnable()
     {
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
@@ -56,6 +56,11 @@ public class TimeManager : Singleton<TimeManager>
         if (Input.GetKeyDown(KeyCode.T))
         {
             for (int i = 0; i < 600; i++)
+                UpdateGameTime();
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            for (int i = 0; i < 60; i++)
                 UpdateGameTime();
         }
 

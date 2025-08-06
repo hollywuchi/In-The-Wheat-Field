@@ -28,7 +28,8 @@ public class NPCMovement : MonoBehaviour
     private Vector2 dir;
     private Vector3Int nextGridPosition;
     private Vector3 nextWorldPosition;
-    private bool isMoving;
+    public bool isMoving;
+    public bool interactble;
 
     // componment
 
@@ -234,6 +235,7 @@ public class NPCMovement : MonoBehaviour
         currentSchedule = schedule;
         targetGridPosition = (Vector3Int)schedule.targetGridPosition;
         stopAnimationClip = schedule.clipAtStop;
+        this.interactble = schedule.interactable;
 
         if (schedule.targetScene == currentScene)
         {
@@ -374,8 +376,8 @@ public class NPCMovement : MonoBehaviour
     {
         spriteRenderer.enabled = true;
         coll.enabled = true;
-        // TODO:将影子关闭
-        // transform.GetChild(0).gameObject.SetActive(true);
+        // 将影子关闭
+        transform.GetChild(0).gameObject.SetActive(true);
     }
 
     private void SetInactiveInScene()
@@ -383,7 +385,7 @@ public class NPCMovement : MonoBehaviour
         spriteRenderer.enabled = false;
         coll.enabled = false;
 
-        // transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(0).gameObject.SetActive(false);
     }
     #endregion
 }
