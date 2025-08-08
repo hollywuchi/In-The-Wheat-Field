@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,19 +12,27 @@ namespace Farm.Inventory
         [SerializeField] private GameObject playerBag;
         public Image dragItem;
         private bool openedUI;
+
+        [Header("通用背包UI")]
+        [SerializeField] private GameObject baseBag;
+        public GameObject shopSlotPrefab;
         [SerializeField] private SlotUI[] slotUIs;
+        [SerializeField] private List<SlotUI> baseBagSlots;
         void OnEnable()
         {
             EventHandler.UpdateInventoryUI += OnUpdateInvntoryUI;
             EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+            EventHandler.BaseBagOpenEvent += OnBaseBagOpenEvent;
         }
         void OnDisable()
         {
             EventHandler.UpdateInventoryUI -= OnUpdateInvntoryUI;
             EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+            EventHandler.BaseBagOpenEvent -= OnBaseBagOpenEvent;
+
         }
 
-       
+
         void Start()
         {
             for (int i = 0; i < slotUIs.Length; i++)
@@ -34,9 +43,34 @@ namespace Farm.Inventory
             openedUI = playerBag.activeInHierarchy;
         }
 
-         private void OnBeforeSceneUnloadEvent()
+        private void OnBeforeSceneUnloadEvent()
         {
             SwitchHighLight(-1);
+        }
+
+        private void OnBaseBagOpenEvent(SoltType slotType, InventoryBag_SO bagData)
+        {
+            // TODO:通用的prefab
+            GameObject prefab = slotType switch
+            {
+                SoltType.Shop => shopSlotPrefab,
+                _ => null,
+            };
+
+            // 生成背包UI
+            baseBag.SetActive(true);
+
+            baseBagSlots = new List<SlotUI>();
+            for (int i = 0; i < bagData.BagItemList.Count; i++)
+            {
+                var slot = Instantiate(prefab, baseBag.transform.GetChild(1)).GetComponent<SlotUI>();
+                slot.Index = i;
+                baseBagSlots.Add(slot);
+            }
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(baseBag.GetComponent<RectTransform>());
+            // 刷新UI显示
+            OnUpdateInvntoryUI(InventoryLocation.Box, bagData.BagItemList);
         }
 
         private void OnUpdateInvntoryUI(InventoryLocation location, List<InventoryItem> list)
@@ -54,6 +88,20 @@ namespace Farm.Inventory
                         else
                         {
                             slotUIs[i].UpdateEmptySolt();
+                        }
+                    }
+                    break;
+                case InventoryLocation.Box:
+                    for (int i = 0; i < baseBagSlots.Count; i++)
+                    {
+                        if (list[i].itemAmount > 0)
+                        {
+                            var item = InventoryManager.Instance.GetDetails(list[i].itemID);
+                            baseBagSlots[i].UpdateSolt(item, list[i].itemAmount);
+                        }
+                        else
+                        {
+                            baseBagSlots[i].UpdateEmptySolt();
                         }
                     }
                     break;

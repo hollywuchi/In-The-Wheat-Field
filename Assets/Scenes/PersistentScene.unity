@@ -1119,6 +1119,8 @@ GameObject:
   - component: {fileID: 917987446}
   - component: {fileID: 917987445}
   - component: {fileID: 917987444}
+  - component: {fileID: 917987450}
+  - component: {fileID: 917987449}
   m_Layer: 0
   m_Name: Girl_Brown
   m_TagString: Untagged
@@ -1135,7 +1137,7 @@ Transform:
   m_GameObject: {fileID: 917987442}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.98, y: -6.3, z: 0}
+  m_LocalPosition: {x: -0.5, y: -6.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1241,7 +1243,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.16785276}
+  m_Offset: {x: 0, y: -0.7813611}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -1252,7 +1254,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.47501057, y: 0.11963585}
+  m_Size: {x: 0.47501057, y: 2.0180635}
   m_EdgeRadius: 0
 --- !u!212 &917987448
 SpriteRenderer:
@@ -1306,6 +1308,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &917987449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917987442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332fd68d9e35a3c4b8c4405deaac4ef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onFinishEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 917987450}
+        m_TargetAssemblyTypeName: NPCFunction, Assembly-CSharp
+        m_MethodName: OpenShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dialogueList:
+  - name: Mia
+    faceImage: {fileID: 21300000, guid: 67d354b9f685e4e1b90255eb84bc5abe, type: 3}
+    onLeft: 1
+    dialogueText: "\u770B\u6765\u6751\u957F\u6CA1\u80FD\u8BA9\u4F60\u98DE\u8D77\u6765\u554A\uFF0C\u770B\u770B\u6709\u4EC0\u4E48\u9700\u8981\u7684\u5427\uFF01\u4E70\u4E00\u65A4\u9001\u534A\u65A4\u54E6~\uFF08\u9A97\u4EBA\u7684\uFF09"
+    hasToPause: 0
+    isDown: 0
+--- !u!114 &917987450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917987442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23321902c87366a4ea4bdbef88f94296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopData: {fileID: 11400000, guid: bf968c9666b6302419612628f4fa5ec2, type: 2}
 --- !u!1 &1058830043
 GameObject:
   m_ObjectHideFlags: 0

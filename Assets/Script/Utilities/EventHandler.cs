@@ -120,4 +120,10 @@ public static class EventHandler
     {
         ShowDialogueEvent?.Invoke(dialoguePiece);
     }
+
+    public static event Action<SoltType,InventoryBag_SO> BaseBagOpenEvent;
+    public static void CallBaseBagOpenEvent(SoltType soltType,InventoryBag_SO data)
+    {
+        BaseBagOpenEvent?.Invoke(soltType,data);
+    }
 }
