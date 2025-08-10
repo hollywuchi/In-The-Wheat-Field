@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Xml.Serialization;
 using Farm.Dialogue;
 using UnityEngine;
@@ -125,5 +126,22 @@ public static class EventHandler
     public static void CallBaseBagOpenEvent(SoltType soltType,InventoryBag_SO data)
     {
         BaseBagOpenEvent?.Invoke(soltType,data);
+    }
+    public static event Action<SoltType,InventoryBag_SO> BaseBagCloseEvent;
+    public static void CallBaseBagCloseEvent(SoltType soltType,InventoryBag_SO data)
+    {
+        BaseBagCloseEvent?.Invoke(soltType,data);
+    }
+
+    public static event Action<GameState> UpdateGameStateEvent;
+    public static void CallUpdateGameStateEvent(GameState State)
+    {
+        UpdateGameStateEvent?.Invoke(State);
+    }
+
+    public static event Action<ItemDetails,bool> ShowTradeUI;
+    public static void CallShowTradeUI(ItemDetails item,bool isSell)
+    {
+        ShowTradeUI?.Invoke(item,isSell);
     }
 }

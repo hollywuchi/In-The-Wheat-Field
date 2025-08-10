@@ -1320,7 +1320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332fd68d9e35a3c4b8c4405deaac4ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onFinishEvent:
+  OnFinishEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 917987450}
@@ -2557,7 +2557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332fd68d9e35a3c4b8c4405deaac4ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onFinishEvent:
+  OnFinishEvent:
     m_PersistentCalls:
       m_Calls: []
   dialogueList:

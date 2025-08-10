@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -8,14 +9,18 @@ namespace Farm.Inventory
     public class InventoryUI : MonoBehaviour
     {
         public ItemToolTip itemToolTip;
+        [Header("拖拽图片")]
+        public Image dragItem;
         [Header("玩家背包UI")]
         [SerializeField] private GameObject playerBag;
-        public Image dragItem;
         private bool openedUI;
 
         [Header("通用背包UI")]
         [SerializeField] private GameObject baseBag;
         public GameObject shopSlotPrefab;
+
+        [Header("交易UI")]
+        public TradeUI TradeUI;
         [SerializeField] private SlotUI[] slotUIs;
         [SerializeField] private List<SlotUI> baseBagSlots;
         void OnEnable()
@@ -23,13 +28,16 @@ namespace Farm.Inventory
             EventHandler.UpdateInventoryUI += OnUpdateInvntoryUI;
             EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
             EventHandler.BaseBagOpenEvent += OnBaseBagOpenEvent;
+            EventHandler.BaseBagCloseEvent += OnBaseBagCloseEvent;
+            EventHandler.ShowTradeUI += OnShowTradeUI;
         }
         void OnDisable()
         {
             EventHandler.UpdateInventoryUI -= OnUpdateInvntoryUI;
             EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
             EventHandler.BaseBagOpenEvent -= OnBaseBagOpenEvent;
-
+            EventHandler.BaseBagCloseEvent -= OnBaseBagCloseEvent;
+            EventHandler.ShowTradeUI -= OnShowTradeUI;
         }
 
 
@@ -69,8 +77,46 @@ namespace Farm.Inventory
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(baseBag.GetComponent<RectTransform>());
+
+            if (slotType == SoltType.Shop)
+            {
+                playerBag.GetComponent<RectTransform>().pivot = new Vector2(-0.5f, 0.5f);
+                playerBag.SetActive(true);
+                openedUI = true;
+            }
             // 刷新UI显示
             OnUpdateInvntoryUI(InventoryLocation.Box, bagData.BagItemList);
+        }
+
+        /// <summary>
+        /// 关闭背包
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="sO"></param>
+        private void OnBaseBagCloseEvent(SoltType slotType, InventoryBag_SO sO)
+        {
+            baseBag.SetActive(false);
+            itemToolTip.gameObject.SetActive(false);    // 与ESC会发生冲突
+            SwitchHighLight(-1);    // 更新UI高亮显示
+
+            foreach (var slot in baseBagSlots)
+            {
+                Destroy(slot.gameObject);
+            }
+            baseBagSlots.Clear();
+
+            if (slotType == SoltType.Shop)
+            {
+                playerBag.GetComponent<RectTransform>().pivot = new Vector2(-0.5f, 0.5f);
+                playerBag.SetActive(false);
+                openedUI = false;
+            }
+        }
+
+        private void OnShowTradeUI(ItemDetails details, bool isSell)
+        {
+            TradeUI.gameObject.SetActive(true);
+            TradeUI.SetupTradeUI(details, isSell);
         }
 
         private void OnUpdateInvntoryUI(InventoryLocation location, List<InventoryItem> list)

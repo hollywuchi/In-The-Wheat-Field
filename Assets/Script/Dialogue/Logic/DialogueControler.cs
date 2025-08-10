@@ -12,7 +12,7 @@ namespace Farm.Dialogue
     {
         private NPCMovement npcMovement => GetComponent<NPCMovement>();
 
-        public UnityEvent onFinishEvent;
+        public UnityEvent OnFinishEvent;
         public List<DialoguePiece> dialogueList = new List<DialoguePiece>();
 
         private Stack<DialoguePiece> dialogueStack;
@@ -54,19 +54,25 @@ namespace Farm.Dialogue
             if (dialogueStack.TryPop(out DialoguePiece result))
             {
                 EventHandler.CallDialogueEvent(result);
+                EventHandler.CallUpdateGameStateEvent(GameState.Pause);
                 yield return new WaitUntil(() => result.isDown);
                 isTalking = false;
             }
             else
             {
                 EventHandler.CallDialogueEvent(null);
+                EventHandler.CallUpdateGameStateEvent(GameState.GamePlay);
                 FillDialogueStake();
                 isTalking = false;
-                
-                onFinishEvent?.Invoke();
+
+                if (OnFinishEvent != null)
+                {
+                    OnFinishEvent.Invoke();
+                    canTalk = false;
+                }
             }
 
-            
+
         }
         private void FillDialogueStake()
         {

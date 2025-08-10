@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Farm.Inventory;
 using TMPro;
+using Unity.Android.Types;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -123,9 +124,18 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginD
             var targetSolt = eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>();
             int targetSoltIndex = targetSolt.Index;
 
+            // 在player自身背包内交换
             if (soltType == SoltType.Bag && targetSolt.soltType == SoltType.Bag)
             {
                 InventoryManager.Instance.SwapItem(Index, targetSoltIndex);
+            }
+            else if(soltType == SoltType.Shop && targetSolt.soltType == SoltType.Bag) // 买
+            {
+                EventHandler.CallShowTradeUI(itemDetails,false);
+            }
+            else if(soltType == SoltType.Bag && targetSolt.soltType == SoltType.Shop) // 卖
+            {
+                EventHandler.CallShowTradeUI(itemDetails,true);
             }
 
             inventoryUI.SwitchHighLight(-1);

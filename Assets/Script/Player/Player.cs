@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Threading;
 using Unity.Mathematics;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -28,6 +29,7 @@ public class Player : MonoBehaviour
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
         EventHandler.MoveToPosition += OnMoveToPosition;
         EventHandler.MouseClickedEvent += OnMouseClickedEvent;
+        EventHandler.UpdateGameStateEvent += OnUpdateGameStateEvent;
     }
 
     void OnDisable()
@@ -36,7 +38,10 @@ public class Player : MonoBehaviour
         EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
         EventHandler.MoveToPosition -= OnMoveToPosition;
         EventHandler.MouseClickedEvent -= OnMouseClickedEvent;
+        EventHandler.UpdateGameStateEvent -= OnUpdateGameStateEvent;
     }
+
+    
 
     void Awake()
     {
@@ -95,6 +100,20 @@ public class Player : MonoBehaviour
         else
         {
             EventHandler.CallExcuteActionAfterAnimation(mouseWorldPos, itemDetails);
+        }
+    }
+
+    private void OnUpdateGameStateEvent(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.Pause:
+                inputDisable = true;
+                break;
+
+            case GameState.GamePlay:
+                inputDisable = false;
+                break;
         }
     }
 
