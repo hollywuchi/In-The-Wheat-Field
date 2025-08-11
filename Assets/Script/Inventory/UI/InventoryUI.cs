@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,7 @@ namespace Farm.Inventory
 
         [Header("交易UI")]
         public TradeUI TradeUI;
+        public TextMeshProUGUI playerMoneyText;
         [SerializeField] private SlotUI[] slotUIs;
         [SerializeField] private List<SlotUI> baseBagSlots;
         void OnEnable()
@@ -49,6 +51,8 @@ namespace Farm.Inventory
             }
             // 注意，现在activeInHierarchy已经代替了active
             openedUI = playerBag.activeInHierarchy;
+
+            playerMoneyText.text = InventoryManager.Instance.playerMoney.ToString();
         }
 
         private void OnBeforeSceneUnloadEvent()
@@ -119,6 +123,11 @@ namespace Farm.Inventory
             TradeUI.SetupTradeUI(details, isSell);
         }
 
+        /// <summary>
+        /// 更新指定位置的UI事件
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="list"></param>
         private void OnUpdateInvntoryUI(InventoryLocation location, List<InventoryItem> list)
         {
             switch (location)
@@ -152,6 +161,7 @@ namespace Farm.Inventory
                     }
                     break;
             }
+            playerMoneyText.text = InventoryManager.Instance.playerMoney.ToString();
         }
         /// <summary>
         /// 控制背包UI的打开与关闭

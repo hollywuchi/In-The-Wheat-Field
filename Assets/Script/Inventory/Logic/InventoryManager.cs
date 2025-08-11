@@ -12,6 +12,8 @@ namespace Farm.Inventory
         public ItemDetailList_SO itemLibrary;
         [Header("背包数据库")]
         public InventoryBag_SO playerBag;
+        [Header("交易")]
+        public int playerMoney;
 
         void OnEnable()
         {
@@ -25,7 +27,7 @@ namespace Farm.Inventory
             EventHandler.HaverstAtPlayerPosition -= OnHaverstAtPlayerPosition;
         }
 
-        
+
         void Start()
         {
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
@@ -61,7 +63,7 @@ namespace Farm.Inventory
         /// 确认背包是否有空位
         /// </summary>
         /// <returns></returns>
-        public bool ChackBagCapacity()
+        public bool CheckBagCapacity()
         {
             for (int i = 0; i < playerBag.BagItemList.Count; i++)
             {
@@ -88,7 +90,7 @@ namespace Farm.Inventory
 
         private void AddItemByIndex(int ID, int Index, int Amount)
         {
-            if (Index == -1 && ChackBagCapacity())  //背包中没有物品且背包还有容量
+            if (Index == -1 && CheckBagCapacity())  //背包中没有物品且背包还有容量
             {
                 for (int i = 0; i < playerBag.BagItemList.Count; i++)
                 {
@@ -133,7 +135,7 @@ namespace Farm.Inventory
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
         }
 
-        private void OnDropItemEvent(int ID, Vector3 pos,ItemType itemType)
+        private void OnDropItemEvent(int ID, Vector3 pos, ItemType itemType)
         {
             RemoveItem(ID, 1);
         }
@@ -148,7 +150,7 @@ namespace Farm.Inventory
 
             AddItemByIndex(ID, Index, 1);
 
-            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.BagItemList);
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
         }
 
 
@@ -173,6 +175,41 @@ namespace Farm.Inventory
                 playerBag.BagItemList[index] = newItem;
             }
 
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
+        }
+
+        /// <summary>
+        /// 买卖方法
+        /// </summary>
+        /// <param name="itemDetails">确认物品</param>
+        /// <param name="amount">买卖数目</param>
+        /// <param name="isSellTrade">买还是卖</param>
+        public void TradeItem(ItemDetails itemDetails, int amount, bool isSellTrade)
+        {
+            int cost = itemDetails.itemPrice * amount;
+            int index = GetItemIndexInBag(itemDetails.itemID);
+
+            if (isSellTrade)     // 卖
+            {
+                if (playerBag.BagItemList[index].itemAmount >= amount)
+                {
+                    RemoveItem(itemDetails.itemID, amount);
+                    // 售卖总价
+                    cost = (int)(cost * itemDetails.sellPercentage);
+                    playerMoney += cost;
+                }
+            }
+            else if (playerMoney - cost > 0)     // 买
+            {
+                if (CheckBagCapacity())
+                {
+                    AddItemByIndex(itemDetails.itemID, index, amount);
+                }
+                playerMoney -= cost;
+
+            }
+
+            // 刷新UI
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
         }
     }
