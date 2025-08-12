@@ -8,7 +8,7 @@ public enum ItemType
 
 public enum SoltType
 {
-    Bag, Box, Shop
+    Bag, Box, Shop, Funiture
 }
 
 public enum InventoryLocation

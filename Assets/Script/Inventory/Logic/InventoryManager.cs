@@ -10,6 +10,8 @@ namespace Farm.Inventory
     {
         [Header("物品数据库")]
         public ItemDetailList_SO itemLibrary;
+        [Header("图纸数据库")]
+        public BluePrintDataList_SO bluePrintLibrary;
         [Header("背包数据库")]
         public InventoryBag_SO playerBag;
         [Header("交易")]

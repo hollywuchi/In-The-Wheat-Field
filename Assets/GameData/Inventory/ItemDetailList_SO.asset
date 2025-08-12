@@ -481,3 +481,15 @@ MonoBehaviour:
     canCarried: 0
     itemPrice: 0
     sellPercentage: 0
+  - itemID: 1040
+    itemName: "\u4E91\u5C71\u6728\u6905\u5B50\u56FE\u7EB8"
+    itemType: 2
+    itemIcon: {fileID: -1215904961, guid: d67f8bdea7b454ba08443e00d51268b8, type: 3}
+    itemOnWorldSprite: {fileID: 697528162, guid: d67f8bdea7b454ba08443e00d51268b8, type: 3}
+    itemDescription: "\u6728\u5934\u51F3\u5B50\u7684\u56FE\u7EB8\uFF0C\u77E5\u8BC6\u597D\u50CF\u8FDB\u5165\u5230\u8111\u5B50\u91CC\u6765\u4E86\n\u9700\u898120\u4E2A\u6728\u5934\u5EFA\u9020"
+    itemUseRadius: 4
+    canPickedup: 0
+    canDropped: 1
+    canCarried: 1
+    itemPrice: 90
+    sellPercentage: 0.8

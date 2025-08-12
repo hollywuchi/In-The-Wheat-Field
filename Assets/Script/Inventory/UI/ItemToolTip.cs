@@ -13,6 +13,10 @@ public class ItemToolTip : MonoBehaviour
     [SerializeField] private Text Value;
     public GameObject toolTipCoin;
 
+    [Header("建造")]
+    public GameObject resourcePanle;
+    [SerializeField] private Image[] resourceItem;
+
     public void SetUpToolTip(ItemDetails itemDetails, SoltType soltType)
     {
         toolTipName.text = itemDetails.itemName;
@@ -52,6 +56,25 @@ public class ItemToolTip : MonoBehaviour
             ItemType.CollectTool => "工具",
             _ => "无"
         };
+    }
+
+    public void SetUpResourcePanle(int ID)
+    {
+        var bluePrint = InventoryManager.Instance.bluePrintLibrary.GetBluePrint(ID);
+        for (int i = 0; i < resourceItem.Length; i++)   // 循环UI中的物品数量
+        {
+            if(i < bluePrint.resourceItem.Length)       // 如果UI中的数量要小于数据库中的数量才可以
+            {
+                var item = bluePrint.resourceItem[i];
+                resourceItem[i].gameObject.SetActive(true);
+                resourceItem[i].sprite = InventoryManager.Instance.GetDetails(item.itemID).itemIcon;
+                resourceItem[i].transform.GetChild(0).GetComponent<Text>().text = item.itemAmount.ToString();
+            }
+            else
+            {
+                resourceItem[i].gameObject.SetActive(false);
+            }
+        }
     }
 
 }

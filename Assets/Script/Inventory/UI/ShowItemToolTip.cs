@@ -1,3 +1,5 @@
+using System.Diagnostics.Tracing;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 namespace Farm.Inventory
@@ -21,6 +23,16 @@ namespace Farm.Inventory
                 inventoryUI.itemToolTip.SetUpToolTip(slotUI.itemDetails, slotUI.soltType);
 
                 inventoryUI.itemToolTip.transform.position = transform.position + Vector3.up * 60;
+
+                if(slotUI.itemDetails.itemType == ItemType.Funiture)
+                {
+                    inventoryUI.itemToolTip.resourcePanle.SetActive(true);
+                    inventoryUI.itemToolTip.SetUpResourcePanle(slotUI.itemDetails.itemID);
+                }
+                else
+                {
+                    inventoryUI.itemToolTip.resourcePanle.SetActive(false);
+                }
             }
             else
             {
