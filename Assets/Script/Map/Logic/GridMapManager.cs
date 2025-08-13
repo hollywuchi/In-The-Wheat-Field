@@ -202,13 +202,16 @@ namespace Farm.Map
                         int Count = 0;
                         for (int i = 0; i < ItemsInRadius.Count; i++)
                         {
-                            EventHandler.CallParticalEffectEvent(ParticalEffectType.ReapableScenery,ItemsInRadius[i].transform.position + Vector3.up);
+                            EventHandler.CallParticalEffectEvent(ParticalEffectType.ReapableScenery, ItemsInRadius[i].transform.position + Vector3.up);
                             ItemsInRadius[i].SpawnHarvestItems();
                             Destroy(ItemsInRadius[i].gameObject);
                             Count++;
-                            if(Count > Settings.reapCount)
+                            if (Count > Settings.reapCount)
                                 break;
                         }
+                        break;
+                    case ItemType.Funiture:
+                        EventHandler.CallBuildFunitureEvent(itemDetails.itemID, mouseWorldPos);
                         break;
                 }
 
@@ -233,7 +236,7 @@ namespace Farm.Map
         /// </summary>
         /// <param name="tool">工具详情</param>
         /// <returns></returns>
-        public bool HaveReapableItemsInReadius(Vector3 mouseWirldPos,ItemDetails tool)
+        public bool HaveReapableItemsInReadius(Vector3 mouseWirldPos, ItemDetails tool)
         {
             ItemsInRadius = new List<ReapItem>();
             Collider2D[] colliders = new Collider2D[20];
@@ -341,14 +344,14 @@ namespace Farm.Map
         /// <param name="gridDimensions">网格范围</param>
         /// <param name="girdOrigin">网格原点</param>
         /// <returns>是否有当前场景的信息</returns>
-        public bool GetGridDemensions(string sceneName, out Vector2Int gridDimensions,out Vector2Int girdOrigin)
+        public bool GetGridDemensions(string sceneName, out Vector2Int gridDimensions, out Vector2Int girdOrigin)
         {
             gridDimensions = Vector2Int.zero;
             girdOrigin = Vector2Int.zero;
 
-            foreach(var mapdata in mapDataList)
+            foreach (var mapdata in mapDataList)
             {
-                if(mapdata.sceneName == sceneName)
+                if (mapdata.sceneName == sceneName)
                 {
                     gridDimensions.x = mapdata.gridWitch;
                     gridDimensions.y = mapdata.gridHeight;

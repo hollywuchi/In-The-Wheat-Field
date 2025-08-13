@@ -1,3 +1,5 @@
+using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -21,12 +23,14 @@ namespace Farm.Inventory
         {
             EventHandler.DropItemEvent += OnDropItemEvent;
             EventHandler.HaverstAtPlayerPosition += OnHaverstAtPlayerPosition;
+            EventHandler.BuildFunitureEvent += OnBuildFunitureEvent;
         }
 
         void OnDisable()
         {
             EventHandler.DropItemEvent += OnDropItemEvent;
             EventHandler.HaverstAtPlayerPosition -= OnHaverstAtPlayerPosition;
+            EventHandler.BuildFunitureEvent -= OnBuildFunitureEvent;
         }
 
 
@@ -155,6 +159,16 @@ namespace Farm.Inventory
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
         }
 
+        private void OnBuildFunitureEvent(int ID, Vector3 pos)
+        {
+            RemoveItem(ID,1);
+            BluePrintDetails bluePrint = bluePrintLibrary.GetBluePrint(ID);
+            foreach (var item in bluePrint.resourceItem)
+            {
+                RemoveItem(item.itemID,item.itemAmount);
+            }
+        }
+
 
         /// <summary>
         /// 移除指定物品
@@ -214,6 +228,28 @@ namespace Farm.Inventory
             // 刷新UI
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
         }
-    }
 
+        /// <summary>
+        /// 检查建造资源库存
+        /// </summary>
+        /// <param name="ID">蓝图ID</param>
+        /// <returns></returns>
+        public bool CheckStock(int ID)
+        {
+            var bluePrintDetils = bluePrintLibrary.GetBluePrint(ID);
+
+            foreach (var resourceItem in bluePrintDetils.resourceItem)
+            {
+                var itemStock = playerBag.GetInventoryItem(resourceItem.itemID);
+                if (itemStock.itemAmount >= resourceItem.itemAmount)
+                {
+                    continue;
+                }
+                else
+                    return false;
+            }
+            return true;
+        }
+
+    }
 }

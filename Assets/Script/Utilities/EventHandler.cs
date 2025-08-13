@@ -122,15 +122,15 @@ public static class EventHandler
         ShowDialogueEvent?.Invoke(dialoguePiece);
     }
 
-    public static event Action<SoltType,InventoryBag_SO> BaseBagOpenEvent;
-    public static void CallBaseBagOpenEvent(SoltType soltType,InventoryBag_SO data)
+    public static event Action<SoltType, InventoryBag_SO> BaseBagOpenEvent;
+    public static void CallBaseBagOpenEvent(SoltType soltType, InventoryBag_SO data)
     {
-        BaseBagOpenEvent?.Invoke(soltType,data);
+        BaseBagOpenEvent?.Invoke(soltType, data);
     }
-    public static event Action<SoltType,InventoryBag_SO> BaseBagCloseEvent;
-    public static void CallBaseBagCloseEvent(SoltType soltType,InventoryBag_SO data)
+    public static event Action<SoltType, InventoryBag_SO> BaseBagCloseEvent;
+    public static void CallBaseBagCloseEvent(SoltType soltType, InventoryBag_SO data)
     {
-        BaseBagCloseEvent?.Invoke(soltType,data);
+        BaseBagCloseEvent?.Invoke(soltType, data);
     }
 
     public static event Action<GameState> UpdateGameStateEvent;
@@ -139,9 +139,15 @@ public static class EventHandler
         UpdateGameStateEvent?.Invoke(State);
     }
 
-    public static event Action<ItemDetails,bool> ShowTradeUI;
-    public static void CallShowTradeUI(ItemDetails item,bool isSell)
+    public static event Action<ItemDetails, bool> ShowTradeUI;
+    public static void CallShowTradeUI(ItemDetails item, bool isSell)
     {
-        ShowTradeUI?.Invoke(item,isSell);
+        ShowTradeUI?.Invoke(item, isSell);
+    }
+
+    public static event Action<int, Vector3> BuildFunitureEvent;
+    public static void CallBuildFunitureEvent(int iD, Vector3 pos)
+    {
+        BuildFunitureEvent?.Invoke(iD, pos);
     }
 }

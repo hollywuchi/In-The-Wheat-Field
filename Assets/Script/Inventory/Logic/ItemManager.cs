@@ -21,15 +21,17 @@ namespace Farm.Inventory
             EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
             EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
             EventHandler.DropItemEvent += OnDropItemEvent;
+            EventHandler.BuildFunitureEvent += OnBuildFunitureEvent;
         }
 
 
         void OnDisable()
         {
             EventHandler.InstantiateItemInScene -= OnInstantiateItemInScene;
-            EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+            EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
             EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
             EventHandler.DropItemEvent -= OnDropItemEvent;
+            EventHandler.BuildFunitureEvent -= OnBuildFunitureEvent;
         }
 
 
@@ -55,12 +57,18 @@ namespace Farm.Inventory
         private void OnDropItemEvent(int ID, Vector3 mousePos, ItemType itemType)
         {
             if (itemType == ItemType.Seed) return;
-            
+
             var newItem = Instantiate(bounceItemPrefab, playerTans.position, Quaternion.identity, itemParent);
             newItem.itemID = ID;
             var dir = (mousePos - playerTans.position).normalized;
 
             newItem.GetComponent<ItemBounce>().InitBounceItem(mousePos, dir);
+        }
+
+        private void OnBuildFunitureEvent(int ID, Vector3 mousePos)
+        {
+            BluePrintDetails bluePrint = InventoryManager.Instance.bluePrintLibrary.GetBluePrint(ID);
+            var buildItem = Instantiate(bluePrint.buildPrefab, mousePos, Quaternion.identity, itemParent);
         }
 
         /// <summary>

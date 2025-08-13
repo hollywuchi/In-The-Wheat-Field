@@ -15,6 +15,7 @@ namespace Farm.Inventory
         void Awake()
         {
             slotUI = GetComponent<SlotUI>();
+            canUse = true;
         }
         void OnEnable()
         {

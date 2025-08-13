@@ -98,7 +98,6 @@ public class AnimatorOverwrite : MonoBehaviour
             }
         }
         SwitchAnimator(currentType);
-        Debug.Log(currentType);
     }
 
     public void SwitchAnimator(PartType currentType)

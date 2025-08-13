@@ -2025,6 +2025,90 @@ MonoBehaviour:
   - tileCoordinate: {x: 15, y: -5}
     girdType: 1
     boolTypeValue: 1
+  - tileCoordinate: {x: 1, y: -14}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 1, y: -13}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 1, y: -12}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 1, y: -11}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 2, y: -14}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 2, y: -13}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 2, y: -12}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 2, y: -11}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 3, y: -14}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 3, y: -13}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 3, y: -12}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 3, y: -11}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 4, y: -14}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 4, y: -13}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 4, y: -12}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 4, y: -11}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 5, y: -14}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 5, y: -13}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 5, y: -12}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 5, y: -11}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 6, y: -14}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 6, y: -13}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 6, y: -12}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 6, y: -11}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 7, y: -14}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 7, y: -13}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 7, y: -12}
+    girdType: 2
+    boolTypeValue: 1
+  - tileCoordinate: {x: 7, y: -11}
+    girdType: 2
+    boolTypeValue: 1
   - tileCoordinate: {x: -31, y: -38}
     girdType: 3
     boolTypeValue: 1

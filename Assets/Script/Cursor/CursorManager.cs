@@ -3,13 +3,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using Farm.Map;
 using Farm.CropPlant;
-using System.Security.Cryptography;
+using Cinemachine;
+using UnityEditor.Search;
+using Farm.Inventory;
 
 public class CursorManager : MonoBehaviour
 {
     public Sprite normal, tool, seed, item;
     private Sprite currentSprite;
     private Image cursorImage;
+    private Image buildImage;
     private RectTransform cursorCanvas;
 
     // 鼠标检测
@@ -35,8 +38,8 @@ public class CursorManager : MonoBehaviour
     void OnDisable()
     {
         EventHandler.ItemSelectEvent -= OnItemSelectEvent;
-        EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
-        EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
+        EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+        EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
     }
 
 
@@ -44,6 +47,8 @@ public class CursorManager : MonoBehaviour
     {
         cursorCanvas = GameObject.FindWithTag("CursorCanvas").GetComponent<RectTransform>();
         cursorImage = cursorCanvas.GetChild(0).GetComponent<Image>();
+        buildImage = cursorCanvas.GetChild(1).GetComponent<Image>();
+        buildImage.gameObject.SetActive(false);
         currentSprite = normal;
         SetCursorImage(normal);
         mianCamera = Camera.main;
@@ -63,7 +68,10 @@ public class CursorManager : MonoBehaviour
             CheckPlayerInput();
         }
         else
+        {
             SetCursorImage(normal);
+            buildImage.gameObject.SetActive(false);
+        }
 
     }
     #region 设置鼠标样式
@@ -81,12 +89,14 @@ public class CursorManager : MonoBehaviour
     {
         cursorPositionVaild = true;
         cursorImage.color = new Color(1, 1, 1, 1);
+        buildImage.color = new Color(1, 1, 1, 0.5f);
     }
 
     private void SetCursorInVaild()
     {
         cursorPositionVaild = false;
         cursorImage.color = new Color(1, 0, 0, 0.5f);
+        buildImage.color = new Color(1, 0, 0, 0.5f);
     }
 
     #endregion
@@ -97,6 +107,7 @@ public class CursorManager : MonoBehaviour
             currentItem = null;
             cursorEnable = false;
             currentSprite = normal;
+            buildImage.gameObject.SetActive(false);
         }
         else
         {
@@ -114,6 +125,13 @@ public class CursorManager : MonoBehaviour
                 _ => normal
             };
             cursorEnable = true;
+
+            if (details.itemType == ItemType.Funiture)
+            {
+                buildImage.gameObject.SetActive(true);
+                buildImage.sprite = details.itemOnWorldSprite;
+                buildImage.SetNativeSize();
+            }
         }
     }
 
@@ -138,6 +156,8 @@ public class CursorManager : MonoBehaviour
     {
         mouseWorldPos = mianCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -mianCamera.transform.position.z));
         mouseGridPos = currentGrid.WorldToCell(mouseWorldPos);
+
+        buildImage.rectTransform.position = Input.mousePosition;
 
         var playerGridPos = currentGrid.WorldToCell(playerPos.position);
 
@@ -191,7 +211,10 @@ public class CursorManager : MonoBehaviour
                     else SetCursorInVaild();
                     break;
                 case ItemType.ReapTool:
-                    if(GridMapManager.Instance.HaveReapableItemsInReadius(mouseWorldPos,currentItem))SetCursorVaild(); else SetCursorInVaild();
+                    if (GridMapManager.Instance.HaveReapableItemsInReadius(mouseWorldPos, currentItem)) SetCursorVaild(); else SetCursorInVaild();
+                    break;
+                case ItemType.Funiture:
+                    if (currentTile.canPlaceFunture && InventoryManager.Instance.CheckStock(currentItem.itemID)) SetCursorVaild(); else SetCursorInVaild();
                     break;
 
             }
