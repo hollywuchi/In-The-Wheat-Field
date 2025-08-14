@@ -2693,7 +2693,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 586618359
   m_SortingLayer: 8
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!4 &1669389258
 Transform:

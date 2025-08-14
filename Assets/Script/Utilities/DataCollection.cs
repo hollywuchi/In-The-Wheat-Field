@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -65,6 +66,13 @@ public class SerialzableVector3
 
 [System.Serializable]
 public class SceneItem
+{
+    public int itemID;
+    public SerialzableVector3 position;
+}
+
+[System.Serializable]
+public class SceneFuniture
 {
     public int itemID;
     public SerialzableVector3 position;

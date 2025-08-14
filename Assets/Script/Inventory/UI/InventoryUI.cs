@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace Farm.Inventory
         [Header("通用背包UI")]
         [SerializeField] private GameObject baseBag;
         public GameObject shopSlotPrefab;
+        public GameObject boxSlotPrefab;
 
         [Header("交易UI")]
         public TradeUI TradeUI;
@@ -66,6 +68,7 @@ namespace Farm.Inventory
             GameObject prefab = slotType switch
             {
                 SoltType.Shop => shopSlotPrefab,
+                SoltType.Box => boxSlotPrefab,
                 _ => null,
             };
 

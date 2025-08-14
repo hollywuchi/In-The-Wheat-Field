@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4398049215201357912}
   - component: {fileID: 5949309197872321835}
   - component: {fileID: 2579295058453580513}
+  - component: {fileID: 6806557618879425037}
   m_Layer: 0
   m_Name: Chair
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 586618359
   m_SortingLayer: 8
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -397025518, guid: 3bdb6f1370acd4062a47227630afb05d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -130,3 +131,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6875, y: 0.72604656}
   m_EdgeRadius: 0
+--- !u!114 &6806557618879425037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684146114125397510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78b6b8cb021b1d4da746e6f1c159d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 1040

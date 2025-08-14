@@ -13,8 +13,10 @@ namespace Farm.Inventory
         public Item bounceItemPrefab;
         private Transform itemParent;
         private Transform playerTans => FindAnyObjectByType<Player>().transform;
-
+        // 记录场景物品
         private Dictionary<string, List<SceneItem>> sceneItemDict = new Dictionary<string, List<SceneItem>>();
+        // 记录场景家具
+        private Dictionary<string, List<SceneFuniture>> sceneFunitureDict = new Dictionary<string, List<SceneFuniture>>();
         void OnEnable()
         {
             EventHandler.InstantiateItemInScene += OnInstantiateItemInScene;
@@ -39,12 +41,14 @@ namespace Farm.Inventory
         private void OnBeforeSceneUnloadEvent()
         {
             GetAllSceneItems();
+            GetAllSceneFuniture();
         }
 
         private void OnAfterSceneLoadEvent()
         {
             itemParent = GameObject.FindWithTag("ItemParent").transform;
             RecreatSceneItems();
+            RebuildFuniture();
         }
 
         private void OnInstantiateItemInScene(int ID, Vector3 pos)
@@ -122,6 +126,53 @@ namespace Farm.Inventory
                     {
                         Item newItem = Instantiate(itemPrefab, item.position.ToVector3(), Quaternion.identity, itemParent);
                         newItem.itemID = item.itemID;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取当前场景中的家具
+        /// </summary>
+        public void GetAllSceneFuniture()
+        {
+            List<SceneFuniture> currentSceneFuniture = new List<SceneFuniture>();
+
+            foreach (var funiture in FindObjectsOfType<Funiture>())
+            {
+                SceneFuniture scenefuniture = new SceneFuniture
+                {
+                    itemID = funiture.itemID,
+                    position = new SerialzableVector3(funiture.transform.position)
+                };
+
+                currentSceneFuniture.Add(scenefuniture);
+            }
+
+            if (sceneItemDict.ContainsKey(SceneManager.GetActiveScene().name))
+            {
+                sceneFunitureDict[SceneManager.GetActiveScene().name] = currentSceneFuniture;
+            }
+            else
+            {
+                sceneFunitureDict.Add(SceneManager.GetActiveScene().name, currentSceneFuniture);
+            }
+        }
+
+        /// <summary>
+        /// 重新生成场景中的家具
+        /// </summary>
+        private void RebuildFuniture()
+        {
+            List<SceneFuniture> currentSceneFuniture = new List<SceneFuniture>();
+
+            if (sceneFunitureDict.TryGetValue(SceneManager.GetActiveScene().name, out currentSceneFuniture))
+            {
+                if (currentSceneFuniture != null)
+                {
+                    foreach (SceneFuniture scenefuniture in currentSceneFuniture)
+                    {
+                        OnBuildFunitureEvent(scenefuniture.itemID, scenefuniture.position.ToVector3());
                     }
                 }
             }
