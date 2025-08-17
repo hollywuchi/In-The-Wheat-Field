@@ -73,6 +73,12 @@ namespace Farm.Inventory
         {
             BluePrintDetails bluePrint = InventoryManager.Instance.bluePrintLibrary.GetBluePrint(ID);
             var buildItem = Instantiate(bluePrint.buildPrefab, mousePos, Quaternion.identity, itemParent);
+
+            if (buildItem.GetComponent<Box>())
+            {
+                buildItem.GetComponent<Box>().index = InventoryManager.Instance.BoxDataAmount;
+                buildItem.GetComponent<Box>().InitBox(buildItem.GetComponent<Box>().index);
+            }
         }
 
         /// <summary>
@@ -146,6 +152,9 @@ namespace Farm.Inventory
                     position = new SerialzableVector3(funiture.transform.position)
                 };
 
+                if (funiture.GetComponent<Box>())
+                    scenefuniture.boxIndex = funiture.GetComponent<Box>().index;    // 保存箱子的序号
+
                 currentSceneFuniture.Add(scenefuniture);
             }
 
@@ -172,7 +181,13 @@ namespace Farm.Inventory
                 {
                     foreach (SceneFuniture scenefuniture in currentSceneFuniture)
                     {
-                        OnBuildFunitureEvent(scenefuniture.itemID, scenefuniture.position.ToVector3());
+                        BluePrintDetails bluePrint = InventoryManager.Instance.bluePrintLibrary.GetBluePrint(scenefuniture.itemID);
+                        var buildItem = Instantiate(bluePrint.buildPrefab, scenefuniture.position.ToVector3(), Quaternion.identity, itemParent);
+
+                        if (buildItem.GetComponent<Box>())
+                        {
+                            buildItem.GetComponent<Box>().InitBox(scenefuniture.boxIndex);
+                        }
                     }
                 }
             }

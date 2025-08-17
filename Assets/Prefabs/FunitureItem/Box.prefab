@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2581627713151485313}
   - component: {fileID: 5611055780887805658}
   - component: {fileID: 3968710514233304193}
+  - component: {fileID: 1428294398540808162}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -183,6 +184,20 @@ MonoBehaviour:
   boxBagTemplete: {fileID: 11400000, guid: d2bc2d9088032984d92aa03fc018f4c0, type: 2}
   boxBagData: {fileID: 0}
   mouseIcon: {fileID: 4546268746432520320}
+  index: 0
+--- !u!114 &1428294398540808162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195898414762621475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78b6b8cb021b1d4da746e6f1c159d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 1041
 --- !u!1 &4546268746432520320
 GameObject:
   m_ObjectHideFlags: 0

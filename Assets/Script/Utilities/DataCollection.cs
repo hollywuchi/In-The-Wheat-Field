@@ -76,6 +76,7 @@ public class SceneFuniture
 {
     public int itemID;
     public SerialzableVector3 position;
+    public int boxIndex;
 }
 
 [System.Serializable]

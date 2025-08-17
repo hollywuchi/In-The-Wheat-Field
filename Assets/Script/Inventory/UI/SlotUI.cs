@@ -23,6 +23,18 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginD
     public ItemDetails itemDetails;
     public int itemAmount;
     public int Index;
+    public InventoryLocation location
+    {
+        get
+        {
+            return soltType switch
+            {
+                SoltType.Bag => InventoryLocation.Player,
+                SoltType.Box => InventoryLocation.Box,
+                _ => InventoryLocation.Player,
+            };
+        }
+    }
 
 
     void Start()
@@ -121,21 +133,25 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginD
             if (eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>() == null)
                 return;
 
-            var targetSolt = eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>();
-            int targetSoltIndex = targetSolt.Index;
+            var targetSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>();
+            int targetSlotIndex = targetSlot.Index;
 
             // 在player自身背包内交换
-            if (soltType == SoltType.Bag && targetSolt.soltType == SoltType.Bag)
+            if (soltType == SoltType.Bag && targetSlot.soltType == SoltType.Bag)
             {
-                InventoryManager.Instance.SwapItem(Index, targetSoltIndex);
+                InventoryManager.Instance.SwapItem(Index, targetSlotIndex);
             }
-            else if(soltType == SoltType.Shop && targetSolt.soltType == SoltType.Bag) // 买
+            else if (soltType == SoltType.Shop && targetSlot.soltType == SoltType.Bag) // 买
             {
-                EventHandler.CallShowTradeUI(itemDetails,false);
+                EventHandler.CallShowTradeUI(itemDetails, false);
             }
-            else if(soltType == SoltType.Bag && targetSolt.soltType == SoltType.Shop) // 卖
+            else if (soltType == SoltType.Bag && targetSlot.soltType == SoltType.Shop) // 卖
             {
-                EventHandler.CallShowTradeUI(itemDetails,true);
+                EventHandler.CallShowTradeUI(itemDetails, true);
+            }
+            else if (soltType != SoltType.Shop && targetSlot.soltType != SoltType.Shop && soltType != targetSlot.soltType)
+            {
+                InventoryManager.Instance.SwapItem(location, Index, targetSlot.location, targetSlotIndex);
             }
 
             inventoryUI.SwitchHighLight(-1);

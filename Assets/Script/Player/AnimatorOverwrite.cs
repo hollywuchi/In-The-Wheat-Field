@@ -76,6 +76,7 @@ public class AnimatorOverwrite : MonoBehaviour
             ItemType.CollectTool => PartType.Collect,
             ItemType.BreakTool => PartType.Break,
             ItemType.ReapTool => PartType.Reap,
+            ItemType.Funiture => PartType.Carry,
             _ => PartType.None
         };
 

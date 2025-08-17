@@ -1,8 +1,5 @@
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.Timeline;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 // 引用了命名空间，其他脚本中就没办法直接调用InventoryManager，除非调用这个命名空间
 // 为了防止乱调用，产生的耦合，也方便之后解耦所用
@@ -16,6 +13,10 @@ namespace Farm.Inventory
         public BluePrintDataList_SO bluePrintLibrary;
         [Header("背包数据库")]
         public InventoryBag_SO playerBag;
+        private InventoryBag_SO currentBoxBag;
+
+        private Dictionary<string,List<InventoryItem>> boxDataDict = new Dictionary<string, List<InventoryItem>>();
+        public int BoxDataAmount => boxDataDict.Count;
         [Header("交易")]
         public int playerMoney;
 
@@ -24,14 +25,17 @@ namespace Farm.Inventory
             EventHandler.DropItemEvent += OnDropItemEvent;
             EventHandler.HaverstAtPlayerPosition += OnHaverstAtPlayerPosition;
             EventHandler.BuildFunitureEvent += OnBuildFunitureEvent;
+            EventHandler.BaseBagOpenEvent += OnBaseBagOpenEvent;
         }
 
         void OnDisable()
         {
-            EventHandler.DropItemEvent += OnDropItemEvent;
+            EventHandler.DropItemEvent -= OnDropItemEvent;
             EventHandler.HaverstAtPlayerPosition -= OnHaverstAtPlayerPosition;
             EventHandler.BuildFunitureEvent -= OnBuildFunitureEvent;
+            EventHandler.BaseBagOpenEvent -= OnBaseBagOpenEvent;
         }
+
 
 
         void Start()
@@ -141,6 +145,61 @@ namespace Farm.Inventory
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
         }
 
+        /// <summary>
+        /// 背包和其他容器之间的物品交换
+        /// </summary>
+        /// <param name="locationFrom"></param>
+        /// <param name="fromIndex"></param>
+        /// <param name="loactionTarget"></param>
+        /// <param name="targetIndex"></param>
+        public void SwapItem(InventoryLocation locationFrom, int fromIndex, InventoryLocation loactionTarget, int targetIndex)
+        {
+            var currentList = GetItemList(locationFrom);
+            var targetList = GetItemList(loactionTarget);
+
+            InventoryItem currentItem = currentList[fromIndex];
+
+            if (targetIndex < targetList.Count)
+            {
+                InventoryItem targetItem = targetList[targetIndex];
+
+                if (targetItem.itemID != 0 && currentItem.itemID != targetItem.itemID)   // 交换两个不相同的物品
+                {
+                    currentList[fromIndex] = targetItem;
+                    targetList[targetIndex] = currentItem;
+                }
+                else if (targetItem.itemID == currentItem.itemID)   // 两个相同的物品直接堆叠
+                {
+                    targetItem.itemAmount += currentItem.itemAmount;
+                    targetList[targetIndex] = targetItem;
+                    currentList[fromIndex] = new InventoryItem();
+                }
+                else    // 目标为空
+                {
+                    targetList[targetIndex] = currentItem;
+                    currentList[fromIndex] = new InventoryItem();
+                }
+
+                EventHandler.CallUpdateInventoryUI(locationFrom,currentList);
+                EventHandler.CallUpdateInventoryUI(loactionTarget,targetList);
+            }
+        }
+
+        /// <summary>
+        /// 根据位置返回背包数据列表
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        private List<InventoryItem> GetItemList(InventoryLocation location)
+        {
+            return location switch
+            {
+                InventoryLocation.Player => playerBag.BagItemList,
+                InventoryLocation.Box => currentBoxBag.BagItemList,
+                _ => null
+            };
+        }
+
         private void OnDropItemEvent(int ID, Vector3 pos, ItemType itemType)
         {
             RemoveItem(ID, 1);
@@ -161,12 +220,17 @@ namespace Farm.Inventory
 
         private void OnBuildFunitureEvent(int ID, Vector3 pos)
         {
-            RemoveItem(ID,1);
+            RemoveItem(ID, 1);
             BluePrintDetails bluePrint = bluePrintLibrary.GetBluePrint(ID);
             foreach (var item in bluePrint.resourceItem)
             {
-                RemoveItem(item.itemID,item.itemAmount);
+                RemoveItem(item.itemID, item.itemAmount);
             }
+        }
+
+        private void OnBaseBagOpenEvent(SoltType soltType, InventoryBag_SO bag_SO)
+        {
+            currentBoxBag = bag_SO;
         }
 
 
@@ -251,5 +315,28 @@ namespace Farm.Inventory
             return true;
         }
 
+        /// <summary>
+        /// 从字典中获取对应箱子数据
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public List<InventoryItem> GetBoxDataList(string key)
+        {
+            if(boxDataDict.ContainsKey(key))
+                return boxDataDict[key];
+            return null;
+        }
+
+        /// <summary>
+        /// 将箱子数据传到字典
+        /// </summary>
+        /// <param name="box"></param>
+        public void AddBoxDataList(Box box)
+        {
+            var key = box.name + box.index;
+            if(!boxDataDict.ContainsKey(key))
+                boxDataDict.Add(key,box.boxBagData.BagItemList);
+            Debug.Log(key);
+        }
     }
 }
