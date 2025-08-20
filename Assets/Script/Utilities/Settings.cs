@@ -1,6 +1,8 @@
+using System;
 using System.Data;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using UnityEngine.TextCore.LowLevel;
 
 public class Settings
 {
@@ -24,7 +26,12 @@ public class Settings
     public const float gridCellDiagonalSize = 1.41f;
 
     public const float pixelSize = 0.05f;   // 如果像素大小为20*20占一个格子，所以一个格子的一个像素点大小为0.05
-    public const float animationBreakTime = 5f; 
+    public const float animationBreakTime = 5f;
 
     public const float maxGridSize = 9999;
+
+    // 灯光
+    public const float lightChangeDuration = 25f;
+    public static TimeSpan morningTime = new TimeSpan(5, 0, 0);
+    public static TimeSpan nightTime = new TimeSpan(19, 0, 0);
 }

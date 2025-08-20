@@ -150,4 +150,10 @@ public static class EventHandler
     {
         BuildFunitureEvent?.Invoke(iD, pos);
     }
+
+    public static event Action<Season,LightShift,float> LightShiftChangeEvnet;
+    public static void CallLightShiftChangeEvent(Season season,LightShift lightShift,float timeDifference)
+    {
+        LightShiftChangeEvnet?.Invoke(season,lightShift,timeDifference);
+    }
 }

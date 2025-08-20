@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class TimeManager : Singleton<TimeManager>
 {
@@ -14,6 +10,9 @@ public class TimeManager : Singleton<TimeManager>
     public bool gameClockPause;
     public TimeSpan GameTime => new TimeSpan(gameHour, gameMinute, gameSecond);
     private float tikTime;
+
+    // 灯光时间差
+    private float timeDifference;
 
     protected override void Awake()
     {
@@ -39,6 +38,8 @@ public class TimeManager : Singleton<TimeManager>
         // 因为方法注册在OnEnable中，生命周期比Awake晚，会报空
         EventHandler.CallGameDateEvent(gameHour, gameDay, gameMonth, gameYear, gameSeason);
         EventHandler.CallGameMinuteEvent(gameMinute, gameHour, gameDay, gameSeason);
+        // 灯光变化
+        EventHandler.CallLightShiftChangeEvent(gameSeason, GetCurrentLightShift(), timeDifference);
     }
     void Update()
     {
@@ -147,6 +148,25 @@ public class TimeManager : Singleton<TimeManager>
             EventHandler.CallGameMinuteEvent(gameMinute, gameHour, gameDay, gameSeason);
         }
         // Debug.Log("minute:" + gameMinute + "second:" + gameSecond);
+        EventHandler.CallLightShiftChangeEvent(gameSeason, GetCurrentLightShift(), timeDifference);
+    }
 
+    /// <summary>
+    /// 获取当前的光照时间段
+    /// </summary>
+    /// <returns></returns>
+    private LightShift GetCurrentLightShift()
+    {
+        if (GameTime >= Settings.morningTime && GameTime <= Settings.nightTime)
+        {
+            timeDifference = (float)(GameTime - Settings.morningTime).TotalMinutes;
+            return LightShift.Morning;
+        }
+        if (GameTime < Settings.morningTime || GameTime > Settings.nightTime)
+        {
+            timeDifference = Mathf.Abs((float)(GameTime - Settings.nightTime).TotalMinutes);
+            return LightShift.Night;
+        }
+        return LightShift.Morning;
     }
 }
