@@ -20,6 +20,8 @@ public class ItemInteractive : MonoBehaviour
             {
                 StartCoroutine(RotateRight());
             }
+
+            EventHandler.CallPlaySoundEvent(SoundName.Rustle);
         }
     }
 
@@ -35,6 +37,7 @@ public class ItemInteractive : MonoBehaviour
             {
                 StartCoroutine(RotateRight());
             }
+            EventHandler.CallPlaySoundEvent(SoundName.Rustle);
         }
     }
     private IEnumerator RotateLeft()

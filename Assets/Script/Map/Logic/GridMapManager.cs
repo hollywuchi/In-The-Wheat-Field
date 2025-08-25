@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using Farm.CropPlant;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -173,6 +174,7 @@ namespace Farm.Map
                     case ItemType.Seed:
                         EventHandler.CallPlantSeedEvent(itemDetails.itemID, currentTile);
                         EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos, ItemType.Seed);
+                        EventHandler.CallPlaySoundEvent(SoundName.Plant);
                         break;
                     case ItemType.Commondity:
                         EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos, ItemType.Commondity);
@@ -184,11 +186,13 @@ namespace Farm.Map
                         currentTile.canDig = false;
                         currentTile.canDropItem = false;
                         // 音效
+                        EventHandler.CallPlaySoundEvent(SoundName.Hoe);
                         break;
                     case ItemType.WaterTool:
                         SetWetGround(currentTile);
                         currentTile.daysSinceWatered = 0;
                         // 音效
+                        EventHandler.CallPlaySoundEvent(SoundName.Water);
                         break;
                     case ItemType.BreakTool:
                     case ItemType.ChopTool:
@@ -209,6 +213,7 @@ namespace Farm.Map
                             if (Count > Settings.reapCount)
                                 break;
                         }
+                        EventHandler.CallPlaySoundEvent(SoundName.Reap);
                         break;
                     case ItemType.Funiture:
                         EventHandler.CallBuildFunitureEvent(itemDetails.itemID, mouseWorldPos);

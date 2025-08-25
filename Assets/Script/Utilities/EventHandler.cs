@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 using Farm.Dialogue;
 using UnityEngine;
@@ -151,9 +152,21 @@ public static class EventHandler
         BuildFunitureEvent?.Invoke(iD, pos);
     }
 
-    public static event Action<Season,LightShift,float> LightShiftChangeEvnet;
-    public static void CallLightShiftChangeEvent(Season season,LightShift lightShift,float timeDifference)
+    public static event Action<Season, LightShift, float> LightShiftChangeEvnet;
+    public static void CallLightShiftChangeEvent(Season season, LightShift lightShift, float timeDifference)
     {
-        LightShiftChangeEvnet?.Invoke(season,lightShift,timeDifference);
+        LightShiftChangeEvnet?.Invoke(season, lightShift, timeDifference);
+    }
+
+    public static event Action<SoundDetails> InitSoundEffect;
+    public static void CallInitSoundEffect(SoundDetails sound)
+    {
+        InitSoundEffect?.Invoke(sound);
+    }
+
+    public static event Action<SoundName> PlaySoundEvent;
+    public static void CallPlaySoundEvent(SoundName soundName)
+    {
+        PlaySoundEvent?.Invoke(soundName);
     }
 }

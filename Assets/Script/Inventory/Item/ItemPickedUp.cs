@@ -11,6 +11,9 @@ namespace Farm.Inventory
             if(item != null && item.itemdetails.canPickedup)
             {
                 InventoryManager.Instance.AddItem(item,true);
+
+                // 播放音效
+                EventHandler.CallPlaySoundEvent(SoundName.Pickup);
             }
         }
     }

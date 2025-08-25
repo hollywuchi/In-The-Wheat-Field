@@ -52,6 +52,7 @@ public class CropDetails
     public bool hasParticalEffect;
     public ParticalEffectType particalEffect;
     public Vector3 effectPos;
+    public SoundName soundEffects;
 
     /// <summary>
     /// 检查工具是否可用，也就是菜篮子不能砍树

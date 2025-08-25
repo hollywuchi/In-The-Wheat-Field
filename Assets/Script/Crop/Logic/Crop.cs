@@ -36,6 +36,10 @@ public class Crop : MonoBehaviour
             }
 
             // 播放音效
+            if (cropDetails.soundEffects != SoundName.None)
+            {
+                EventHandler.CallPlaySoundEvent(cropDetails.soundEffects);
+            }
             // 播放粒子特效
             if (cropDetails.hasParticalEffect)
                 EventHandler.CallParticalEffectEvent(cropDetails.particalEffect, transform.position + cropDetails.effectPos);
@@ -54,6 +58,7 @@ public class Crop : MonoBehaviour
                 else
                     anim.SetTrigger("FallingLeft");
 
+                EventHandler.CallPlaySoundEvent(SoundName.TreeFalling);
                 StartCoroutine(HarvestAfterAnimation());
             }
         }
