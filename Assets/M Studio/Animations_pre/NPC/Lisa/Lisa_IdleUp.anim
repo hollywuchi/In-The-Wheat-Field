@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Girl02_IdleDown
+  m_Name: Lisa_IdleUp
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 1007033402911347040, guid: 48c266ae0734348198694bc6282c5264, type: 3}
+      value: {fileID: 986173550, guid: 85f3f75b0912741b0bc48e7f38554cd2, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,7 +44,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 1007033402911347040, guid: 48c266ae0734348198694bc6282c5264, type: 3}
+    - {fileID: 986173550, guid: 85f3f75b0912741b0bc48e7f38554cd2, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

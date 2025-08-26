@@ -17,7 +17,7 @@ MonoBehaviour:
     soundClip: {fileID: 8300000, guid: c5fb27dee80d5af439a3c2853f553813, type: 3}
     soundPitchMin: 1
     soundPitchMax: 1.2
-    soundVolume: 0.5
+    soundVolume: 0.15
   - soundName: 3
     soundClip: {fileID: 8300000, guid: ca24ea3fbce23e541bb1aabd1c65cfed, type: 3}
     soundPitchMin: 1
@@ -89,12 +89,12 @@ MonoBehaviour:
     soundPitchMax: 1
     soundVolume: 0.8
   - soundName: 14
-    soundClip: {fileID: 8300000, guid: 24567b352b47fb64f85f1ba85b58e855, type: 3}
+    soundClip: {fileID: 8300000, guid: 5853ae56183729647bc9263b4f0d9b71, type: 3}
     soundPitchMin: 1
     soundPitchMax: 1
     soundVolume: 0.8
   - soundName: 15
-    soundClip: {fileID: 8300000, guid: 4d9fc56aef4f17b43b69b54d24a33fd4, type: 3}
+    soundClip: {fileID: 8300000, guid: 3feaddba07dc0f641978ed89bed5cb5b, type: 3}
     soundPitchMin: 1
     soundPitchMax: 1
     soundVolume: 0.8
