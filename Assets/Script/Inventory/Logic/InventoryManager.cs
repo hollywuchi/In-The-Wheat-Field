@@ -1,22 +1,29 @@
 using System.Collections.Generic;
+using Farm.Save;
 using UnityEngine;
+using UnityEngine.Timeline;
+using UnityEngine.UIElements;
 
 // 引用了命名空间，其他脚本中就没办法直接调用InventoryManager，除非调用这个命名空间
 // 为了防止乱调用，产生的耦合，也方便之后解耦所用
 namespace Farm.Inventory
 {
-    public class InventoryManager : Singleton<InventoryManager>
+    public class InventoryManager : Singleton<InventoryManager>, ISaveable
     {
         [Header("物品数据库")]
         public ItemDetailList_SO itemLibrary;
         [Header("图纸数据库")]
         public BluePrintDataList_SO bluePrintLibrary;
         [Header("背包数据库")]
+        public InventoryBag_SO playerBagTemp;
         public InventoryBag_SO playerBag;
         private InventoryBag_SO currentBoxBag;
 
-        private Dictionary<string,List<InventoryItem>> boxDataDict = new Dictionary<string, List<InventoryItem>>();
+        private Dictionary<string, List<InventoryItem>> boxDataDict = new Dictionary<string, List<InventoryItem>>();
         public int BoxDataAmount => boxDataDict.Count;
+
+        public string GUID => GetComponent<DataGUID>().guid;
+
         [Header("交易")]
         public int playerMoney;
 
@@ -26,6 +33,7 @@ namespace Farm.Inventory
             EventHandler.HaverstAtPlayerPosition += OnHaverstAtPlayerPosition;
             EventHandler.BuildFunitureEvent += OnBuildFunitureEvent;
             EventHandler.BaseBagOpenEvent += OnBaseBagOpenEvent;
+            EventHandler.StartNewGameEvent += OnStartNewGameEvent;
         }
 
         void OnDisable()
@@ -34,13 +42,16 @@ namespace Farm.Inventory
             EventHandler.HaverstAtPlayerPosition -= OnHaverstAtPlayerPosition;
             EventHandler.BuildFunitureEvent -= OnBuildFunitureEvent;
             EventHandler.BaseBagOpenEvent -= OnBaseBagOpenEvent;
+            EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
         }
 
 
 
         void Start()
         {
-            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
+            ISaveable saveable = this;
+            saveable.RegisterSaveable();
+            // EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
         }
 
         /// <summary>
@@ -180,8 +191,8 @@ namespace Farm.Inventory
                     currentList[fromIndex] = new InventoryItem();
                 }
 
-                EventHandler.CallUpdateInventoryUI(locationFrom,currentList);
-                EventHandler.CallUpdateInventoryUI(loactionTarget,targetList);
+                EventHandler.CallUpdateInventoryUI(locationFrom, currentList);
+                EventHandler.CallUpdateInventoryUI(loactionTarget, targetList);
             }
         }
 
@@ -233,6 +244,14 @@ namespace Farm.Inventory
             currentBoxBag = bag_SO;
         }
 
+
+        private void OnStartNewGameEvent(int obj)
+        {
+            playerBag = Instantiate(playerBagTemp);
+            playerMoney = Settings.playerStartMoney;
+            boxDataDict.Clear();
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
+        }
 
         /// <summary>
         /// 移除指定物品
@@ -322,7 +341,7 @@ namespace Farm.Inventory
         /// <returns></returns>
         public List<InventoryItem> GetBoxDataList(string key)
         {
-            if(boxDataDict.ContainsKey(key))
+            if (boxDataDict.ContainsKey(key))
                 return boxDataDict[key];
             return null;
         }
@@ -334,9 +353,46 @@ namespace Farm.Inventory
         public void AddBoxDataList(Box box)
         {
             var key = box.name + box.index;
-            if(!boxDataDict.ContainsKey(key))
-                boxDataDict.Add(key,box.boxBagData.BagItemList);
+            if (!boxDataDict.ContainsKey(key))
+                boxDataDict.Add(key, box.boxBagData.BagItemList);
             Debug.Log(key);
+        }
+
+        public GameSaveData GenerateSaveData()
+        {
+            GameSaveData saveData = new GameSaveData();
+            saveData.playerMoney = playerMoney;
+
+            saveData.inventoryDict = new Dictionary<string, List<InventoryItem>>()
+            {
+                {playerBag.name,playerBag.BagItemList}
+            };
+
+            foreach (var item in boxDataDict)
+            {
+                saveData.inventoryDict.Add(item.Key, item.Value);
+            }
+
+            return saveData;
+        }
+
+        public void RestoreData(GameSaveData saveData)
+        {
+            this.playerMoney = saveData.playerMoney;
+            playerBag = Instantiate(playerBagTemp);
+            playerBag.BagItemList = saveData.inventoryDict[playerBag.name];
+
+            foreach (var item in saveData.inventoryDict)
+            {
+                if (boxDataDict.ContainsKey(item.Key))
+                {
+                    boxDataDict[item.Key] = item.Value;
+                }
+            }
+
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
+
+            // FIXME:注意视频中所说的缺少Playermoney
         }
     }
 }

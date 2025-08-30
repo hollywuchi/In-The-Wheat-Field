@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using Farm.CropPlant;
+using Farm.Save;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 namespace Farm.Map
 {
-    public class GridMapManager : Singleton<GridMapManager>
+    public class GridMapManager : Singleton<GridMapManager>,ISaveable
     {
         [Header("地图瓦片信息")]
         public RuleTile digTile;
@@ -23,6 +24,8 @@ namespace Farm.Map
         private Grid currentGrid;
         private List<ReapItem> ItemsInRadius;
         private Season currentSeason;
+
+        public string GUID => GetComponent<DataGUID>().guid;
 
         void OnEnable()
         {
@@ -369,6 +372,20 @@ namespace Farm.Map
             }
             return false;
 
+        }
+
+        public GameSaveData GenerateSaveData()
+        {
+            GameSaveData saveData = new GameSaveData();
+            saveData.tileDetailsDict = this.tileDetailsDict;
+            saveData.firstLoadDict = this.firstLoadDict;
+            return saveData;
+        }
+
+        public void RestoreData(GameSaveData saveData)
+        {
+            this.firstLoadDict = saveData.firstLoadDict;
+            this.tileDetailsDict = saveData.tileDetailsDict;
         }
     }
 }

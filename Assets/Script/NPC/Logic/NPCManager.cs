@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class NPCManager : Singleton<NPCManager>
@@ -12,6 +13,26 @@ public class NPCManager : Singleton<NPCManager>
     {
         base.Awake();
         InitSceneRouteDic();
+    }
+
+    void OnEnable()
+    {
+        EventHandler.StartNewGameEvent += OnStartNewGameEvent;
+
+    }
+
+    void OnDisable()
+    {
+        EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+    }
+
+    private void OnStartNewGameEvent(int obj)
+    {
+        foreach (var character in npcPositionList)
+        {
+            character.npc.position = character.position;
+            character.npc.GetComponent<NPCMovement>().StartScene = character.startScene;
+        }
     }
 
     /// <summary>

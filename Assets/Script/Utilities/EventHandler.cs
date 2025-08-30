@@ -169,4 +169,16 @@ public static class EventHandler
     {
         PlaySoundEvent?.Invoke(soundName);
     }
+
+    public static event Action<int> StartNewGameEvent;
+    public static void CallStartNewGameEvent(int index)
+    {
+        StartNewGameEvent?.Invoke(index);
+    }
+
+    public static event Action EndGameEvent;
+    public static void CallEndGameEvent()
+    {
+        EndGameEvent?.Invoke();
+    }
 }

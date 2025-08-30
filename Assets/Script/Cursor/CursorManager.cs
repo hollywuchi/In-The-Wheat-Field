@@ -214,7 +214,13 @@ public class CursorManager : MonoBehaviour
                     if (GridMapManager.Instance.HaveReapableItemsInReadius(mouseWorldPos, currentItem)) SetCursorVaild(); else SetCursorInVaild();
                     break;
                 case ItemType.Funiture:
-                    if (currentTile.canPlaceFunture && InventoryManager.Instance.CheckStock(currentItem.itemID)) SetCursorVaild(); else SetCursorInVaild();
+                    buildImage.gameObject.SetActive(true);
+                    var bluePrintDetails = InventoryManager.Instance.bluePrintLibrary.GetBluePrint(currentItem.itemID);
+
+                    if (currentTile.canPlaceFunture && InventoryManager.Instance.CheckStock(currentItem.itemID) && !HaveFunitureInRadius(bluePrintDetails))
+                        SetCursorVaild();
+                    else
+                        SetCursorInVaild();
                     break;
 
             }
@@ -224,6 +230,18 @@ public class CursorManager : MonoBehaviour
             SetCursorInVaild();
         }
 
+    }
+
+    private bool HaveFunitureInRadius(BluePrintDetails bluePrintDetails)
+    {
+        var buildItem = bluePrintDetails.buildPrefab;
+        Vector2 point = mouseWorldPos;
+        var size = buildItem.GetComponent<BoxCollider2D>().size;
+
+        var otherColl = Physics2D.OverlapBox(point, size, 0);
+        if (otherColl != null)
+            return otherColl.GetComponent<Funiture>();
+        return false;
     }
 
     private bool InteractWithUI()

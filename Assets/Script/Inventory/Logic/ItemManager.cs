@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Farm.Save;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,12 +8,15 @@ using UnityEngine.UIElements;
 
 namespace Farm.Inventory
 {
-    public class ItemManager : MonoBehaviour
+    public class ItemManager : MonoBehaviour, ISaveable
     {
         public Item itemPrefab;
         public Item bounceItemPrefab;
         private Transform itemParent;
         private Transform playerTans => FindAnyObjectByType<Player>().transform;
+
+        public string GUID => GetComponent<DataGUID>().guid;
+
         // 记录场景物品
         private Dictionary<string, List<SceneItem>> sceneItemDict = new Dictionary<string, List<SceneItem>>();
         // 记录场景家具
@@ -24,6 +28,7 @@ namespace Farm.Inventory
             EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
             EventHandler.DropItemEvent += OnDropItemEvent;
             EventHandler.BuildFunitureEvent += OnBuildFunitureEvent;
+            EventHandler.StartNewGameEvent += OnStartNewGameEvent;
         }
 
 
@@ -34,6 +39,15 @@ namespace Farm.Inventory
             EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
             EventHandler.DropItemEvent -= OnDropItemEvent;
             EventHandler.BuildFunitureEvent -= OnBuildFunitureEvent;
+            EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+        }
+
+
+
+        void Start()
+        {
+            ISaveable saveable = this;
+            saveable.RegisterSaveable();
         }
 
 
@@ -79,6 +93,12 @@ namespace Farm.Inventory
                 buildItem.GetComponent<Box>().index = InventoryManager.Instance.BoxDataAmount;
                 buildItem.GetComponent<Box>().InitBox(buildItem.GetComponent<Box>().index);
             }
+        }
+
+        private void OnStartNewGameEvent(int obj)
+        {
+            sceneItemDict.Clear();
+            sceneFunitureDict.Clear();
         }
 
         /// <summary>
@@ -191,6 +211,26 @@ namespace Farm.Inventory
                     }
                 }
             }
+        }
+
+        public GameSaveData GenerateSaveData()
+        {
+            GetAllSceneFuniture();
+            GetAllSceneItems();
+            GameSaveData saveData = new GameSaveData();
+            saveData.sceneItemDict = this.sceneItemDict;
+            saveData.sceneFunitureDict = this.sceneFunitureDict;
+
+            return saveData;
+        }
+
+        public void RestoreData(GameSaveData saveData)
+        {
+            this.sceneFunitureDict = saveData.sceneFunitureDict;
+            this.sceneItemDict = saveData.sceneItemDict;
+
+            RecreatSceneItems();
+            RebuildFuniture();
         }
     }
 

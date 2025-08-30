@@ -1,10 +1,12 @@
 using System.Collections;
+using Farm.Save;
+using Unity.Loading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Farm.Transition
 {
-    public class TransitionManager : MonoBehaviour
+    public class TransitionManager : Singleton<TransitionManager>, ISaveable
     {
         [SceneName]
         public string startSceneName;
@@ -12,22 +14,47 @@ namespace Farm.Transition
         private CanvasGroup canvasGroup;
         private bool isFade;
         private AsyncOperation operation;
+
+        public string GUID => GetComponent<DataGUID>().guid;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            // 在开始游戏之前添加UI场景
+            SceneManager.LoadScene("UI", LoadSceneMode.Additive);
+        }
         void OnEnable()
         {
             EventHandler.TransitionEvent += OnTransitionEvent;
+            EventHandler.StartNewGameEvent += OnStartNewGameEvent;
+            EventHandler.EndGameEvent += OnEndGameEvent;
         }
         void OnDisable()
         {
             EventHandler.TransitionEvent -= OnTransitionEvent;
+            EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+            EventHandler.EndGameEvent += OnEndGameEvent;
+        }
+
+
+
+        private void OnStartNewGameEvent(int obj)
+        {
+            StartCoroutine(LoadSaveDataScene(startSceneName));
+        }
+
+        private void OnEndGameEvent()
+        {
+            StartCoroutine(UnloadScene());
         }
 
         // Start 竟然也可以改成协程形式
-        IEnumerator Start()
+        void Start()
         {
+            ISaveable saveable = this;
+            saveable.RegisterSaveable();
+
             canvasGroup = FindObjectOfType<CanvasGroup>();
-            yield return LoadSceneSetActive(startSceneName);
-            // 目的是，在游戏初始化之后也能执行场景加载后的事件
-            EventHandler.CallAfterSceneLoadEvent();
         }
 
         private void OnTransitionEvent(string sceneName, Vector3 position)
@@ -35,7 +62,6 @@ namespace Farm.Transition
             if (!isFade)
                 StartCoroutine(Transition(sceneName, position));
         }
-
         /// <summary>
         /// 切换场景
         /// </summary>
@@ -59,7 +85,7 @@ namespace Farm.Transition
             EventHandler.CallAfterSceneLoadEvent();
 
             // 如果没有新场景没有加载完，那么就不能淡出
-            if(operation.isDone)
+            if (operation.isDone)
                 yield return Fade(0);
         }
 
@@ -101,5 +127,41 @@ namespace Farm.Transition
             canvasGroup.blocksRaycasts = false;
         }
 
+        private IEnumerator LoadSaveDataScene(string sceneName)
+        {
+            yield return Fade(1);
+
+            if (SceneManager.GetActiveScene().name != "PersistentScene")
+            {
+                EventHandler.CallBeforeSceneUnloadEvent();
+                yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+            }
+
+            yield return LoadSceneSetActive(sceneName);
+            EventHandler.CallAfterSceneLoadEvent();
+
+            yield return Fade(0);
+        }
+
+        public IEnumerator UnloadScene()
+        {
+            EventHandler.CallBeforeSceneUnloadEvent();
+            yield return Fade(1f);
+            yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
+            yield return Fade(0);
+        }
+
+        public GameSaveData GenerateSaveData()
+        {
+            GameSaveData saveData = new GameSaveData();
+            saveData.dataSceneName = SceneManager.GetActiveScene().name;
+
+            return saveData;
+        }
+
+        public void RestoreData(GameSaveData saveData)
+        {
+            StartCoroutine(LoadSaveDataScene(saveData.dataSceneName));
+        }
     }
 }

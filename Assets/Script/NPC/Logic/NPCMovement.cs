@@ -2,12 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Farm.AStar;
+using Farm.Save;
+using TreeEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.UI;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
-public class NPCMovement : MonoBehaviour
+public class NPCMovement : MonoBehaviour, ISaveable
 {
     public ScheduleDataList_SO scheduleData;
     private SortedSet<ScheduleDetails> scheduleSet;
@@ -16,6 +21,8 @@ public class NPCMovement : MonoBehaviour
     private string targetScene;
     private Vector3Int currentGridPosition;
     private Vector3Int targetGridPosition;
+
+    private Coroutine npcMoveRoutine;
 
     public string StartScene { set => currentScene = value; }
     [Header("移动参数")]
@@ -43,12 +50,17 @@ public class NPCMovement : MonoBehaviour
     private bool isInitialised;
     private bool npcMove;
     private bool sceneLoaded;
+    private bool isFirstLoad;
+    private Season currentSeason;
 
     private AnimationClip stopAnimationClip;
     public AnimationClip blankAnimationClip;
     private AnimatorOverrideController animOverride;
 
     private TimeSpan gameTime => TimeManager.Instance.GameTime;
+
+    public string GUID => GetComponent<DataGUID>().guid;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -73,6 +85,8 @@ public class NPCMovement : MonoBehaviour
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
         EventHandler.GameMinuteEvent += OnGameMinuteEvent;
+        EventHandler.EndGameEvent += OnEndGameEvent;
+        EventHandler.StartNewGameEvent += OnStartNewGameEvent;
     }
 
     void OnDisable()
@@ -80,8 +94,16 @@ public class NPCMovement : MonoBehaviour
         EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
         EventHandler.GameMinuteEvent -= OnGameMinuteEvent;
+        EventHandler.EndGameEvent -= OnEndGameEvent;
+        EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
     }
 
+
+    void Start()
+    {
+        ISaveable saveable = this;
+        saveable.RegisterSaveable();
+    }
 
     void Update()
     {
@@ -115,12 +137,20 @@ public class NPCMovement : MonoBehaviour
             isInitialised = true;
         }
         sceneLoaded = true;
+
+        if (!isFirstLoad)
+        {
+            currentGridPosition = grid.WorldToCell(transform.position);
+            var schedule = new ScheduleDetails(0, 0, 0, 0, currentSeason, targetScene, (Vector2Int)targetGridPosition, stopAnimationClip, interactble);
+            BuildPath(schedule);
+            isFirstLoad = true;
+        }
     }
     private void OnGameMinuteEvent(int minute, int hour, int day, Season season)
     {
         int time = (hour * 100) + minute;
         ScheduleDetails matchSchedule = null;
-
+        currentSeason = season;
         foreach (var schedule in scheduleSet)
         {
             if (schedule.Time == time)
@@ -140,6 +170,19 @@ public class NPCMovement : MonoBehaviour
             BuildPath(matchSchedule);
     }
 
+    private void OnEndGameEvent()
+    {
+        sceneLoaded = false;
+        npcMove = false;
+        if (npcMoveRoutine != null)
+            StopCoroutine(npcMoveRoutine);
+    }
+
+    private void OnStartNewGameEvent(int obj)
+    {
+        isInitialised = true;
+        isFirstLoad = true;
+    }
 
     private void CheckVisiable()
     {
@@ -185,7 +228,7 @@ public class NPCMovement : MonoBehaviour
 
     private void MoveToGridPositon(Vector3Int gridPos, TimeSpan stepTime)
     {
-        StartCoroutine(MoveRoutine(gridPos, stepTime));
+        npcMoveRoutine = StartCoroutine(MoveRoutine(gridPos, stepTime));
     }
 
     private IEnumerator MoveRoutine(Vector3Int gridPos, TimeSpan stepTime)
@@ -233,6 +276,7 @@ public class NPCMovement : MonoBehaviour
 
         movementSteps.Clear();
         currentSchedule = schedule;
+        targetScene = schedule.targetScene;
         targetGridPosition = (Vector3Int)schedule.targetGridPosition;
         stopAnimationClip = schedule.clipAtStop;
         this.interactble = schedule.interactable;
@@ -243,6 +287,7 @@ public class NPCMovement : MonoBehaviour
         }
         else if (schedule.targetScene != currentScene)
         {
+            Debug.Log(currentScene + schedule.targetScene);
             SceneRoute sceneRoute = NPCManager.Instance.GetSceneRoute(currentScene, schedule.targetScene);
 
             if (sceneRoute != null)
@@ -388,4 +433,49 @@ public class NPCMovement : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
     }
     #endregion
+    public GameSaveData GenerateSaveData()
+    {
+        GameSaveData saveData = new GameSaveData();
+        saveData.characterPosDict = new Dictionary<string, SerialzableVector3>()
+        {
+            {"targetGridPosition",new SerialzableVector3(targetGridPosition)},
+            {"currentPosition",new SerialzableVector3(transform.position)},
+        };
+        saveData.dataSceneName = currentScene;
+        saveData.targetScene = this.targetScene;
+
+        saveData.timeDict = new Dictionary<string, int>()
+        {
+            {"currentSeason",(int)currentSeason}
+        };
+
+        if (stopAnimationClip != null)
+        {
+            saveData.animationInstaceID = stopAnimationClip.GetInstanceID();
+        }
+        saveData.interactable = this.interactble;
+        return saveData;
+    }
+
+    public void RestoreData(GameSaveData saveData)
+    {
+        isInitialised = true;
+        isFirstLoad = false;
+        currentScene = saveData.dataSceneName;
+        targetScene = saveData.targetScene;
+
+        Vector3 pos = saveData.characterPosDict["currentPosition"].ToVector3();
+        Vector3Int gridPos = (Vector3Int)saveData.characterPosDict["targetGridPosition"].ToVector2Int();
+
+        transform.position = pos;
+        targetGridPosition = gridPos;
+
+        if (saveData.animationInstaceID != 0)
+        {
+            this.stopAnimationClip = Resources.InstanceIDToObject(saveData.animationInstaceID) as AnimationClip;
+        }
+
+        this.interactble = saveData.interactable;
+        this.currentSeason = (Season)saveData.timeDict["currentSeason"];
+    }
 }

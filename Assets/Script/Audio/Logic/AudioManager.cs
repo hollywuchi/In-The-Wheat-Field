@@ -1,8 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using UnityEditor.Rendering;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -33,12 +29,14 @@ public class AudioManager : Singleton<AudioManager>
     {
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
         EventHandler.PlaySoundEvent += OnPlaySoundEvent;
+        EventHandler.EndGameEvent += OnEndGameEvent;
     }
 
     void OnDisable()
     {
         EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
         EventHandler.PlaySoundEvent -= OnPlaySoundEvent;
+        EventHandler.EndGameEvent -= OnEndGameEvent;
     }
 
 
@@ -66,6 +64,13 @@ public class AudioManager : Singleton<AudioManager>
         var soundDetails = soundDetailList.GetSoundDetails(soundName);
         if (soundDetails != null)
             EventHandler.CallInitSoundEffect(soundDetails);
+    }
+
+    private void OnEndGameEvent()
+    {
+        if (soundRoutine != null)
+            StopCoroutine(soundRoutine);
+        mute.TransitionTo(1f);
     }
 
     private IEnumerator PlaySoundRoutine(SoundDetails music, SoundDetails ambient)
@@ -109,5 +114,10 @@ public class AudioManager : Singleton<AudioManager>
     private float ConvertSoundVolume(float volume)
     {
         return volume * 100 - 80;
+    }
+
+    public void SetMasterVolume(float value)
+    {
+        audioMixer.SetFloat("MasterVolume", value * 100 - 80);
     }
 }

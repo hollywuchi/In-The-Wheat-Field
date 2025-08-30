@@ -73090,7 +73090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1906895845}
   - component: {fileID: 1906895844}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bounds
   m_TagString: Bound
   m_Icon: {fileID: 0}

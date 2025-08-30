@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Threading;
-using Unity.Mathematics;
-using UnityEditorInternal;
+using System.Collections.Generic;
+using System.Diagnostics;
+using Farm.Save;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Animations;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ISaveable
 {
     private Rigidbody2D rb;
     public float speed;
@@ -23,6 +23,9 @@ public class Player : MonoBehaviour
     private float mouseX;
     private float mouseY;
     private bool useTool;
+
+    public string GUID => GetComponent<DataGUID>().guid;
+
     void OnEnable()
     {
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
@@ -30,6 +33,8 @@ public class Player : MonoBehaviour
         EventHandler.MoveToPosition += OnMoveToPosition;
         EventHandler.MouseClickedEvent += OnMouseClickedEvent;
         EventHandler.UpdateGameStateEvent += OnUpdateGameStateEvent;
+        EventHandler.StartNewGameEvent += OnStartNewGameEvent;
+        EventHandler.EndGameEvent += OnEndGameEvent;
     }
 
     void OnDisable()
@@ -39,9 +44,11 @@ public class Player : MonoBehaviour
         EventHandler.MoveToPosition -= OnMoveToPosition;
         EventHandler.MouseClickedEvent -= OnMouseClickedEvent;
         EventHandler.UpdateGameStateEvent -= OnUpdateGameStateEvent;
+        EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+        EventHandler.EndGameEvent -= OnEndGameEvent;
     }
 
-    
+
 
     void Awake()
     {
@@ -51,7 +58,15 @@ public class Player : MonoBehaviour
 
         // 刚体自带的插帧效果，真的有效改善了主角残影问题
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        inputDisable = true;
     }
+
+    void Start()
+    {
+        ISaveable saveable = this;
+        saveable.RegisterSaveable();
+    }
+
     void Update()
     {
         if (!inputDisable)
@@ -116,6 +131,16 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+    private void OnStartNewGameEvent(int obj)
+    {
+        inputDisable = false;
+        transform.position = Settings.playerStartPos;
+    }
+
+    private void OnEndGameEvent()
+    {
+        inputDisable = true;
+    }
 
     private IEnumerator UseToolRoutine(Vector3 mouseWorldPos, ItemDetails itemDetails)
     {
@@ -175,8 +200,8 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("isMoving", isMoving);
 
-            anim.SetFloat("mouseX",mouseX);
-            anim.SetFloat("mouseY",mouseY);
+            anim.SetFloat("mouseX", mouseX);
+            anim.SetFloat("mouseY", mouseY);
             if (isMoving)
             {
                 anim.SetFloat("inputX", inputX);
@@ -185,5 +210,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    public GameSaveData GenerateSaveData()
+    {
+        GameSaveData saveData = new GameSaveData();
+        saveData.characterPosDict = new Dictionary<string, SerialzableVector3>
+        {
+            { name, new SerialzableVector3(transform.position) }
+        };
+        // Question: 这里为什么可以简化Add
+        return saveData;
+    }
 
+    public void RestoreData(GameSaveData saveData)
+    {
+        var targetPosition = saveData.characterPosDict[name].ToVector3();
+
+        transform.position = targetPosition;
+    }
 }
