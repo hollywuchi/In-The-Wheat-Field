@@ -55,6 +55,16 @@ namespace Farm.Inventory
             openedUI = playerBag.activeInHierarchy;
 
             playerMoneyText.text = InventoryManager.Instance.playerMoney.ToString();
+
+        }
+
+        void Update()
+        {
+            if (openedUI && Input.GetKeyDown(KeyCode.Escape))
+            {
+                playerBag.SetActive(false);
+                EventHandler.CallUpdateGameStateEvent(GameState.GamePlay);
+            }
         }
 
         private void OnBeforeSceneUnloadEvent()
@@ -62,9 +72,15 @@ namespace Farm.Inventory
             SwitchHighLight(-1);
         }
 
+
+        /// <summary>
+        /// 打开背包
+        /// </summary>
+        /// <param name="slotType"></param>
+        /// <param name="bagData"></param>
         private void OnBaseBagOpenEvent(SoltType slotType, InventoryBag_SO bagData)
         {
-            // TODO:通用的prefab
+            // WORKFLOW:通用的prefab
             GameObject prefab = slotType switch
             {
                 SoltType.Shop => shopSlotPrefab,
@@ -87,6 +103,7 @@ namespace Farm.Inventory
 
             if (slotType == SoltType.Shop)
             {
+                // 修改背包UI的中心点
                 playerBag.GetComponent<RectTransform>().pivot = new Vector2(-0.5f, 0.5f);
                 playerBag.SetActive(true);
                 openedUI = true;
@@ -114,7 +131,8 @@ namespace Farm.Inventory
 
             if (slotType == SoltType.Shop)
             {
-                playerBag.GetComponent<RectTransform>().pivot = new Vector2(-0.5f, 0.5f);
+                // bug修复，在关闭背包之后更改背包的中心点
+                playerBag.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
                 playerBag.SetActive(false);
                 openedUI = false;
             }
@@ -167,12 +185,16 @@ namespace Farm.Inventory
             playerMoneyText.text = InventoryManager.Instance.playerMoney.ToString();
         }
         /// <summary>
-        /// 控制背包UI的打开与关闭
+        /// 控制背包UI的打开与关闭,需要改进
         /// </summary>
         public void SwitchUIOpened()
         {
             openedUI = !openedUI;
             playerBag.SetActive(openedUI);
+            if (openedUI)
+                EventHandler.CallUpdateGameStateEvent(GameState.Pause);
+            else
+                EventHandler.CallUpdateGameStateEvent(GameState.GamePlay);
         }
 
         public void SwitchHighLight(int index)

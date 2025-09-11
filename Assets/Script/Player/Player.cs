@@ -22,7 +22,7 @@ public class Player : MonoBehaviour, ISaveable
     // 鼠标方向向量
     private float mouseX;
     private float mouseY;
-    private bool useTool;
+    // private bool useTool;
 
     public string GUID => GetComponent<DataGUID>().guid;
 
@@ -144,7 +144,7 @@ public class Player : MonoBehaviour, ISaveable
 
     private IEnumerator UseToolRoutine(Vector3 mouseWorldPos, ItemDetails itemDetails)
     {
-        useTool = true;
+        // useTool = true;
         inputDisable = true;
         yield return null;
         foreach (var anim in animators)
@@ -159,7 +159,7 @@ public class Player : MonoBehaviour, ISaveable
         yield return new WaitForSeconds(0.25f);
 
         // 等待动画结束
-        useTool = false;
+        // useTool = false;
         inputDisable = false;
     }
 

@@ -31,7 +31,11 @@ public class NPCManager : Singleton<NPCManager>
         foreach (var character in npcPositionList)
         {
             character.npc.position = character.position;
-            character.npc.GetComponent<NPCMovement>().StartScene = character.startScene;
+            // BUG：貌似因为没有到达格子中间导致的NPC不停移动
+            var NPCMovement = character.npc.GetComponent<NPCMovement>();
+            NPCMovement.StartScene = character.startScene;
+            NPCMovement.isInitialised = true;
+
         }
     }
 

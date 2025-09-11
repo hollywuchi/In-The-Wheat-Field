@@ -47,7 +47,7 @@ public class NPCMovement : MonoBehaviour, ISaveable
 
     private Grid grid;
     private Stack<MovementStep> movementSteps;
-    private bool isInitialised;
+    public bool isInitialised;
     private bool npcMove;
     private bool sceneLoaded;
     private bool isFirstLoad;
@@ -180,7 +180,7 @@ public class NPCMovement : MonoBehaviour, ISaveable
 
     private void OnStartNewGameEvent(int obj)
     {
-        isInitialised = true;
+        isInitialised = false;
         isFirstLoad = true;
     }
 
@@ -287,7 +287,7 @@ public class NPCMovement : MonoBehaviour, ISaveable
         }
         else if (schedule.targetScene != currentScene)
         {
-            Debug.Log(currentScene + schedule.targetScene);
+            // Debug.Log(currentScene + schedule.targetScene);
             SceneRoute sceneRoute = NPCManager.Instance.GetSceneRoute(currentScene, schedule.targetScene);
 
             if (sceneRoute != null)
@@ -382,6 +382,7 @@ public class NPCMovement : MonoBehaviour, ISaveable
 
     private void SwitchAnimation()
     {
+        // 如果NPC没有在当前场景的目标位置，那就会变换动画为走路
         isMoving = transform.position != GetWorldPosition(targetGridPosition);
         anim.SetBool("IsMoving", isMoving);
 

@@ -18,7 +18,7 @@ namespace Farm.Dialogue
         private Stack<DialoguePiece> dialogueStack;
         private GameObject NPCButton;
         private bool canTalk;
-        private bool isTalking;
+        // private bool isTalking;
 
         void Awake()
         {
@@ -50,20 +50,20 @@ namespace Farm.Dialogue
 
         private IEnumerator DialogueRoutine()
         {
-            isTalking = true;
+            // isTalking = true;
             if (dialogueStack.TryPop(out DialoguePiece result))
             {
                 EventHandler.CallDialogueEvent(result);
                 EventHandler.CallUpdateGameStateEvent(GameState.Pause);
                 yield return new WaitUntil(() => result.isDown);
-                isTalking = false;
+                // isTalking = false;
             }
             else
             {
                 EventHandler.CallDialogueEvent(null);
                 EventHandler.CallUpdateGameStateEvent(GameState.GamePlay);
                 FillDialogueStake();
-                isTalking = false;
+                // isTalking = false;
 
                 if (OnFinishEvent != null)
                 {
