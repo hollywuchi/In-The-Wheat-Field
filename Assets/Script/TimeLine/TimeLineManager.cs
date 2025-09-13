@@ -1,27 +1,35 @@
-using System.Collections;
+using System.Net.Http.Headers;
+using Farm.Save;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.UI;
-using DG.Tweening;
-using Unity.Mathematics;
-using TMPro;
 
-public class TimeLineManager : Singleton<TimeLineManager>
+public class TimeLineManager : Singleton<TimeLineManager>, ISaveable
 {
     public PlayableDirector startDirector;
-    // public Image skipImg;
-    // private Text skipText;
+    public CanvasGroup SkipGroup;
     private PlayableDirector currentDirector;
     private bool isPause;
 
     private bool isDown;
     public bool IsDown { set => isDown = value; }
+
+    public string GUID => GetComponent<DataGUID>().guid;
+
     private bool isCompleted;
+
+    private float skipTime;
     protected override void Awake()
     {
         base.Awake();
         currentDirector = startDirector;
         // skipText = transform.GetComponentInChildren<Text>();
+    }
+
+    void Start()
+    {
+        ISaveable saveable = this;
+        saveable.RegisterSaveable();
     }
 
     void OnEnable()
@@ -49,7 +57,7 @@ public class TimeLineManager : Singleton<TimeLineManager>
             currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(1);
         }
 
-        // SkipImageFade();
+        SkipImageFade();
 
     }
     public void PauseTimeLine(PlayableDirector director)
@@ -71,35 +79,47 @@ public class TimeLineManager : Singleton<TimeLineManager>
     // 长按按钮，直到完全显示，直接跳过
     //      
     // 中间松手,会逐渐隐藏到消失
-    // private void SkipImageFade()
-    // {
-    //     if (Input.GetKey(KeyCode.Space) && !isCompleted)
-    //     {
-    //         // 长按空格键跳过剧情
-    //         float time = Time.deltaTime;
-    //         time += Time.deltaTime;
-    //         if (time <= time + 3)   // 如果时间没有到3s
-    //         {
-    //             if (skipImg.color.a != 1)   // 且图标没有完全显示，那就持续增加a的值直到完全显示
-    //             {
-    //                 Color imgColor = skipImg.color;
-    //                 imgColor.a += 1 / (3 * Time.deltaTime);
-    //                 skipImg.color = imgColor;
-    //             }
-    //         }
-    //         else
-    //         {
-                
-    //             time = 0;
-    //         }
-    //     }
-    //     else if (skipImg.color.a > 0)  // 如果没到那么就持续递减直到a变成0
-    //     {
-    //         Color imgColor = skipImg.color;
-    //         imgColor.a -= 1 / (3 * Time.deltaTime);
-    //         skipImg.color = imgColor;
-    //     }
+    private void SkipImageFade()
+    {
+        if (Input.anyKey && !isCompleted)
+        {
+            // 长按空格键跳过剧情
+            skipTime += Time.deltaTime;
+            if (skipTime <= Settings.SkipTime)   // 如果时间没有到2s
+            {
+                if (SkipGroup.alpha != 1)   // 且图标没有完全显示，那就持续增加a的值直到完全显示
+                {
+                    // 这里并不需要进行计算，而是直接进行分数表示线性关系即可
+                    SkipGroup.alpha = skipTime / Settings.SkipTime;
+                }
+            }
+            else if (Input.GetKey(KeyCode.Space))   // 如果时间到达了3秒，那么就跳过剧情
+            {
+                currentDirector.time = 19.9667f;
+                // print("跳过剧情");
+                skipTime = 0;
+                isCompleted = true;
+            }
+        }
+        else if (SkipGroup.alpha > 0)  // 中间松手
+        {
+            skipTime -= 2 * Time.deltaTime;
+            SkipGroup.alpha = skipTime / Settings.SkipTime;
+        }
 
 
-    // }
+    }
+
+    public GameSaveData GenerateSaveData()
+    {
+        GameSaveData saveData = new GameSaveData();
+        saveData.isCompleted = isCompleted;
+        return saveData;
+    }
+
+    public void RestoreData(GameSaveData saveData)
+    {
+        // TODO:timeline保存
+        this.isCompleted = saveData.isCompleted;
+    }
 }

@@ -58,7 +58,7 @@ public class AnimatorOverwrite : MonoBehaviour
     {
         holdItem.sprite = itemSprite;
         holdItem.enabled = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         holdItem.enabled = false;
     }
 

@@ -34,4 +34,6 @@ public class Settings
 
     public static Vector3 playerStartPos = new Vector3(1.3f, -10.3f, 0);
     public static int playerStartMoney = 100;
+
+    public const float SkipTime = 1;
 }

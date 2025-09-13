@@ -1849,6 +1849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 799283031}
   - component: {fileID: 799283032}
+  - component: {fileID: 799283033}
   m_Layer: 0
   m_Name: TimeLineManager
   m_TagString: Untagged
@@ -1884,6 +1885,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDirector: {fileID: 442720626}
+  SkipGroup: {fileID: 931893452}
+--- !u!114 &799283033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799283030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f3ade6dcef4de489a1d5cd0e235b1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guid: 5ba435ad-a48b-44b6-9442-06549f083ca9
 --- !u!1 &864227237
 GameObject:
   m_ObjectHideFlags: 0
@@ -2422,8 +2437,9 @@ GameObject:
   - component: {fileID: 931893449}
   - component: {fileID: 931893451}
   - component: {fileID: 931893450}
+  - component: {fileID: 931893452}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Skip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2487,6 +2503,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931893448}
   m_CullTransparentMesh: 1
+--- !u!225 &931893452
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931893448}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &975595823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2710,7 +2738,7 @@ GameObject:
   - component: {fileID: 1091802038}
   - component: {fileID: 1091802037}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: SkipText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

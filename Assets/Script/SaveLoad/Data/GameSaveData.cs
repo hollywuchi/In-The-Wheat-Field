@@ -22,5 +22,9 @@ namespace Farm.Save
         public string targetScene;                                           // NPC目标场景，前面有了初始场景
         public bool interactable;                                            // NPC是否可以互动
         public int animationInstaceID;                                       // 动画片段的实例化ID，可以反推动画片段
+
+        // TimeLine部分
+
+        public bool isCompleted;                                             // 场景是否第一次加载
     }
 }

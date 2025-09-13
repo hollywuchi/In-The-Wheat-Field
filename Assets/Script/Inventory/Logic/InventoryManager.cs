@@ -355,7 +355,6 @@ namespace Farm.Inventory
             var key = box.name + box.index;
             if (!boxDataDict.ContainsKey(key))
                 boxDataDict.Add(key, box.boxBagData.BagItemList);
-            Debug.Log(key);
         }
 
         public GameSaveData GenerateSaveData()

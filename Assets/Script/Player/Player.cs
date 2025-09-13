@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Farm.Save;
-using UnityEditor.Experimental.GraphView;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Player : MonoBehaviour, ISaveable
@@ -171,18 +170,21 @@ public class Player : MonoBehaviour, ISaveable
         inputX = Input.GetAxis("Horizontal");
         inputY = Input.GetAxis("Vertical");
 
-        if (inputX != 0 && inputY != 0) //限制斜方向的移动速度
-        {
-            inputX *= 0.6f;
-            inputY *= 0.6f;
-        }
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
             inputX *= 0.5f;
             inputY *= 0.5f;
         }
-        movementInput = new Vector2(inputX, inputY);
+
+        // if (inputX != 0 && inputY != 0) //限制斜方向的移动速度（已废弃）
+        // {
+        //     inputX *= 0.7f;
+        //     inputY *= 0.7f;
+        // }
+        // 将向量进行归一化，可以解决玩家斜方向移动速度不匹配问题（最佳答案）
+        // 进行归一化之后虽然手感上要好一点，但是之后会有漂移问题
+        movementInput = new Vector2(inputX, inputY).normalized;
 
         isMoving = movementInput != Vector2.zero;
     }
