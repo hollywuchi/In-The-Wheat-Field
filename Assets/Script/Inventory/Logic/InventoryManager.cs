@@ -356,7 +356,7 @@ namespace Farm.Inventory
             if (!boxDataDict.ContainsKey(key))
                 boxDataDict.Add(key, box.boxBagData.BagItemList);
         }
-
+        #region 存档部分
         public GameSaveData GenerateSaveData()
         {
             GameSaveData saveData = new GameSaveData();
@@ -393,5 +393,6 @@ namespace Farm.Inventory
 
             // FIXME:注意视频中所说的缺少Playermoney
         }
+        #endregion
     }
 }

@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Threading;
+using System.Linq;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -138,10 +137,14 @@ namespace Farm.Inventory
             }
         }
 
-        private void OnShowTradeUI(ItemDetails details, bool isSell)
+        private void OnShowTradeUI(ItemDetails details, bool isSell, bool isSelected)
         {
-            TradeUI.gameObject.SetActive(true);
+            TradeUI.gameObject.SetActive(isSelected);
             TradeUI.SetupTradeUI(details, isSell);
+            if(!isSell)
+                TradeUI.tradeText.text = "想要几个？";
+            else
+                TradeUI.tradeText.text = "要卖几个？";
         }
 
         /// <summary>
@@ -196,10 +199,16 @@ namespace Farm.Inventory
             else
                 EventHandler.CallUpdateGameStateEvent(GameState.GamePlay);
         }
-
+        /// <summary>
+        /// 转换格子UI周围的环绕动画
+        /// </summary>
+        /// <param name="index"></param>
         public void SwitchHighLight(int index)
         {
-            foreach (var slot in slotUIs)
+            // 数组合并
+            var combineUI = slotUIs.Concat(baseBagSlots);
+
+            foreach (var slot in combineUI)
             {
                 if (slot.Index == index && slot.isSelected)
                 {
@@ -211,9 +220,8 @@ namespace Farm.Inventory
                     slot.highLightImg.gameObject.SetActive(false);
                 }
             }
+            // 为什么点选商店中的UI不会显示周围动画？
+            // 因为foreach中并没有遍历商店中的UI组也就是baseBagSlots
         }
-
-
-
     }
 }

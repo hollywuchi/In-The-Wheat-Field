@@ -1,9 +1,6 @@
 using System;
-using System.Xml.Serialization;
 using TMPro;
-using TMPro.EditorUtilities;
 using UnityEngine;
-using UnityEngine.TerrainUtils;
 using UnityEngine.UI;
 
 namespace Farm.Inventory
@@ -15,6 +12,7 @@ namespace Farm.Inventory
         public InputField itemAmount;
         public Button submitButton;
         public Button cancelButton;
+        public TextMeshProUGUI tradeText;
 
         private ItemDetails item;
         private bool isSellTrade;
@@ -25,7 +23,6 @@ namespace Farm.Inventory
             submitButton.onClick.AddListener(TradeItem);
             itemAmount.characterLimit = 2;
         }
-
         public void SetupTradeUI(ItemDetails item, bool isCell)
         {
             this.item = item;

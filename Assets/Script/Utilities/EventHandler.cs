@@ -140,10 +140,10 @@ public static class EventHandler
         UpdateGameStateEvent?.Invoke(State);
     }
 
-    public static event Action<ItemDetails, bool> ShowTradeUI;
-    public static void CallShowTradeUI(ItemDetails item, bool isSell)
+    public static event Action<ItemDetails, bool, bool> ShowTradeUI;
+    public static void CallShowTradeUI(ItemDetails item, bool isSell, bool isSelected)
     {
-        ShowTradeUI?.Invoke(item, isSell);
+        ShowTradeUI?.Invoke(item, isSell, isSelected);
     }
 
     public static event Action<int, Vector3> BuildFunitureEvent;

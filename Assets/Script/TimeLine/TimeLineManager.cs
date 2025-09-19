@@ -119,7 +119,6 @@ public class TimeLineManager : Singleton<TimeLineManager>, ISaveable
 
     public void RestoreData(GameSaveData saveData)
     {
-        // TODO:timeline保存
         this.isCompleted = saveData.isCompleted;
     }
 }

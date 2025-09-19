@@ -1,8 +1,5 @@
-using DG.Tweening;
 using Farm.Inventory;
 using TMPro;
-using Unity.Android.Types;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,7 +7,6 @@ using UnityEngine.UI;
 public class SlotUI : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     [Header("获取组件")]
-
     [SerializeField] private Image slotImg;
     [SerializeField] private TextMeshProUGUI amountText;
     public Image highLightImg;
@@ -94,8 +90,12 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginD
         {
             // 点按通知转换姿势(物品的信息和是否点选)
             EventHandler.CallItemSelectEvent(itemDetails, isSelected);
+            EventHandler.CallShowTradeUI(itemDetails, true, isSelected);
         }
-
+        if (soltType == SoltType.Shop)
+        {
+            EventHandler.CallShowTradeUI(itemDetails, false, isSelected);
+        }
     }
 
 
@@ -143,18 +143,19 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginD
             }
             else if (soltType == SoltType.Shop && targetSlot.soltType == SoltType.Bag) // 买
             {
-                EventHandler.CallShowTradeUI(itemDetails, false);
+                EventHandler.CallShowTradeUI(itemDetails, false, isSelected);
             }
             else if (soltType == SoltType.Bag && targetSlot.soltType == SoltType.Shop) // 卖
             {
-                EventHandler.CallShowTradeUI(itemDetails, true);
+                EventHandler.CallShowTradeUI(itemDetails, true, isSelected);
             }
             else if (soltType != SoltType.Shop && targetSlot.soltType != SoltType.Shop && soltType != targetSlot.soltType)
             {
                 InventoryManager.Instance.SwapItem(location, Index, targetSlot.location, targetSlotIndex);
             }
 
-            inventoryUI.SwitchHighLight(-1);
+            // inventoryUI.SwitchHighLight(-1);
+            // print(1);
         }
         else    // 尝试把物品丢到地上
         {

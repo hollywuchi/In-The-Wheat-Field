@@ -8166,6 +8166,7 @@ MonoBehaviour:
   itemAmount: {fileID: 1182824563}
   submitButton: {fileID: 1267743595}
   cancelButton: {fileID: 1686067710}
+  tradeText: {fileID: 1859318869}
 --- !u!1 &1265018395
 GameObject:
   m_ObjectHideFlags: 0

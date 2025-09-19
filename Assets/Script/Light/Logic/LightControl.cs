@@ -15,7 +15,6 @@ public class LightControl : MonoBehaviour
         currentLight = GetComponent<Light2D>();
     }
 
-    // TODO:实际切换灯光
     public void ChangeLightShift(Season season, LightShift lightShift, float timeDifference)
     {
         currentLightDetails = lightData.GetLightDetails(season, lightShift);
