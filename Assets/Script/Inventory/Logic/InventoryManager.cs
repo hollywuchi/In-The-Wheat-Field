@@ -34,6 +34,7 @@ namespace Farm.Inventory
             EventHandler.BuildFunitureEvent += OnBuildFunitureEvent;
             EventHandler.BaseBagOpenEvent += OnBaseBagOpenEvent;
             EventHandler.StartNewGameEvent += OnStartNewGameEvent;
+            EventHandler.DeliveryQuestItems += OnDeliveryQuestItems;
         }
 
         void OnDisable()
@@ -43,9 +44,8 @@ namespace Farm.Inventory
             EventHandler.BuildFunitureEvent -= OnBuildFunitureEvent;
             EventHandler.BaseBagOpenEvent -= OnBaseBagOpenEvent;
             EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+            EventHandler.DeliveryQuestItems -= OnDeliveryQuestItems;
         }
-
-
 
         void Start()
         {
@@ -64,11 +64,21 @@ namespace Farm.Inventory
             return itemLibrary.itemDetailsList.Find(i => i.itemID == ID);
         }
 
+        /// <summary>
+        /// 返回玩家背包中的物品
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public InventoryItem getitem(int ID)
         {
             return playerBag.BagItemList.Find(i => i.itemID == ID);
         }
 
+        /// <summary>
+        /// 从地上拾取物品添加到背包中
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="toDestory"></param>
         public void AddItem(Item item, bool toDestory)
         {
             var Index = GetItemIndexInBag(item.itemID);
@@ -109,6 +119,12 @@ namespace Farm.Inventory
             return -1;
         }
 
+        /// <summary>
+        /// 直接凭空生成这个物品添加到背包中
+        /// </summary>
+        /// <param name="ID">物品ID</param>
+        /// <param name="Index">背包的空格序号</param>
+        /// <param name="Amount">物品数量</param>
         private void AddItemByIndex(int ID, int Index, int Amount)
         {
             if (Index == -1 && CheckBagCapacity())  //背包中没有物品且背包还有容量
@@ -251,6 +267,22 @@ namespace Farm.Inventory
             playerMoney = Settings.playerStartMoney;
             boxDataDict.Clear();
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
+        }
+
+        private void OnDeliveryQuestItems(QuestDetails currnetDetails)
+        {
+            // 遍历玩家奖励列表，添加到背包中
+            foreach (var item in currnetDetails.rewards)
+            {
+                var Index = GetItemIndexInBag(item.itemID);
+                AddItemByIndex(item.itemID,Index,item.itemAmount);
+            }
+            
+            // 移除需要的物品
+            RemoveItem(currnetDetails.requireItem.itemID,currnetDetails.requireItem.itemAmount);
+
+            // 刷新UI
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.BagItemList);
         }
 
         /// <summary>

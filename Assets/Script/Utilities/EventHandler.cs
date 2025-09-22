@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 using Farm.Dialogue;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public static class EventHandler
@@ -180,5 +181,17 @@ public static class EventHandler
     public static void CallEndGameEvent()
     {
         EndGameEvent?.Invoke();
+    }
+
+    public static event Action<QuestDetails> AcceptQuest;
+    public static void CallAcceptQuest(QuestDetails questDetails)
+    {
+        AcceptQuest?.Invoke(questDetails);
+    }
+
+    public static event Action<QuestDetails> DeliveryQuestItems;
+    public static void CallDeliveryQuestItems(QuestDetails questDetails)
+    {
+        DeliveryQuestItems?.Invoke(questDetails);
     }
 }

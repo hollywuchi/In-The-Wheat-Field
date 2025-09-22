@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Farm.Inventory;
+using UnityEditor.Rendering.BuiltIn.ShaderGraph;
 using UnityEngine;
 
 public class NPCFunction : MonoBehaviour
@@ -7,6 +9,12 @@ public class NPCFunction : MonoBehaviour
     public InventoryBag_SO shopData;
     private bool isOpen;
 
+    private Questable questable;
+
+    void Awake()
+    {
+        questable = GetComponent<Questable>();
+    }
     void Update()
     {
         if (isOpen && Input.GetKeyDown(KeyCode.Escape))
@@ -24,7 +32,33 @@ public class NPCFunction : MonoBehaviour
     public void CloseShop()
     {
         isOpen = false;
-        EventHandler.CallBaseBagCloseEvent(SoltType.Shop,shopData);
+        EventHandler.CallBaseBagCloseEvent(SoltType.Shop, shopData);
         EventHandler.CallUpdateGameStateEvent(GameState.GamePlay);
+    }
+
+    public void AcceptQuest()
+    {
+        if (questable != null)
+        {
+            questable.questDetails.questStates = QuestStates.Accept;    // 将NPC身上的任务状态转换为承接状态
+            EventHandler.CallAcceptQuest(questable.questDetails);   // 当前NPC身上有任务模块才可以承接任务
+        }
+    }
+
+    public void CheckQuest()
+    {
+        // BUG:现在接受任务和领取奖励重叠，没有办法分开
+        // 现在初步想法是将UnityAction的事件监听转换即可解决
+        if (questable != null && questable.questDetails.questStates == QuestStates.Accept)
+        {
+            int currentNum = InventoryManager.Instance.getitem(questable.questDetails.requireItem.itemID).itemAmount;
+            // 如果背包中的物品大于所需要的物品
+            if(currentNum >= questable.questDetails.requireItem.itemAmount)
+            {
+                //  呼叫交付物品的方法,并将当前状态变为完成
+                questable.questDetails.questStates = QuestStates.Complete;
+                EventHandler.CallDeliveryQuestItems(questable.questDetails);
+            }
+        }
     }
 }

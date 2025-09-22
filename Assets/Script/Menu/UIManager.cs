@@ -1,5 +1,7 @@
 using System.Collections;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.TextCore;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -65,7 +67,9 @@ public class UIManager : MonoBehaviour
     {
         pausePanel.SetActive(false);
         EventHandler.CallEndGameEvent();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+        // Worning:如果之后出现游戏结束方面的BUG 先来这地方把0.5改成1
         Instantiate(menuPrefab, menuCanvas.transform);
+
     }
 }

@@ -635,7 +635,7 @@ GameObject:
   - component: {fileID: 278789909}
   - component: {fileID: 278789908}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: CG Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -777,6 +777,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360086262}
   m_CullTransparentMesh: 1
+--- !u!1 &417304008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 417304009}
+  - component: {fileID: 417304010}
+  m_Layer: 0
+  m_Name: QuestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &417304009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417304008}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 748874919}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &417304010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417304008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa7a4ee3031a9c40b2f6b0876e9b515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questDataBase: {fileID: 11400000, guid: ce06700648eb2de45bb3e0d623caf93e, type: 2}
 --- !u!1 &442720624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1663,6 +1708,7 @@ Transform:
   - {fileID: 1608610835}
   - {fileID: 799283031}
   - {fileID: 2050835461}
+  - {fileID: 417304009}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &781664439
@@ -2179,7 +2225,7 @@ GameObject:
   - component: {fileID: 917987449}
   - component: {fileID: 917987451}
   m_Layer: 0
-  m_Name: Girl_Mia
+  m_Name: Mia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3467,7 +3513,7 @@ GameObject:
   - component: {fileID: 1349030229}
   - component: {fileID: 1349030234}
   m_Layer: 0
-  m_Name: Girl_White
+  m_Name: Lilith
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4300,7 +4346,9 @@ GameObject:
   - component: {fileID: 1567157560}
   - component: {fileID: 1567157559}
   - component: {fileID: 1567157558}
+  - component: {fileID: 1567157565}
   - component: {fileID: 1567157556}
+  - component: {fileID: 1567157564}
   - component: {fileID: 1567157563}
   m_Layer: 0
   m_Name: Lisa
@@ -4340,12 +4388,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnFinishEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1567157565}
+        m_TargetAssemblyTypeName: NPCFunction, Assembly-CSharp
+        m_MethodName: AcceptQuest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1567157565}
+        m_TargetAssemblyTypeName: NPCFunction, Assembly-CSharp
+        m_MethodName: CheckQuest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   dialogueList:
-  - name: Mia
-    faceImage: {fileID: 21300000, guid: 67d354b9f685e4e1b90255eb84bc5abe, type: 3}
+  - name: Lisa
+    faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
     onLeft: 1
-    dialogueText: "\u770B\u6765\u6751\u957F\u6CA1\u80FD\u8BA9\u4F60\u98DE\u8D77\u6765\u554A\uFF0C\u770B\u770B\u6709\u4EC0\u4E48\u9700\u8981\u7684\u5427\uFF01\u4E70\u4E00\u65A4\u9001\u534A\u65A4\u54E6~\uFF08\u9A97\u4EBA\u7684\uFF09"
+    dialogueText: "\u8FD9\u91CC\u5C31\u662F\u4F60\u7684\u5C0F\u5C4B\u4E86\uFF0C\u623F\u95F4\u5916\u7684\u571F\u5730\u90FD\u53EF\u4EE5\u79CD\u690D\u54E6\uFF0C\u73B0\u5728\u62FF\u8D77\u9504\u5934\u79CD\u70B9\u571F\u8C46\u5427\uFF01"
     hasToPause: 0
     isDown: 0
 --- !u!114 &1567157558
@@ -4525,6 +4597,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guid: af78ce42-9071-4a12-b6bb-adaab6713985
+--- !u!114 &1567157564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567157554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e93268829494143bec650db485eb99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questDetails:
+    questName: 
+    npcName: 
+    questStates: 0
+    questIntroduction: 
+    requireItem:
+      itemID: 0
+      itemAmount: 0
+    rewards: []
+--- !u!114 &1567157565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567157554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23321902c87366a4ea4bdbef88f94296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopData: {fileID: 0}
 --- !u!1 &1569124150
 GameObject:
   m_ObjectHideFlags: 0
@@ -4801,7 +4907,7 @@ GameObject:
   - component: {fileID: 1634217911}
   - component: {fileID: 1634217912}
   m_Layer: 0
-  m_Name: Old Man_0
+  m_Name: Old Man
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
