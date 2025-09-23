@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -139,12 +138,18 @@ namespace Farm.Inventory
 
         private void OnShowTradeUI(ItemDetails details, bool isSell, bool isSelected)
         {
-            TradeUI.gameObject.SetActive(isSelected);
-            TradeUI.SetupTradeUI(details, isSell);
-            if(!isSell)
-                TradeUI.tradeText.text = "想要几个？";
-            else
-                TradeUI.tradeText.text = "要卖几个？";
+            if (openedUI && baseBagSlots[0] != null)
+            {
+                if (baseBagSlots[0].soltType == SoltType.Shop)
+                {
+                    TradeUI.gameObject.SetActive(isSelected);
+                    TradeUI.SetupTradeUI(details, isSell);
+                    if (!isSell)
+                        TradeUI.tradeText.text = "想要几个？";
+                    else
+                        TradeUI.tradeText.text = "要卖几个？";
+                }
+            }
         }
 
         /// <summary>

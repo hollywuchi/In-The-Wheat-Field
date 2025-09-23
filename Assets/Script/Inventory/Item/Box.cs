@@ -43,7 +43,7 @@ public class Box : MonoBehaviour
 
     void Update()
     {
-        if (canOpen && Input.GetMouseButtonDown(1))
+        if (!isOpen && canOpen && Input.GetMouseButtonDown(1))
         {
             isOpen = true;
             EventHandler.CallBaseBagOpenEvent(SoltType.Box, boxBagData);

@@ -635,7 +635,7 @@ GameObject:
   - component: {fileID: 278789909}
   - component: {fileID: 278789908}
   m_Layer: 5
-  m_Name: CG Panel
+  m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4391,19 +4391,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1567157565}
         m_TargetAssemblyTypeName: NPCFunction, Assembly-CSharp
-        m_MethodName: AcceptQuest
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1567157565}
-        m_TargetAssemblyTypeName: NPCFunction, Assembly-CSharp
-        m_MethodName: CheckQuest
+        m_MethodName: QuestFunciton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -36,7 +36,20 @@ public class NPCFunction : MonoBehaviour
         EventHandler.CallUpdateGameStateEvent(GameState.GamePlay);
     }
 
-    public void AcceptQuest()
+
+    /// <summary>
+    /// 对话结束之后承接任务的事件
+    /// </summary>
+    public void QuestFunciton()
+    {
+        // 确保其中的任务不会一口气全部完成
+        if (questable.questDetails.questStates == QuestStates.Waitting)
+            AcceptQuest();
+        else
+            CheckQuest();
+    }
+
+    private void AcceptQuest()
     {
         if (questable != null)
         {
@@ -45,15 +58,13 @@ public class NPCFunction : MonoBehaviour
         }
     }
 
-    public void CheckQuest()
+    private void CheckQuest()
     {
-        // BUG:现在接受任务和领取奖励重叠，没有办法分开
-        // 现在初步想法是将UnityAction的事件监听转换即可解决
         if (questable != null && questable.questDetails.questStates == QuestStates.Accept)
         {
             int currentNum = InventoryManager.Instance.getitem(questable.questDetails.requireItem.itemID).itemAmount;
             // 如果背包中的物品大于所需要的物品
-            if(currentNum >= questable.questDetails.requireItem.itemAmount)
+            if (currentNum >= questable.questDetails.requireItem.itemAmount)
             {
                 //  呼叫交付物品的方法,并将当前状态变为完成
                 questable.questDetails.questStates = QuestStates.Complete;
