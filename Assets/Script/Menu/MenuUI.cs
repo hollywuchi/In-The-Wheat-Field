@@ -23,4 +23,9 @@ public class MenuUI : MonoBehaviour
         Application.Quit();
         Debug.Log("EXIT GAME");
     }
+
+    public void BackTime()
+    {
+        Time.timeScale = 1;
+    }
 }

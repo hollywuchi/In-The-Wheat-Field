@@ -69,9 +69,14 @@ namespace Farm.Inventory
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public InventoryItem getitem(int ID)
+        public InventoryItem Getitem(int ID)
         {
             return playerBag.BagItemList.Find(i => i.itemID == ID);
+        }
+
+        public ItemDetails GetItemInDataBase(int ID)
+        {
+            return itemLibrary.itemDetailsList.Find(i => i.itemID == ID);
         }
 
         /// <summary>
@@ -275,14 +280,14 @@ namespace Farm.Inventory
             foreach (var item in currnetDetails.rewards)
             {
                 var Index = GetItemIndexInBag(item.itemID);
-                AddItemByIndex(item.itemID,Index,item.itemAmount);
+                AddItemByIndex(item.itemID, Index, item.itemAmount);
             }
-            
+
             // 移除需要的物品
-            RemoveItem(currnetDetails.requireItem.itemID,currnetDetails.requireItem.itemAmount);
+            RemoveItem(currnetDetails.requireItem.itemID, currnetDetails.requireItem.itemAmount);
 
             // 刷新UI
-            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.BagItemList);
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.BagItemList);
         }
 
         /// <summary>

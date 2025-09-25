@@ -62,7 +62,7 @@ public class NPCFunction : MonoBehaviour
     {
         if (questable != null && questable.questDetails.questStates == QuestStates.Accept)
         {
-            int currentNum = InventoryManager.Instance.getitem(questable.questDetails.requireItem.itemID).itemAmount;
+            int currentNum = InventoryManager.Instance.Getitem(questable.questDetails.requireItem.itemID).itemAmount;
             // 如果背包中的物品大于所需要的物品
             if (currentNum >= questable.questDetails.requireItem.itemAmount)
             {

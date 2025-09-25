@@ -15,7 +15,7 @@ MonoBehaviour:
   questDataList:
   - questName: "\u79CD\u690D"
     npcName: Lisa
-    questStates: 0
+    questStates: 1
     questIntroduction: "\u79CD\u690D15\u682A\u571F\u8C46"
     requireItem:
       itemID: 1017

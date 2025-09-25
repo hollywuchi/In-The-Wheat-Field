@@ -8,12 +8,12 @@ namespace Farm.Inventory
     public class ShowItemToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private SlotUI slotUI;
-        private InventoryUI inventoryUI => GetComponentInParent<InventoryUI>();
+        // private InventoryUI inventoryUI => GetComponentInParent<InventoryUI>();
+        private InventoryUI inventoryUI => transform.root.GetComponentInChildren<InventoryUI>();
 
         void Awake()
         {
-            slotUI = GetComponent<SlotUI>();    // 减少性能消耗
-            
+            slotUI = GetComponent<SlotUI>();    // 减少性能消耗 
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -24,7 +24,7 @@ namespace Farm.Inventory
 
                 inventoryUI.itemToolTip.transform.position = transform.position + Vector3.up * 60;
 
-                if(slotUI.itemDetails.itemType == ItemType.Funiture)
+                if (slotUI.itemDetails.itemType == ItemType.Funiture)
                 {
                     inventoryUI.itemToolTip.resourcePanle.SetActive(true);
                     inventoryUI.itemToolTip.SetUpResourcePanle(slotUI.itemDetails.itemID);

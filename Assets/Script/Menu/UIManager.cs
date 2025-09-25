@@ -1,23 +1,28 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.TextCore;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
     private GameObject menuCanvas;
     public GameObject menuPrefab;
+    public GameObject questPrefab;
+    public GameObject questContent;
+    public GameObject questInfoUI;
+    public GameObject questUI;
 
     public Button settingsButton;
     public GameObject pausePanel;
     public Slider volumeSlide;
 
-    void Awake()
-    {
-        settingsButton.onClick.AddListener(TogglePausePanel);
-        volumeSlide.onValueChanged.AddListener(AudioManager.Instance.SetMasterVolume);
-    }
+    // protected override void Awake()
+    // {
+
+    // }
+
+    
     void OnEnable()
     {
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
@@ -30,6 +35,10 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        settingsButton.onClick.AddListener(TogglePausePanel);
+        settingsButton.onClick.AddListener(GetQuestToUI);
+        volumeSlide.onValueChanged.AddListener(AudioManager.Instance.SetMasterVolume);
+
         menuCanvas = GameObject.FindWithTag("MenuCanvas");
         Instantiate(menuPrefab, menuCanvas.transform);
     }
@@ -44,6 +53,7 @@ public class UIManager : MonoBehaviour
     {
         bool isOpen = pausePanel.activeInHierarchy;
 
+        // 貌似现在已经弃用
         if (isOpen)
         {
             pausePanel.SetActive(false);
@@ -56,6 +66,26 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 0;
         }
     }
+
+    private void GetQuestToUI()
+    {
+        foreach (var quest in QuestManager.Instance.questDataBase.questDataList)
+        {
+            if (quest.questStates == QuestStates.Accept)
+            {
+                Instantiate(questPrefab, questContent.transform);
+                EventHandler.CallShowQuestOnUI(quest);
+            }
+        }
+    }
+
+    public void WakeUpUI()
+    {
+        questUI.SetActive(false);
+        questInfoUI.SetActive(true);
+        // print(1);
+    }
+
 
     public void ReturnMenuCanvas()
     {
