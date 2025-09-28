@@ -2424,6 +2424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332fd68d9e35a3c4b8c4405deaac4ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueDataList: {fileID: 0}
   OnFinishEvent:
     m_PersistentCalls:
       m_Calls:
@@ -4386,6 +4387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332fd68d9e35a3c4b8c4405deaac4ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueDataList: {fileID: 11400000, guid: d85e2b963207a1a4eb2ccaf641215bec, type: 2}
   OnFinishEvent:
     m_PersistentCalls:
       m_Calls:
@@ -4401,13 +4403,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  dialogueList:
-  - name: Lisa
-    faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
-    onLeft: 1
-    dialogueText: "\u8FD9\u91CC\u5C31\u662F\u4F60\u7684\u5C0F\u5C4B\u4E86\uFF0C\u623F\u95F4\u5916\u7684\u571F\u5730\u90FD\u53EF\u4EE5\u79CD\u690D\u54E6\uFF0C\u73B0\u5728\u62FF\u8D77\u9504\u5934\u79CD\u70B9\u571F\u8C46\u5427\uFF01"
-    hasToPause: 0
-    isDown: 0
+  dialogueList: []
 --- !u!114 &1567157558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5094,6 +5090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332fd68d9e35a3c4b8c4405deaac4ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueDataList: {fileID: 0}
   OnFinishEvent:
     m_PersistentCalls:
       m_Calls: []

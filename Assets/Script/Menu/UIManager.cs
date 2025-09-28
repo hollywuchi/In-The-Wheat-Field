@@ -6,17 +6,21 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
+    [Header("菜单组件")]
     private GameObject menuCanvas;
     public GameObject menuPrefab;
+    [Header("任务组件")]
     public GameObject questPrefab;
     public GameObject questContent;
     public GameObject questInfoUI;
+    public GameObject questRewardUI;
     public GameObject questUI;
 
     public Button settingsButton;
     public GameObject pausePanel;
     public Slider volumeSlide;
 
+    // 单例模式的awake出现问题
     // protected override void Awake()
     // {
 
@@ -83,7 +87,6 @@ public class UIManager : Singleton<UIManager>
     {
         questUI.SetActive(false);
         questInfoUI.SetActive(true);
-        // print(1);
     }
 
 
@@ -100,6 +103,13 @@ public class UIManager : Singleton<UIManager>
         yield return new WaitForSeconds(0.5f);
         // Worning:如果之后出现游戏结束方面的BUG 先来这地方把0.5改成1
         Instantiate(menuPrefab, menuCanvas.transform);
+    }
 
+    public void DestoryAllSlot()
+    {
+        foreach (var reward in questRewardUI.GetComponentsInChildren<SlotUI>())
+        {
+            Destroy(reward.gameObject);
+        }
     }
 }

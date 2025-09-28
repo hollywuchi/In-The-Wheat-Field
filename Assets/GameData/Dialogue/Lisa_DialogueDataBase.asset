@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88117ac59ff061c439c8574da7220da4, type: 3}
+  m_Name: Lisa_DialogueDataBase
+  m_EditorClassIdentifier: 
+  npcDialogueList:
+  - dialogues:
+    - name: Lisa
+      faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
+      onLeft: 1
+      dialogueText: "\u8FD9\u91CC\u5C31\u662F\u4F60\u7684\u5C0F\u5C4B\u4E86\uFF0C\u623F\u95F4\u5916\u7684\u571F\u5730\u90FD\u53EF\u4EE5\u79CD\u690D\u54E6\uFF0C\u73B0\u5728\u62FF\u8D77\u9504\u5934\u79CD\u70B9\u571F\u8C46\u5427\uFF01"
+      hasToPause: 0
+      isDown: 0
+  - dialogues:
+    - name: Lisa
+      faceImage: {fileID: 21300000, guid: 954616e3c701f4e22bd74bbccd87ccc2, type: 3}
+      onLeft: 1
+      dialogueText: "\u70B9\u51FB\u53F3\u4E0A\u89D2\u9F7F\u8F6E\u53EF\u4EE5\u6682\u505C\u6E38\u620F\uFF0C\u5F53\u7136\u4E5F\u53EF\u4EE5\u770B\u5F53\u524D\u7684\u4EFB\u52A1\u54E6~"
+      hasToPause: 0
+      isDown: 0
+    - name: Lisa
+      faceImage: {fileID: 21300000, guid: 954616e3c701f4e22bd74bbccd87ccc2, type: 3}
+      onLeft: 1
+      dialogueText: "\u8BB0\u5F97\u56DE\u6765\u548CNPC\u2026\u2026\u4E0D\uFF0C\u6211\u5BF9\u8BDD\u54E6"
+      hasToPause: 0
+      isDown: 0
+  - dialogues:
+    - name: Lisa
+      faceImage: {fileID: 21300000, guid: 70fb0fc6beb2647a897e9b1683114fce, type: 3}
+      onLeft: 1
+      dialogueText: "\u4F60\u5DF2\u7ECF\u662F\u79CD\u7530\u9AD8\u624B\u4E86\uFF0C\u5FEB\u62FF\u8D77\u9504\u5934\u79CD\u7530\u5427"
+      hasToPause: 0
+      isDown: 0
+    - name: Lisa
+      faceImage: {fileID: 21300000, guid: 954616e3c701f4e22bd74bbccd87ccc2, type: 3}
+      onLeft: 1
+      dialogueText: "\u79CD\u7530\u9AD8\u624B\u53EF\u4E0D\u6BD4\u9694\u58C1\u7684\u65EE\u65EF\u7ED9\u6728\u9AD8\u624B\u5DEE\u54E6~"
+      hasToPause: 0
+      isDown: 0

@@ -119,7 +119,7 @@ public static class EventHandler
     }
 
     public static event Action<DialoguePiece> ShowDialogueEvent;
-    public static void CallDialogueEvent(DialoguePiece dialoguePiece)
+    public static void CallShowDialogueEvent(DialoguePiece dialoguePiece)
     {
         ShowDialogueEvent?.Invoke(dialoguePiece);
     }

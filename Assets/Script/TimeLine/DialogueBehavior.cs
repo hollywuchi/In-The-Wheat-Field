@@ -18,7 +18,7 @@ public class DialogueBehavior : PlayableBehaviour
     public override void OnBehaviourPlay(Playable playable, FrameData info)
     {
         // 直接呼叫开始
-        EventHandler.CallDialogueEvent(piece);
+        EventHandler.CallShowDialogueEvent(piece);
         if (Application.isPlaying)
         {
             if (piece.hasToPause)
@@ -29,7 +29,7 @@ public class DialogueBehavior : PlayableBehaviour
         }
         else
         {
-            EventHandler.CallDialogueEvent(null);
+            EventHandler.CallShowDialogueEvent(null);
         }
     }
 
@@ -42,7 +42,7 @@ public class DialogueBehavior : PlayableBehaviour
 
     public override void OnBehaviourPause(Playable playable, FrameData info)
     {
-        EventHandler.CallDialogueEvent(null);
+        EventHandler.CallShowDialogueEvent(null);
         // 继承于PlayableBehaviour的方法貌似不遵循Unity的生命周期，因此会在没有编译的情况下调用，从而产生没有实例化的错误
         // TimeLineManager.Instance.isCompleted = true;
     }
