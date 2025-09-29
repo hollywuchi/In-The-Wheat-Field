@@ -21,14 +21,18 @@ namespace Farm.Dialogue
         private bool canTalk;
 
         private Questable questable => GetComponent<Questable>();
-        // private bool isTalking;
 
         void Awake()
         {
-            FillDialogueStake();
             NPCButton = transform.GetChild(1).gameObject;
+        }
+        void Start()
+        {
             if (dialogueDataList != null)
-                dialogueDataList.InitDialogueDic();
+            {
+                dialogueList = dialogueDataList.InitDialogueDic()[questable.questDetails.questStates].dialogues;
+            }
+            FillDialogueStake();
         }
 
         void OnTriggerEnter2D(Collider2D collision)
@@ -55,37 +59,32 @@ namespace Farm.Dialogue
 
         private IEnumerator DialogueRoutine()
         {
-            // isTalking = true;
-            // BUG:现在问题是，触发之后只会重复一句话，而且不会停止
-            if (questable != null)
-            {
-                dialogueList = dialogueDataList.InitDialogueDic()[questable.questDetails.questStates].dialogues;
-                FillDialogueStake();
-            }
-
             if (dialogueStack.TryPop(out DialoguePiece result))
             {
                 EventHandler.CallShowDialogueEvent(result);
                 EventHandler.CallUpdateGameStateEvent(GameState.Pause);
                 yield return new WaitUntil(() => result.isDown);
-                // isTalking = false;
             }
             // 如果首次堆栈中没有数据,那么就先压入
             else
             {
                 EventHandler.CallShowDialogueEvent(null);
                 EventHandler.CallUpdateGameStateEvent(GameState.GamePlay);
-                FillDialogueStake();
-                // isTalking = false;
 
+                // isTalking = false;
                 if (OnFinishEvent != null)
                 {
                     OnFinishEvent.Invoke();
                     canTalk = false;
                 }
+
+                if (questable != null)
+                {
+                    print(questable.questDetails.questStates);
+                    dialogueList = dialogueDataList.InitDialogueDic()[questable.questDetails.questStates].dialogues;
+                }
+                FillDialogueStake();
             }
-            // EventHandler.CallUpdateGameStateEvent(GameState.GamePlay);
-            dialogueStack.Clear();
         }
         /// <summary>
         /// 将列表中的对话压入堆栈中
