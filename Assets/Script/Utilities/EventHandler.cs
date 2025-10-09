@@ -195,16 +195,22 @@ public static class EventHandler
         DeliveryQuestItems?.Invoke(questDetails);
     }
 
-    public static event Action<QuestDetails> ShowQuestOnUI;
-    public static void CallShowQuestOnUI(QuestDetails questDetails)
-    {
-        ShowQuestOnUI?.Invoke(questDetails);
-    }
+    // public static event Action<QuestDetails> ShowQuestOnUI;
+    // public static void CallShowQuestOnUI(QuestDetails questDetails)
+    // {
+    //     ShowQuestOnUI?.Invoke(questDetails);
+    // }
 
     public static event Action<QuestDetails> ShowDetailOnInfoUI;
     public static void CallShowDetailOnInfoUI(QuestDetails questDetails)
     {
         ShowDetailOnInfoUI?.Invoke(questDetails);
+    }
+
+    public static event Action RefreshQuestDetails;
+    public static void CallRefreshQuestDetails()
+    {
+        RefreshQuestDetails?.Invoke();
     }
 
 }

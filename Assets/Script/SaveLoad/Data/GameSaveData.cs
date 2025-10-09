@@ -15,6 +15,7 @@ namespace Farm.Save
         public Dictionary<string, bool> firstLoadDict;                       // 场景首次加载字典（场景名称+bool标记）
         public Dictionary<string, List<InventoryItem>> inventoryDict;        // 各项背包物品字典（背包名称+物品列表）
         public Dictionary<string, int> timeDict;                             // 时间字典（日/月/年三个字典+对应时间）
+        public List<QuestDetails> questDetails;                              // 任务列表(保存当前任务的状态等信息)
 
         public int playerMoney;                                              // 玩家金钱
 

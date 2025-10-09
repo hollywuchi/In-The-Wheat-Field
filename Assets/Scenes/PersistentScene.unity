@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -787,6 +786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 417304009}
   - component: {fileID: 417304010}
+  - component: {fileID: 417304011}
   m_Layer: 0
   m_Name: QuestManager
   m_TagString: Untagged
@@ -822,6 +822,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questDataBase: {fileID: 11400000, guid: ce06700648eb2de45bb3e0d623caf93e, type: 2}
+--- !u!114 &417304011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417304008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f3ade6dcef4de489a1d5cd0e235b1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guid: 00017826-5858-4b6f-a814-83ff4b331585
 --- !u!1 &442720624
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,7 +906,7 @@ GameObject:
   m_Component:
   - component: {fileID: 463641045}
   m_Layer: 0
-  m_Name: NPC
+  m_Name: ///NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1265,12 +1278,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &584051551
 GameObject:
   m_ObjectHideFlags: 3
@@ -1555,8 +1568,8 @@ MonoBehaviour:
     startScene: 01.Field
     position: {x: 2.69, y: -6.36, z: 0}
   - npc: {fileID: 917987443}
-    startScene: 01.Field
-    position: {x: -1.98, y: -6.3, z: 0}
+    startScene: 03.Town
+    position: {x: -17, y: 6.09, z: 0}
   - npc: {fileID: 1567157555}
     startScene: 00.Start
     position: {x: 1.33, y: -7.42, z: 0}
@@ -2223,6 +2236,7 @@ GameObject:
   - component: {fileID: 917987444}
   - component: {fileID: 917987450}
   - component: {fileID: 917987449}
+  - component: {fileID: 917987452}
   - component: {fileID: 917987451}
   m_Layer: 0
   m_Name: Mia
@@ -2240,7 +2254,7 @@ Transform:
   m_GameObject: {fileID: 917987442}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -6.26, z: 0}
+  m_LocalPosition: {x: -17, y: 6.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2424,7 +2438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332fd68d9e35a3c4b8c4405deaac4ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueDataList: {fileID: 0}
+  dialogueDataList: {fileID: 11400000, guid: 6d522d83f98970e499e77a4ffb3de242, type: 2}
   OnFinishEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2440,13 +2454,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  dialogueList:
-  - name: Mia
-    faceImage: {fileID: 21300000, guid: 67d354b9f685e4e1b90255eb84bc5abe, type: 3}
-    onLeft: 1
-    dialogueText: "\u770B\u6765\u6751\u957F\u6CA1\u80FD\u8BA9\u4F60\u98DE\u8D77\u6765\u554A\uFF0C\u770B\u770B\u6709\u4EC0\u4E48\u9700\u8981\u7684\u5427\uFF01\u4E70\u4E00\u65A4\u9001\u534A\u65A4\u54E6~\uFF08\u9A97\u4EBA\u7684\uFF09"
-    hasToPause: 0
-    isDown: 0
+      - m_Target: {fileID: 917987450}
+        m_TargetAssemblyTypeName: NPCFunction, Assembly-CSharp
+        m_MethodName: QuestFunciton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dialogueList: []
 --- !u!114 &917987450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2473,6 +2493,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guid: cc693f3a-22de-466f-a26c-3bc8f6971c92
+--- !u!114 &917987452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917987442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e93268829494143bec650db485eb99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questDetails:
+    questName: 
+    npcName: 
+    questStates: 0
+    questIntroduction: 
+    requireItem:
+      itemID: 0
+      itemAmount: 0
+    requireTime: {x: 0, y: 0, z: 0}
+    rewards: []
 --- !u!1 &931893448
 GameObject:
   m_ObjectHideFlags: 0
@@ -3636,7 +3678,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.16785276}
+  m_Offset: {x: 0, y: 0.04982519}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -3647,7 +3689,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.47501057, y: 0.11963585}
+  m_Size: {x: 0.5773063, y: 0.35569096}
   m_EdgeRadius: 0
 --- !u!212 &1349030233
 SpriteRenderer:
@@ -3669,7 +3711,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4503,7 +4545,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.118628025}
+  m_Offset: {x: 0.006285012, y: -0.057353735}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -4514,7 +4556,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.47501057, y: 0.16825771}
+  m_Size: {x: 0.70127285, y: 0.52022123}
   m_EdgeRadius: 0
 --- !u!212 &1567157562
 SpriteRenderer:
@@ -4601,6 +4643,7 @@ MonoBehaviour:
     requireItem:
       itemID: 0
       itemAmount: 0
+    requireTime: {x: 0, y: 0, z: 0}
     rewards: []
 --- !u!114 &1567157565
 MonoBehaviour:
@@ -5013,7 +5056,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.16785276}
+  m_Offset: {x: 0, y: 0.028850555}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -5024,7 +5067,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.47501057, y: 0.11963585}
+  m_Size: {x: 0.663095, y: 0.39764023}
   m_EdgeRadius: 0
 --- !u!212 &1634217910
 SpriteRenderer:

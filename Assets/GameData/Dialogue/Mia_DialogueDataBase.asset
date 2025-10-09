@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88117ac59ff061c439c8574da7220da4, type: 3}
+  m_Name: Mia_DialogueDataBase
+  m_EditorClassIdentifier: 
+  npcDialogueList:
+  - dialogues:
+    - name: Hollywuchi
+      faceImage: {fileID: 21300000, guid: 9250cb0d0524f439fb2e48d5ecc828e5, type: 3}
+      onLeft: 0
+      dialogueText: "\u4F60\u597D\uFF0C\u8BF7\u95EE\u662FMia\u5C0F\u59D0\u5417\uFF1F"
+      hasToPause: 0
+      isDown: 1
+    - name: Mia
+      faceImage: {fileID: 21300000, guid: 67d354b9f685e4e1b90255eb84bc5abe, type: 3}
+      onLeft: 1
+      dialogueText: "\u4F60\u597D\uFF0C\u4F60\u5C31\u662F\u65B0\u6765\u7684\u5427"
+      hasToPause: 0
+      isDown: 1
+    - name: Mia
+      faceImage: {fileID: 21300000, guid: 0ebf15807ee9d4dcaa0a1aed0fadf257, type: 3}
+      onLeft: 1
+      dialogueText: "\u5982\u679C\u4F60\u60F3\u627E\u5546\u4EBA\uFF0C\u73B0\u5728\u8FD8\u6CA1\u6709\u5F00\u95E8\u54E6\uFF0C\u7B49\u52308\u70B9\u534A\uFF0C\u6211\u4F1A\u53BB\u5357\u8FB9\u6446\u644A"
+      hasToPause: 0
+      isDown: 1
+    - name: Mia
+      faceImage: {fileID: 21300000, guid: 0ebf15807ee9d4dcaa0a1aed0fadf257, type: 3}
+      onLeft: 1
+      dialogueText: "\u60F3\u4E70\u597D\u4E1C\u897F\u8BB0\u5F97\u6765\u90A3\u8FB9\u627E\u6211\u54E6~"
+      hasToPause: 0
+      isDown: 1
+    - name: Hollywuchi
+      faceImage: {fileID: 21300000, guid: e62c299aa3fef458f9f46e8a98fc0608, type: 3}
+      onLeft: 0
+      dialogueText: "\u597D\u7684\u597D\u7684\uFF0C\u6211\u4E00\u5B9A\u4F1A\u53BB
+        \u7684"
+      hasToPause: 0
+      isDown: 1
+  - dialogues:
+    - name: Mia
+      faceImage: {fileID: 21300000, guid: 67d354b9f685e4e1b90255eb84bc5abe, type: 3}
+      onLeft: 1
+      dialogueText: "\u8FD8\u6CA1\u5230\u516B\u70B9\u534A\u54E6\uFF0C\u6211\u4E00\u5411\u5F88\u5B88\u65F6\u7684~"
+      hasToPause: 0
+      isDown: 0
+  - dialogues:
+    - name: Mia
+      faceImage: {fileID: 21300000, guid: 67d354b9f685e4e1b90255eb84bc5abe, type: 3}
+      onLeft: 1
+      dialogueText: "\u6B22\u8FCE\u5149\u4E34\uFF01"
+      hasToPause: 0
+      isDown: 1

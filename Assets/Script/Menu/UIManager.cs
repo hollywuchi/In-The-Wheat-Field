@@ -21,11 +21,6 @@ public class UIManager : Singleton<UIManager>
     public Slider volumeSlide;
 
     // 单例模式的awake出现问题
-    // protected override void Awake()
-    // {
-
-    // }
-
     
     void OnEnable()
     {
@@ -73,12 +68,20 @@ public class UIManager : Singleton<UIManager>
 
     private void GetQuestToUI()
     {
+        // 在重新生成UI之前删除所有的原UI
+        foreach(Transform obj in questContent.transform)
+        {
+            Destroy(obj.gameObject);
+        }
+        // 现在的UI数量正确，但是信息并不正确
         foreach (var quest in QuestManager.Instance.questDataBase.questDataList)
         {
             if (quest.questStates == QuestStates.Accept)
             {
-                Instantiate(questPrefab, questContent.transform);
-                EventHandler.CallShowQuestOnUI(quest);
+                var uiEle = Instantiate(questPrefab, questContent.transform);
+                uiEle.GetComponent<QuestUI>().questDetails = quest;
+                uiEle.transform.GetChild(0).GetComponent<Text>().text = quest.questName;
+                // EventHandler.CallShowQuestOnUI(quest);
             }
         }
     }

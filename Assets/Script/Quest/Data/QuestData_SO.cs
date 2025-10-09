@@ -25,6 +25,6 @@ public class QuestDetails
     public QuestStates questStates;                // 任务状态
     [TextArea] public string questIntroduction;    // 任务介绍
     public InventoryItem requireItem;              // 需要的物品
-
+    public Vector3Int requireTime;                 // 需要到达的时间
     public List<InventoryItem> rewards;            // 奖励列表，可以根据其中的itemID生成对应的SlotUI
 }

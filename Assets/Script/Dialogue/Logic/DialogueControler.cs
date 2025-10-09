@@ -80,7 +80,7 @@ namespace Farm.Dialogue
 
                 if (questable != null)
                 {
-                    print(questable.questDetails.questStates);
+                    // print(questable.questDetails.questStates);
                     dialogueList = dialogueDataList.InitDialogueDic()[questable.questDetails.questStates].dialogues;
                 }
                 FillDialogueStake();
