@@ -193,7 +193,7 @@ public class Player : MonoBehaviour, ISaveable
     /// </summary>
     private void playerMove()
     {
-        rb.MovePosition(rb.position + movementInput * speed * Time.deltaTime);
+        rb.MovePosition(rb.position + movementInput * speed * Time.fixedDeltaTime);
     }
 
     private void SwitchAnimation()
