@@ -138,7 +138,7 @@ namespace Farm.Inventory
 
         private void OnShowTradeUI(ItemDetails details, bool isSell, bool isSelected)
         {
-            if (openedUI && baseBagSlots[0] != null)
+            if (openedUI && baseBagSlots.Count != 0)
             {
                 if (baseBagSlots[0].soltType == SoltType.Shop)
                 {

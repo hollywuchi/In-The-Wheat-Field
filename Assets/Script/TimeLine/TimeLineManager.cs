@@ -1,8 +1,12 @@
+using System.Collections;
 using System.Net.Http.Headers;
+using System.Transactions;
 using Farm.Save;
+using Farm.Transition;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 public class TimeLineManager : Singleton<TimeLineManager>, ISaveable
 {
@@ -23,7 +27,6 @@ public class TimeLineManager : Singleton<TimeLineManager>, ISaveable
     {
         base.Awake();
         currentDirector = startDirector;
-        // skipText = transform.GetComponentInChildren<Text>();
     }
 
     void Start()
@@ -121,4 +124,26 @@ public class TimeLineManager : Singleton<TimeLineManager>, ISaveable
     {
         this.isCompleted = saveData.isCompleted;
     }
+
+    /// <summary>
+    /// 下面两个方法都是为了新手引导做准备
+    /// </summary>
+    /// <param name="Lisa"></param>
+    public void NextTimeLine(GameObject Lisa)
+    {
+        StartCoroutine(TransitionManager.Instance.Transition("01.Field", new Vector3(-0.5f, -6, 0)));
+        TimeManager.Instance.PassOneMinute();
+        // TimeManager.Instance.PassTenMinute();
+    }
+
+    public void ChangeTimeLine(TimelineAsset nextTimeLine)
+    {
+        currentDirector.playableAsset = nextTimeLine;
+        // yield return new WaitForSeconds(1);
+        currentDirector.Play();
+    }
+
+    // TODO:尝试优化现在的逻辑
+    // 可以转换场景，但是NPC没有办法顺利转移
+    // 目前的想法是方法套协程，来实现自动转移
 }

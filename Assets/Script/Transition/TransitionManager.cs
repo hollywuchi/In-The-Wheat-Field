@@ -12,7 +12,7 @@ namespace Farm.Transition
         public string startSceneName;
 
         private CanvasGroup canvasGroup;
-        private bool isFade;
+        public bool isFade;
         private AsyncOperation operation;
 
         public string GUID => GetComponent<DataGUID>().guid;
@@ -68,7 +68,7 @@ namespace Farm.Transition
         /// <param name="sceneName">目标场景名称</param>
         /// <param name="position">玩家落地位置</param>
         /// <returns></returns>
-        private IEnumerator Transition(string sceneName, Vector3 position)
+        public IEnumerator Transition(string sceneName, Vector3 position)
         {
 
             EventHandler.CallBeforeSceneUnloadEvent();

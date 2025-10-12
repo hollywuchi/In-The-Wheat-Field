@@ -141,6 +141,8 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginD
             if (soltType == SoltType.Bag && targetSlot.soltType == SoltType.Bag)
             {
                 InventoryManager.Instance.SwapItem(Index, targetSlotIndex);
+                // BUG：转换之后没有办法将格子内的数据清除
+                itemAmount = 0;
             }
             else if (soltType == SoltType.Shop && targetSlot.soltType == SoltType.Bag) // 买
             {

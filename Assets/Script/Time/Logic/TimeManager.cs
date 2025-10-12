@@ -73,13 +73,11 @@ public class TimeManager : Singleton<TimeManager>, ISaveable
         #region 作弊部分 仅限测试使用
         if (Input.GetKeyDown(KeyCode.T))
         {
-            for (int i = 0; i < 600; i++)
-                UpdateGameTime();
+            PassTenMinute();
         }
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            for (int i = 0; i < 60; i++)
-                UpdateGameTime();
+            PassOneMinute();
         }
 
         if (Input.GetKeyDown(KeyCode.G))
@@ -89,6 +87,18 @@ public class TimeManager : Singleton<TimeManager>, ISaveable
             EventHandler.CallGameDateEvent(gameHour, gameDay, gameMonth, gameYear, gameSeason);
         }
         #endregion
+    }
+
+    public void PassTenMinute()
+    {
+        for (int i = 0; i < 600; i++)
+            UpdateGameTime();
+    }
+
+    public void PassOneMinute()
+    {
+        for (int i = 0; i < 60; i++)
+            UpdateGameTime();
     }
 
     private void OnAfterSceneLoadEvent()

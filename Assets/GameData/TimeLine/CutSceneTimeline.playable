@@ -203,6 +203,75 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: DialogueClip
+  - m_Version: 1
+    m_Start: 25.133333333333322
+    m_ClipIn: 0
+    m_Asset: {fileID: -3638605454597524468}
+    m_Duration: 0.10000000000001208
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -8437143095205026229}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: DialogueClip
   m_Markers:
     m_Objects: []
 --- !u!114 &-6960586403971363844
@@ -583,7 +652,7 @@ MonoBehaviour:
       name: Hollywuchi
       faceImage: {fileID: 21300000, guid: 91720d10e0c0c489f80bd693c4a619b1, type: 3}
       onLeft: 0
-      dialogueText: "\u8FD9\u7ED9\u6211\u5E72\u54EA\u6765\u4E86\uFF1F\u8FD9\u8FD8\u662F\u56FD\u5185\u5417\u2026\u2026"
+      dialogueText: "\u5443\u554A\uFF0C\u5934\u597D\u75DB\uFF0C\u6211\u8FD9\u662F\u5728\u54EA\uFF1F"
       hasToPause: 1
       isDown: 1
 --- !u!114 &-3894961660137212599
@@ -608,6 +677,26 @@ MonoBehaviour:
   m_Loop: 0
   m_Version: 1
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+--- !u!114 &-3638605454597524468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05cb0887b4595e34d89fc343701944bc, type: 3}
+  m_Name: DialogueClip(Clone)
+  m_EditorClassIdentifier: 
+  dialogue:
+    piece:
+      name: LIsa
+      faceImage: {fileID: 21300000, guid: 954616e3c701f4e22bd74bbccd87ccc2, type: 3}
+      onLeft: 1
+      dialogueText: "\u597D\u4E86\uFF0C\u6751\u91CC\u4EBA\u90FD\u7B49\u7740\u4F60\u5462\uFF0C\u8DDF\u6211\u6765\u5427"
+      hasToPause: 1
+      isDown: 1
 --- !u!114 &-2793870312673087130
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -661,6 +750,29 @@ MonoBehaviour:
   m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_ApplyOffsets: 0
+--- !u!114 &-1729840709192696761
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e0374501f39d54eb30235764636e0e, type: 3}
+  m_Name: Control Track
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips: []
+  m_Markers:
+    m_Objects: []
 --- !u!114 &-1662600196118309556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -719,6 +831,8 @@ MonoBehaviour:
   - {fileID: 5687791124317674272}
   - {fileID: -8437143095205026229}
   - {fileID: 4077403096704574627}
+  - {fileID: 7301442267371171415}
+  - {fileID: -1729840709192696761}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -16434,6 +16548,22 @@ MonoBehaviour:
   m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_ApplyOffsets: 0
+--- !u!114 &6696200496671209695
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 25.233333333333334
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 9cf13a35bf2289e4d8cb4272d5f3ac34, type: 2}
 --- !u!114 &6860291258907282118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16552,6 +16682,47 @@ MonoBehaviour:
   m_Loop: 0
   m_Version: 1
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+--- !u!114 &7301442267371171415
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b46e36075dd1c124a8422c228e75e1fb, type: 3}
+  m_Name: Signal Track
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips: []
+  m_Markers:
+    m_Objects:
+    - {fileID: 6696200496671209695}
+    - {fileID: 7639836258682362955}
+--- !u!114 &7639836258682362955
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
+  m_Name: Signal Emitter
+  m_EditorClassIdentifier: 
+  m_Time: 25.283333333333335
+  m_Retroactive: 0
+  m_EmitOnce: 0
+  m_Asset: {fileID: 11400000, guid: 90bbeef9bfff6c445964528396935931, type: 2}
 --- !u!114 &8542296811527545525
 MonoBehaviour:
   m_ObjectHideFlags: 1
