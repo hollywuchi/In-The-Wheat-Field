@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Net.Http.Headers;
-using System.Transactions;
 using Farm.Save;
 using Farm.Transition;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -129,21 +126,27 @@ public class TimeLineManager : Singleton<TimeLineManager>, ISaveable
     /// 下面两个方法都是为了新手引导做准备
     /// </summary>
     /// <param name="Lisa"></param>
-    public void NextTimeLine(GameObject Lisa)
-    {
-        StartCoroutine(TransitionManager.Instance.Transition("01.Field", new Vector3(-0.5f, -6, 0)));
-        TimeManager.Instance.PassOneMinute();
-        // TimeManager.Instance.PassTenMinute();
-    }
+    // public void TeleportNPC(GameObject Lisa)
+    // {
+    //     // StartCoroutine(TransitionManager.Instance.Transition("01.Field", new Vector3(-0.5f, -6, 0)));
+    //     // TimeManager.Instance.PassOneMinute();
+    //     // TimeManager.Instance.PassTenMinute();
+    //     Lisa.transform.position = new Vector3(-0.5f,-4.5f,0);
+    // }
 
     public void ChangeTimeLine(TimelineAsset nextTimeLine)
     {
-        currentDirector.playableAsset = nextTimeLine;
-        // yield return new WaitForSeconds(1);
-        currentDirector.Play();
+        StartCoroutine(_ChangeTimeLine(nextTimeLine));
     }
 
-    // TODO:尝试优化现在的逻辑
-    // 可以转换场景，但是NPC没有办法顺利转移
-    // 目前的想法是方法套协程，来实现自动转移
+    public IEnumerator _ChangeTimeLine(TimelineAsset nextTimeLine)
+    {
+        yield return TransitionManager.Instance.Fade(1);
+        TimeManager.Instance.PassTenMinute();
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(TransitionManager.Instance.Transition("01.Field", new Vector3(-0.5f, -6, 0)));
+        currentDirector.playableAsset = nextTimeLine;
+        currentDirector.Play();
+        yield return null;
+    }
 }

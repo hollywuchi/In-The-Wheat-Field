@@ -14,15 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scheduleList:
   - hour: 7
-    minute: 55
-    day: 0
-    priority: 0
-    season: 0
-    targetScene: 03.Town
-    targetGridPosition: {x: -10, y: -11}
-    clipAtStop: {fileID: 0}
-    interactable: 1
-  - hour: 7
     minute: 30
     day: 0
     priority: 0
@@ -31,3 +22,21 @@ MonoBehaviour:
     targetGridPosition: {x: -18, y: 3}
     clipAtStop: {fileID: 0}
     interactable: 1
+  - hour: 7
+    minute: 55
+    day: 0
+    priority: 0
+    season: 0
+    targetScene: 03.Town
+    targetGridPosition: {x: -10, y: -11}
+    clipAtStop: {fileID: 0}
+    interactable: 1
+  - hour: 19
+    minute: 0
+    day: 0
+    priority: 0
+    season: 0
+    targetScene: 03.Town
+    targetGridPosition: {x: -18, y: 5}
+    clipAtStop: {fileID: 0}
+    interactable: 0

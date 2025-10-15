@@ -32,7 +32,7 @@ public class Settings
     public static TimeSpan morningTime = new TimeSpan(5, 0, 0);
     public static TimeSpan nightTime = new TimeSpan(19, 0, 0);
 
-    public static Vector3 playerStartPos = new Vector3(1.79f, -14.55f, 0);
+    public static Vector3 playerStartPos = new Vector3(1.5f, -14.55f, 0);
     public static int playerStartMoney = 100;
 
     public const float SkipTime = 1;

@@ -12,7 +12,7 @@ namespace Farm.Transition
         public string startSceneName;
 
         private CanvasGroup canvasGroup;
-        public bool isFade;
+        private bool isFade;
         private AsyncOperation operation;
 
         public string GUID => GetComponent<DataGUID>().guid;
@@ -110,7 +110,7 @@ namespace Farm.Transition
         /// </summary>
         /// <param name="targetAlpha">1为黑，0为透明</param>
         /// <returns></returns>
-        private IEnumerator Fade(float targetAlpha)
+        public IEnumerator Fade(float targetAlpha)
         {
             isFade = true;
             canvasGroup.blocksRaycasts = true;

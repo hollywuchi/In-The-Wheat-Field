@@ -19,7 +19,51 @@ MonoBehaviour:
       onLeft: 1
       dialogueText: "\u54E6\u5BF9\u4E86\uFF0C\u4F60\u53EF\u4EE5\u5728\u65C1\u8FB9\u7684\u7BB1\u5B50\u91CC\u627E\u5230\u6700\u5F00\u59CB\u7684\u5DE5\u5177"
       hasToPause: 1
-      isDown: 0
+      isDown: 1
+--- !u!114 &-6130906013608881021
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030f85c3f73729f4f976f66ffb23b875, type: 3}
+  m_Name: AnimationPlayableAsset
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 7400000, guid: 8f5886ae4628a4f3eaf606be7f0ec873, type: 2}
+  m_Position: {x: 0, y: 0, z: 0}
+  m_EulerAngles: {x: 0, y: 0, z: 0}
+  m_UseTrackMatchFields: 1
+  m_MatchTargetFields: 63
+  m_RemoveStartOffset: 1
+  m_ApplyFootIK: 1
+  m_Loop: 0
+  m_Version: 1
+  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+--- !u!114 &-5631747382792358172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030f85c3f73729f4f976f66ffb23b875, type: 3}
+  m_Name: AnimationPlayableAsset
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 7400000, guid: afad3e84746594314b0569e4dbac20f9, type: 2}
+  m_Position: {x: 0, y: 0, z: 0}
+  m_EulerAngles: {x: 0, y: 0, z: 0}
+  m_UseTrackMatchFields: 1
+  m_MatchTargetFields: 63
+  m_RemoveStartOffset: 1
+  m_ApplyFootIK: 1
+  m_Loop: 0
+  m_Version: 1
+  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!114 &-4190532948256203931
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -39,7 +83,7 @@ MonoBehaviour:
       onLeft: 1
       dialogueText: "\u8FDB\u5EA6\uFF1F\u4EC0\u4E48\u8FDB\u5EA6\uFF1F"
       hasToPause: 1
-      isDown: 0
+      isDown: 1
 --- !u!114 &-2479526938975149811
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,7 +103,7 @@ MonoBehaviour:
       onLeft: 1
       dialogueText: "\u6CA1\u4EC0\u4E48\u597D\u7B49\u7684\u4E86\uFF0C\u6CA1\u542C\u61C2\u7684\u90FD\u5728\u53F3\u4E0A\u89D2\u6682\u505C\u83DC\u5355\u91CC\u4E86"
       hasToPause: 1
-      isDown: 0
+      isDown: 1
 --- !u!114 &-2448234191746533606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -76,10 +120,10 @@ MonoBehaviour:
     piece:
       name: Hollywuchi
       faceImage: {fileID: 21300000, guid: 36e7d59ac1efc4cf7bc6a250df52e2b4, type: 3}
-      onLeft: 1
+      onLeft: 0
       dialogueText: "\u7B49\u4E00\u4E0B\uFF0C\u53BB\u54EA\u9886\u5DE5\u5177\uFF1F\uFF1F\uFF1F"
       hasToPause: 1
-      isDown: 0
+      isDown: 1
 --- !u!114 &-1787491706099594176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,7 +143,7 @@ MonoBehaviour:
       onLeft: 1
       dialogueText: "\u5FEB\u5FEB\u884C\u52A8\u8D77\u6765\u5427\uFF0C\u7F8E\u597D\u7684\u7530\u56ED\u751F\u6D3B\u5C31\u8981\u5F00\u59CB\u55BD~"
       hasToPause: 1
-      isDown: 0
+      isDown: 1
 --- !u!114 &-1143811119415752433
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,7 +163,7 @@ MonoBehaviour:
       onLeft: 1
       dialogueText: "\u73B0\u5728\u8FD9\u91CC\u5C31\u662F\u4F60\u7684\u65B0\u5BB6\u4E86\uFF0C\u6B22\u8FCE\u6B22\u8FCE"
       hasToPause: 1
-      isDown: 0
+      isDown: 1
 --- !u!114 &-527065777735501482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,10 +180,32 @@ MonoBehaviour:
     piece:
       name: Hollywuchi
       faceImage: {fileID: 21300000, guid: 2acedd98a2e4247569fc702d2b8fc91d, type: 3}
-      onLeft: 1
+      onLeft: 0
       dialogueText: "\u989D\uFF0C\u6211\u4EEC\u7684\u8FDB\u5EA6\u8FD9\u4E48\u5FEB\u5417\uFF1F"
       hasToPause: 1
-      isDown: 0
+      isDown: 1
+--- !u!114 &-87269587051738355
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 030f85c3f73729f4f976f66ffb23b875, type: 3}
+  m_Name: AnimationPlayableAsset
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 7400000, guid: 8c9ab63af6b414c57856b3912e7e6d6a, type: 2}
+  m_Position: {x: 0, y: 0, z: 0}
+  m_EulerAngles: {x: 0, y: 0, z: 0}
+  m_UseTrackMatchFields: 1
+  m_MatchTargetFields: 63
+  m_RemoveStartOffset: 1
+  m_ApplyFootIK: 1
+  m_Loop: 0
+  m_Version: 1
+  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +221,7 @@ MonoBehaviour:
   m_Version: 0
   m_Tracks:
   - {fileID: 7917639910779166340}
+  - {fileID: 5382939644661251857}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -180,7 +247,143 @@ MonoBehaviour:
       onLeft: 1
       dialogueText: "\u5C1D\u8BD5\u79CD\u70B9\u4EC0\u4E48\u5427\uFF01\u522B\u5FD8\u4E86\u6309\u7A7A\u683C\u53EF\u4EE5\u548C\u5C45\u6C11\u4EEC\u5BF9\u8BDD\u54E6"
       hasToPause: 1
-      isDown: 0
+      isDown: 1
+--- !u!114 &3483626018093638786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21dcc2386d650c4597f3633c75a1f98, type: 3}
+  m_Name: Animation Track (1)
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 5382939644661251857}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 0.00000000000000003122502256758253
+    m_ClipIn: 0
+    m_Asset: {fileID: -87269587051738355}
+    m_Duration: 0.09999999999999998
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 3483626018093638786}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 1
+    m_PreExtrapolationMode: 1
+    m_PostExtrapolationTime: Infinity
+    m_PreExtrapolationTime: 0.00000000000000003122502256758253
+    m_DisplayName: BodyIdleUp
+  m_Markers:
+    m_Objects: []
+  m_InfiniteClipPreExtrapolation: 0
+  m_InfiniteClipPostExtrapolation: 0
+  m_InfiniteClipOffsetPosition: {x: 0, y: 0, z: 0}
+  m_InfiniteClipOffsetEulerAngles: {x: 0, y: 0, z: 0}
+  m_InfiniteClipTimeOffset: 0
+  m_InfiniteClipRemoveOffset: 0
+  m_InfiniteClipApplyFootIK: 1
+  mInfiniteClipLoop: 0
+  m_MatchTargetFields: 63
+  m_Position: {x: 0, y: 0, z: 0}
+  m_EulerAngles: {x: 0, y: 0, z: 0}
+  m_AvatarMask: {fileID: 0}
+  m_ApplyAvatarMask: 1
+  m_TrackOffset: 0
+  m_InfiniteClip: {fileID: 0}
+  m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+  m_ApplyOffsets: 0
+--- !u!114 &5382939644661251857
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0fc6f5187a81dc47999eefade6f0935, type: 3}
+  m_Name: Player_anim
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children:
+  - {fileID: 7004729310346268685}
+  - {fileID: 3483626018093638786}
+  - {fileID: 8953085441098234530}
+  m_Clips: []
+  m_Markers:
+    m_Objects: []
 --- !u!114 &6248887900445078802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,7 +403,117 @@ MonoBehaviour:
       onLeft: 1
       dialogueText: "\u5269\u4E0B\u7684\u5C31\u5F88\u7B80\u5355\u55BD\uFF0C\u7B49\u5F85\u8FD9\u9897\u79CD\u5B50\u53D1\u82BD\u957F\u5927\u5C31\u597D\u4E86"
       hasToPause: 1
-      isDown: 0
+      isDown: 1
+--- !u!114 &7004729310346268685
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21dcc2386d650c4597f3633c75a1f98, type: 3}
+  m_Name: Animation Track
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 5382939644661251857}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 0
+    m_ClipIn: 0
+    m_Asset: {fileID: -6130906013608881021}
+    m_Duration: 0.1
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 7004729310346268685}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 1
+    m_PreExtrapolationMode: 1
+    m_PostExtrapolationTime: Infinity
+    m_PreExtrapolationTime: 0
+    m_DisplayName: ArmIdleUp
+  m_Markers:
+    m_Objects: []
+  m_InfiniteClipPreExtrapolation: 0
+  m_InfiniteClipPostExtrapolation: 0
+  m_InfiniteClipOffsetPosition: {x: 0, y: 0, z: 0}
+  m_InfiniteClipOffsetEulerAngles: {x: 0, y: 0, z: 0}
+  m_InfiniteClipTimeOffset: 0
+  m_InfiniteClipRemoveOffset: 0
+  m_InfiniteClipApplyFootIK: 1
+  mInfiniteClipLoop: 0
+  m_MatchTargetFields: 63
+  m_Position: {x: 0, y: 0, z: 0}
+  m_EulerAngles: {x: 0, y: 0, z: 0}
+  m_AvatarMask: {fileID: 0}
+  m_ApplyAvatarMask: 1
+  m_TrackOffset: 0
+  m_InfiniteClip: {fileID: 0}
+  m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+  m_ApplyOffsets: 0
 --- !u!114 &7917639910779166340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -226,7 +539,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: -1143811119415752433}
-    m_Duration: 1
+    m_Duration: 0.1
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7917639910779166340}
     m_EaseInDuration: 0
@@ -292,10 +605,10 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: DialogueClip
   - m_Version: 1
-    m_Start: 1.1833333333333333
+    m_Start: 0.1
     m_ClipIn: 0
     m_Asset: {fileID: -527065777735501482}
-    m_Duration: 1
+    m_Duration: 0.10000000000000003
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7917639910779166340}
     m_EaseInDuration: 0
@@ -361,10 +674,10 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: DialogueClip
   - m_Version: 1
-    m_Start: 2.4166666666666665
+    m_Start: 0.20000000000000004
     m_ClipIn: 0
     m_Asset: {fileID: -4190532948256203931}
-    m_Duration: 1
+    m_Duration: 0.10000000000000003
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7917639910779166340}
     m_EaseInDuration: 0
@@ -430,10 +743,10 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: DialogueClip
   - m_Version: 1
-    m_Start: 3.6333333333333333
+    m_Start: 0.30000000000000004
     m_ClipIn: 0
     m_Asset: {fileID: -8078051438824121190}
-    m_Duration: 1
+    m_Duration: 0.09999999999999998
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7917639910779166340}
     m_EaseInDuration: 0
@@ -499,10 +812,10 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: DialogueClip
   - m_Version: 1
-    m_Start: 4.833333333333333
+    m_Start: 0.4
     m_ClipIn: 0
     m_Asset: {fileID: 8379138212710567953}
-    m_Duration: 1
+    m_Duration: 0.10000000000000009
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7917639910779166340}
     m_EaseInDuration: 0
@@ -568,10 +881,10 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: DialogueClip
   - m_Version: 1
-    m_Start: 6.066666666666666
+    m_Start: 0.5000000000000001
     m_ClipIn: 0
     m_Asset: {fileID: 6248887900445078802}
-    m_Duration: 1
+    m_Duration: 0.10000000000000009
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7917639910779166340}
     m_EaseInDuration: 0
@@ -637,10 +950,10 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: DialogueClip
   - m_Version: 1
-    m_Start: 7.35
+    m_Start: 0.6000000000000002
     m_ClipIn: 0
     m_Asset: {fileID: -2448234191746533606}
-    m_Duration: 1
+    m_Duration: 0.10000000000000009
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7917639910779166340}
     m_EaseInDuration: 0
@@ -706,10 +1019,10 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: DialogueClip
   - m_Version: 1
-    m_Start: 8.633333333333333
+    m_Start: 0.7000000000000003
     m_ClipIn: 0
     m_Asset: {fileID: -2479526938975149811}
-    m_Duration: 1
+    m_Duration: 0.09999999999999964
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7917639910779166340}
     m_EaseInDuration: 0
@@ -775,10 +1088,10 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: DialogueClip
   - m_Version: 1
-    m_Start: 9.883333333333333
+    m_Start: 0.7999999999999999
     m_ClipIn: 0
     m_Asset: {fileID: -1787491706099594176}
-    m_Duration: 1
+    m_Duration: 0.09999999999999964
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7917639910779166340}
     m_EaseInDuration: 0
@@ -844,10 +1157,10 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: DialogueClip
   - m_Version: 1
-    m_Start: 11.116666666666667
+    m_Start: 0.8999999999999999
     m_ClipIn: 0
     m_Asset: {fileID: 1407684482377550740}
-    m_Duration: 1
+    m_Duration: 0.09999999999999964
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7917639910779166340}
     m_EaseInDuration: 0
@@ -933,4 +1246,114 @@ MonoBehaviour:
       onLeft: 1
       dialogueText: "\u5728\u4F60\u8EAB\u540E\u7684\u4E00\u5927\u7247\u6DF1\u8272\u7684\u571F\u5730\u90FD\u662F\u53EF\u4EE5\u5F00\u57A6\u79CD\u690D\u7684"
       hasToPause: 1
-      isDown: 0
+      isDown: 1
+--- !u!114 &8953085441098234530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21dcc2386d650c4597f3633c75a1f98, type: 3}
+  m_Name: Animation Track (2)
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 5382939644661251857}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 0
+    m_ClipIn: 0
+    m_Asset: {fileID: -5631747382792358172}
+    m_Duration: 0.1
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 8953085441098234530}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 1
+    m_PreExtrapolationMode: 1
+    m_PostExtrapolationTime: Infinity
+    m_PreExtrapolationTime: 0
+    m_DisplayName: HairIdleUp
+  m_Markers:
+    m_Objects: []
+  m_InfiniteClipPreExtrapolation: 0
+  m_InfiniteClipPostExtrapolation: 0
+  m_InfiniteClipOffsetPosition: {x: 0, y: 0, z: 0}
+  m_InfiniteClipOffsetEulerAngles: {x: 0, y: 0, z: 0}
+  m_InfiniteClipTimeOffset: 0
+  m_InfiniteClipRemoveOffset: 0
+  m_InfiniteClipApplyFootIK: 1
+  mInfiniteClipLoop: 0
+  m_MatchTargetFields: 63
+  m_Position: {x: 0, y: 0, z: 0}
+  m_EulerAngles: {x: 0, y: 0, z: 0}
+  m_AvatarMask: {fileID: 0}
+  m_ApplyAvatarMask: 1
+  m_TrackOffset: 0
+  m_InfiniteClip: {fileID: 0}
+  m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+  m_ApplyOffsets: 0

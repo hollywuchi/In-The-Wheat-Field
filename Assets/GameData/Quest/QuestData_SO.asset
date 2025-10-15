@@ -28,8 +28,8 @@ MonoBehaviour:
       itemAmount: 5
   - questName: "\u4EA4\u6613"
     npcName: Mia
-    questStates: 2
-    questIntroduction: "8\u70B9\u53BB\u627EMia\u5BF9\u8BDD"
+    questStates: 0
+    questIntroduction: "8\u70B9\u53BB\u96C6\u4F1A\u627EMia\u4E70\u70B9\u4E1C\u897F\u5427"
     requireItem:
       itemID: 0
       itemAmount: 0
