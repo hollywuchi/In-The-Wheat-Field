@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: SceneSoundList
   m_EditorClassIdentifier: 
   sceneSoundItems:
+  - sceneName: 00.Start
+    ambient: 14
+    music: 20
   - sceneName: 01.Field
     ambient: 14
     music: 16
@@ -22,3 +25,6 @@ MonoBehaviour:
   - sceneName: 03.Town
     ambient: 15
     music: 18
+  - sceneName: UI
+    ambient: 0
+    music: 21

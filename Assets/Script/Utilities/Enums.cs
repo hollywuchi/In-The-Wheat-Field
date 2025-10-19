@@ -55,7 +55,8 @@ public enum SoundName
     None, FootStepSoft, FootStepHard,
     Axe, Pickaxe, Hoe, Reap, Water, Basket, Chop,
     Pickup, Plant, TreeFalling, Rustle,
-    AmbientCountryside1, AmbientCountryside2, MusicCalm1, MusicCalm2, MusicCalm3, AmbientIndoor1
+    AmbientCountryside1, AmbientCountryside2, MusicCalm1, MusicCalm2, MusicCalm3, AmbientIndoor1,
+    Music_Start,Music_UI
 }
 public enum QuestStates
 {

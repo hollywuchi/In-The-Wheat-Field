@@ -98,3 +98,13 @@ MonoBehaviour:
     soundPitchMin: 1
     soundPitchMax: 1
     soundVolume: 0.8
+  - soundName: 20
+    soundClip: {fileID: 8300000, guid: 805fd956e6875a54dbfe4947adf16a5d, type: 3}
+    soundPitchMin: 1
+    soundPitchMax: 1
+    soundVolume: 0.8
+  - soundName: 21
+    soundClip: {fileID: 8300000, guid: 635e6f50a7017774fb344dcd1c81a8cd, type: 3}
+    soundPitchMin: 1
+    soundPitchMax: 1
+    soundVolume: 0.8

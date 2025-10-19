@@ -17,11 +17,12 @@ public class SwitchBounds : MonoBehaviour
     {
         PolygonCollider2D Bounds = GameObject.FindGameObjectWithTag("Bound").GetComponent<PolygonCollider2D>();
 
-        CinemachineConfiner confiner = GetComponent<CinemachineConfiner>();
+        CinemachineConfiner2D confiner = GetComponent<CinemachineConfiner2D>();
 
         confiner.m_BoundingShape2D = Bounds;
 
         // 转换边界之后清除缓存
-        confiner.InvalidatePathCache();
+        // confiner.InvalidatePathCache();
+        confiner.InvalidateCache();
     }
 }

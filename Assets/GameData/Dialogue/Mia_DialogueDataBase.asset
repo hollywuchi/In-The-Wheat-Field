@@ -34,7 +34,7 @@ MonoBehaviour:
       isDown: 0
     - name: Mia
       faceImage: {fileID: 21300000, guid: 0ebf15807ee9d4dcaa0a1aed0fadf257, type: 3}
-      onLeft: 0
+      onLeft: 1
       dialogueText: "\u54C8\u54C8\uFF0C\u6211\u600E\u4E48\u4F1A\u8BA4\u9519\u5462"
       hasToPause: 1
       isDown: 0
@@ -70,4 +70,4 @@ MonoBehaviour:
       onLeft: 1
       dialogueText: "\u6B22\u8FCE\u5149\u4E34\uFF01"
       hasToPause: 1
-      isDown: 1
+      isDown: 0

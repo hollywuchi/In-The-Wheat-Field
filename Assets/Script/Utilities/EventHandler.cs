@@ -147,6 +147,9 @@ public static class EventHandler
         ShowTradeUI?.Invoke(item, isSell, isSelected);
     }
 
+    /// <summary>
+    /// 使用蓝图建造家具的方法
+    /// </summary>
     public static event Action<int, Vector3> BuildFunitureEvent;
     public static void CallBuildFunitureEvent(int iD, Vector3 pos)
     {
