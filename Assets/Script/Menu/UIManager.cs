@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Farm.Transition;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
@@ -15,13 +17,14 @@ public class UIManager : Singleton<UIManager>
     public GameObject questInfoUI;
     public GameObject questRewardUI;
     public GameObject questUI;
+    public GameObject sleepUI;
 
     public Button settingsButton;
     public GameObject pausePanel;
     public Slider volumeSlide;
 
     // 单例模式的awake出现问题
-    
+
     void OnEnable()
     {
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
@@ -69,7 +72,7 @@ public class UIManager : Singleton<UIManager>
     private void GetQuestToUI()
     {
         // 在重新生成UI之前删除所有的原UI
-        foreach(Transform obj in questContent.transform)
+        foreach (Transform obj in questContent.transform)
         {
             Destroy(obj.gameObject);
         }
@@ -92,6 +95,26 @@ public class UIManager : Singleton<UIManager>
         questInfoUI.SetActive(true);
     }
 
+    public void OpenSleepUI()
+    {
+        if (!sleepUI.activeSelf) sleepUI.SetActive(true);
+    }
+
+    /// <summary>
+    /// 跳过一天的方法
+    /// </summary>
+    public void PassDay()
+    {
+        StartCoroutine(_PassDay());
+    }
+    private IEnumerator _PassDay()
+    {
+        yield return TransitionManager.Instance.Fade(1);
+        System.GC.Collect();
+        TimeManager.Instance.SleepEvent();
+        yield return new WaitForSeconds(1.5f);  
+        yield return TransitionManager.Instance.Fade(0);
+    }
 
     public void ReturnMenuCanvas()
     {

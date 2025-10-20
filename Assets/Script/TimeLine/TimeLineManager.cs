@@ -48,7 +48,6 @@ public class TimeLineManager : Singleton<TimeLineManager>, ISaveable
     }
 
     private void OnStop(PlayableDirector director) => isCompleted = true;
-
     void Update()
     {
         if (isPause && Input.GetKeyDown(KeyCode.Space) && isDown)
@@ -77,8 +76,10 @@ public class TimeLineManager : Singleton<TimeLineManager>, ISaveable
 
     // 跳过按钮显示
     // 长按按钮，直到完全显示，直接跳过
-    //      
     // 中间松手,会逐渐隐藏到消失
+    /// <summary>
+    /// 跳过开始CG
+    /// </summary>
     private void SkipImageFade()
     {
         if (Input.anyKey && !isCompleted)
@@ -143,10 +144,17 @@ public class TimeLineManager : Singleton<TimeLineManager>, ISaveable
     {
         yield return TransitionManager.Instance.Fade(1);
         TimeManager.Instance.PassTenMinute();
-        yield return new WaitForSeconds(1f);
-        StartCoroutine(TransitionManager.Instance.Transition("01.Field", new Vector3(-0.5f, -6, 0)));
+        yield return new WaitForSeconds(1.5f);
+        yield return StartCoroutine(TransitionManager.Instance.Transition("01.Field", new Vector3(-0.5f, -6, 0)));
+        EventHandler.CallUpdateGameStateEvent(GameState.Pause);
         currentDirector.playableAsset = nextTimeLine;
         currentDirector.Play();
         yield return null;
     }
+
+    // public void StopTime()
+    // {
+    //     print(1);
+    //     EventHandler.CallUpdateGameStateEvent(GameState.Pause);
+    // }
 }

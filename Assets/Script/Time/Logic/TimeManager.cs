@@ -101,6 +101,14 @@ public class TimeManager : Singleton<TimeManager>, ISaveable
             UpdateGameTime();
     }
 
+    public void SleepEvent()
+    {
+        gameDay++;
+        gameHour = 6;
+        gameMinute = 59;
+        PassOneMinute();
+    }
+
     private void OnAfterSceneLoadEvent()
     {
         gameClockPause = false;

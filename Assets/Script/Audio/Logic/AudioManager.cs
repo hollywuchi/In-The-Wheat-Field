@@ -13,7 +13,7 @@ public class AudioManager : Singleton<AudioManager>
     public AudioSource ambientSource;
     public AudioSource gameSource;
 
-    private float MusicStartSecond => Random.Range(5, 10);
+    private float MusicStartSecond => Random.Range(3, 5);
     private Coroutine soundRoutine;
 
     [Header("AudioMixer")]
@@ -25,6 +25,10 @@ public class AudioManager : Singleton<AudioManager>
     public AudioMixerSnapshot mute;
 
     private float musicTransitionSecond = 4f;
+    void Start()
+    {
+        PlayMusicClip(soundDetailList.GetSoundDetails(SoundName.Music_UI),1f);
+    }
     void OnEnable()
     {
         EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
@@ -70,6 +74,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         if (soundRoutine != null)
             StopCoroutine(soundRoutine);
+        PlayMusicClip(soundDetailList.GetSoundDetails(SoundName.Music_UI),1f);
         mute.TransitionTo(1f);
     }
 
